@@ -1,0 +1,68 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+.el-dialog {
+  border-radius: 0;
+}
+.el-dialog__header {
+  border-bottom: 1px solid #dddddd;
+  padding: 16px;
+  font-weight: bold;
+}
+.el-dialog__body {
+  padding: 16px 20px;
+}
+.el-dialog__headerbtn {
+  top: 16px;
+  right: 16px;
+}
+.el-dialog__actions {
+  margin-top: 35px;
+  margin-bottom: 0;
+  display: -webkit-box;
+  display: flex;
+}
+.el-dialog__actions > *:not(.el-form-item__content) {
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
+}
+.el-dialog__actions--form .el-form-item__content {
+  display: -webkit-box;
+  display: flex;
+}
+.el-dialog__actions--form .el-form-item__content > * {
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
+}
+
+.el-message-box {
+  padding-bottom: 30px;
+}
+.el-message-box__header {
+  color: #3B2A4B;
+  font-weight: bold;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+.el-message-box__title {
+  font-size: 18px;
+  line-height: 24px;
+}
+.el-message-box__content {
+  padding: 25px 25px 35px;
+}
+.el-message-box__btns {
+  padding: 0 25px 0;
+  display: -webkit-box;
+  display: flex;
+}
+.el-message-box__btns .el-button {
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
+  height: 40px;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=lightbox.css.map */

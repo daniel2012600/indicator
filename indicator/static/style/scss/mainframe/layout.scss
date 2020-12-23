@@ -1,0 +1,296 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+// 主要框架 00.mainframe.html
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+html {
+  -webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
+}
+
+// 外框架
+.md-app {
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+// logo
+.logo-s {
+  width: 170px;
+  height: 24px;
+}
+
+// 頁首工具列
+.md-toolbar {
+  padding: 0;
+  z-index: 1001;
+
+  // 頁首按鈕
+  .md-button {
+    width: 64px;
+    height: 64px;
+    border-radius: 0;
+
+    &::before {
+      border-radius: 0;
+    }
+    .md-ripple {
+      border-radius: 0;
+    }
+
+    &:not([disabled]).md-focused:before,
+    &:not([disabled]):active:before,
+    &:not([disabled]):hover:before {
+      background-color: #673E84;
+      opacity: 1;
+    }
+
+    // 頁首按鈕
+    & ~ .md-title {
+      margin-left: 6px;
+    }
+  }
+
+  // 頁首row前半部分
+  &-section-start {
+    @include breakpoint(767, max) {
+      flex: 2;
+    }
+  }
+
+  // 使用者下拉選單
+  &-user-menu {
+    margin-right: 3px;
+    border-radius: 0;
+    padding: 1em;
+
+    &.el-popper[x-placement^=bottom] {
+      margin-top: 0;
+    }
+
+    .user-menu {
+      // 使用者下拉選單內容
+      &__content {
+        font-size: 14px;
+      }
+      &__button {
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// 側選單
+.md-drawer {
+  .md-list {
+    &-item {
+      &.md-inset {
+        .md-list-item-content {
+          padding-left: 60px;
+        }
+      }
+
+      + .md-list-item {
+        margin-top: -1px;
+
+        .md-list-item-expand.md-active {
+          border-top-color: $gray-4;
+        }
+      }
+      &.md-inset-title {
+        .md-list-item-container {
+          color: $gray-7;
+          font-size: 12px;
+        }
+      }
+
+      // 側選單active
+      &--active {
+        .md-list-item-content {
+          color: $primary;
+          font-weight: bold;
+        }
+      }
+    }
+
+
+    &-item-content {
+      & > .md-icon {
+        &:first-child {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    &-expand {
+      .md-list {
+        padding-top: 0;
+        &-item {
+          &.md-inset {
+            .md-list-item-content {
+              min-height: 36px;
+            }
+          }
+
+          &.md-inset-title {
+            .md-list-item-content {
+              margin-top: 10px;
+              min-height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 內容最外層
+.md-content.md-theme-default,
+.md-app:not(.md-overlap).md-theme-default {
+    background: $bgcolor;
+}
+
+// 內容內部
+.wrap {
+  min-height: calc(100vh - 64px - 60px - 16px);
+  overflow: hidden;
+
+  @include breakpoint(767, max) {
+    min-height: calc(100vh - 64px - 84px - 16px);
+  }
+  @include breakpoint(xl) {
+    &:not(.wrap--full-page) {
+      max-width: 1566px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  //  標題
+  &__title {
+    color: $title;
+    margin-bottom: 14px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+
+    @include breakpoint(767, max) {
+      flex: 1 1 100%;
+      min-width: 100%;
+    }
+  }
+
+  // 子標題
+  &__sub-title {
+    color: $title;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+// 麵包屑
+.el-breadcrumb {
+  margin-bottom: 10px;
+  &__item {
+    // 本頁
+    &[aria-current="page"] {
+      .el-breadcrumb__inner {
+        color: $primary;
+      }
+    }
+
+    .el-breadcrumb__inner {
+      &.is-link,
+      a {
+        color: $gray-9;
+        font-weight: normal;
+        text-decoration: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+// 標題右側過濾工具列
+.title-tool {
+  //margin-bottom: 14px;
+}
+
+// tooltip提示框
+.info-tooltip {
+  font-size: 18px;
+  color: $gray-7;
+  padding: 0;
+  margin-left: 5px;
+  transition: all .2s;
+
+  &:hover {
+    cursor: pointer;
+    color: $title;
+  }
+}
+
+// 分欄(col)內容
+.grid-content {
+  &--full-height {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    > *:not([class^="wrap__"]):not([class^="content__header"]) {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+
+      > * {
+        flex: 1 1 auto;
+        min-width: 100%;
+      }
+    }
+  }
+}
+
+// 頁底
+.footer {
+  background: $purple;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding: 18px 16px;
+  text-align: center;
+  color: $white;
+
+  > br {
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+}
+
+// sparkline的tooltip跑版問題修正
+.jqstooltip {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+
+// 選取框selection
+.md-theme-default :not(input):not(textarea)::selection {
+  background-color: $primary;
+  color: $white;
+}

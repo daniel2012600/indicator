@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+        "gtm.start": new Date().getTime(),
+        event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-PPMD6JC");
+</script>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- ==============================layout include========================== -->
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="/static/style/googlefonts/Roboto/Roboto.css">
+    <link rel="stylesheet" href="/static/style/vue-material/1.0.0-beta-11/vue-material.min.css">
+    <link rel="stylesheet" href="/static/style/vue-material/1.0.0-beta-11/default.css">
+    <!-- 引入element样式 -->
+    <link rel="stylesheet" href="/static/css/element.theme.css">
+    <!-- Add this to <head> -->
+    <link type="text/css" rel="stylesheet" href="/static/style/bootstrap/4.4.1/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/global.css">
+    <link media="screen" rel="stylesheet" href="/static/style/css/mainframe.css"/>
+    <link media="screen" rel="stylesheet" href="/static/style/css/component.css">
+    <link media="screen" rel="stylesheet" href="/static/style/css/base.css">
+    <link rel="stylesheet" href="/static/style/css/pagecss/page.css">
+    <!-- ==============================layout include========================== -->
+
+            
+    <meta
+    name="description"
+    content="EagleEye CDP 顧客數據雲。整合線上和線下管道的數據系統，幫您挖掘分析企業數據、快速勾勒顧客輪廓，進而設定精準行銷方案，帶動品牌營收、協助企業成長！"
+    />
+    <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,minimal-ui"
+    />
+    <meta property="og:locale" data-vmid="title" content="zh_TW" />
+    <meta
+    property="og:description"
+    data-vmid="description"
+    content="EagleEye CDP 顧客數據雲。整合線上和線下管道的數據系統，幫您挖掘分析企業數據、快速勾勒顧客輪廓，進而設定精準行銷方案，帶動品牌營收、協助企業成長！"
+    />
+    <meta
+    property="og:site_name"
+    data-vmid="site_name"
+    content="Eagleeye-CDP"
+    />
+    <meta property="og:type" data-vmid="type" content="website" />
+    <meta
+    property="og:image"
+    data-vmid="image"
+    content="https://cdppj.eagleeye.com.tw/static/img/og_img.jpg"
+    />
+    <meta
+    property="og:url"
+    data-vmid="url"
+    content="https://cdppj.eagleeye.com.tw"
+    />
+    <!-- 網頁顯示的寬度等於裝置寬度 End-->
+    <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='favicon.ico') }}"
+    />
+    <!--Apple icon-->
+    <link
+    href="/static/style/official/images/ios/apple-icon-57x57.png"
+    rel="apple-touch-icon-precomposed"
+    sizes="57x57"
+    />
+    <link
+    href="/static/style/official/images/ios/apple-icon-72x72.png"
+    rel="apple-touch-icon-precomposed"
+    sizes="72x72"
+    />
+    <link
+    href="/static/style/official/images/ios/apple-icon-114x114.png"
+    rel="apple-touch-icon-precomposed"
+    sizes="114x114"
+    />
+    <link
+    href="/static/style/official/images/ios/apple-icon-144x144.png"
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    />
+    <!-- CSS Link File Start -->
+    <link
+    media="screen"
+    rel="stylesheet"
+    href="/static/style/official/css/reset.css"
+    />
+    <!-- CSS reset  -->
+    <link
+    media="screen"
+    rel="stylesheet"
+    href="/static/style/official/css/global.css"
+    />
+    <!-- CSS 全站共通樣式  -->
+    <link
+    media="screen"
+    rel="stylesheet"
+    href="/static/style/official/css/iconfont.css"
+    />
+    <!-- CSS iconfont  -->
+    <link
+    media="screen"
+    rel="stylesheet"
+    href="/static/style/official/css/mainframe.css"
+    />
+    <!-- CSS 全站共通框架  -->
+    <link
+    media="screen"
+    rel="stylesheet"
+    href="/static/style/official/css/login.css"
+    />
+    <!-- CSS Link File End -->
+    <!-- 引el样式 -->
+    <link
+    rel="stylesheet"
+    href="/static/style/element-ui/2.13.0/theme-chalk/lib/index.css"
+    />
+    <!-- 引入el组件库 -->
+    <link rel="stylesheet" href="/static/css/page.css" />
+    <style id="main_style"></style>
+
+
+
+    <style lang="scss" scoped>
+        .md-app {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        span[role="heading"]:focus {
+            /*drawer 很糟榚的藍色外框*/
+            box-shadow: none !important;
+            outline: none !important; 
+        }
+        .md-drawer {
+            /*width: 230px;*/
+            max-width: calc(100vw - 125px);
+        }
+        .md-progress-spinner circle {
+            stroke: #606266 !important;
+        }
+        .md-list.md-theme-default .md-list-item-container:not(.md-list-item-default):not([disabled]):hover{
+            background-color: #f5f7fa !important;
+        }
+        .full-control {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap-reverse;
+        }
+        .list {
+            width: 400px;
+        }
+        .full-control > .md-list {
+            width: 400px;
+            max-width: 100%;
+            height: 400px;
+            display: inline-block;
+            overflow: auto;
+            border: 1px solid rgba(#000, .12);
+            vertical-align: top;
+        }
+        .control {
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+        }
+        .logo-s {
+            background: url('/static/images/logo_cdp_white.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 170px;
+            height: 24px;
+        }
+    </style>
+    <style id="main_style"></style>
+    {% block head %}{% endblock %}
+    </head>
+
+    <body>
+    <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PPMD6JC"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <div id="app" class="Wrap" v-cloak>
+        <div class="page-container">
+        <md-app md-waterfall md-mode="fixed">
+            <md-app-toolbar class=" md-dense md-primary">
+                <div class="md-toolbar-row">
+                    <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+                        <md-icon>menu</md-icon>
+                    </md-button>
+                    <span class="md-title">
+                        <svg class="logo-s"></svg>
+                    </span>
+                    <span style="flex: 1 1 auto;"></span>
+
+                </div>
+                {% block toolbarrow %}{% endblock %}
+            </md-app-toolbar>
+
+            <md-app-drawer :md-active.sync="menuVisible" class="md-scrollbar">
+                <template>
+                        <md-list :md-expand-single="expandSingle">
+                            <!-- ==========[總覽]========== -->
+                            
+                            <md-list-item @click="click_href('/')">
+                                <md-icon>home</md-icon>
+                                <span class="md-list-item-text">首頁</span>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                            
+
+                            <!-- ==========[展示區]========== -->
+                            <md-list-item id="list_demonstrate" :load="list_show('list_demonstrate')" md-expand :md-expanded.sync="expandDem">
+                                <md-icon>theaters</md-icon>
+                                <span class="md-list-item-text">元件展示區</span>
+                                <md-list slot="md-expand">
+
+                                    <md-list-item class="md-inset" @click="click_href('/echarts.heatmap')">熱點圖
+                                    </md-list-item>
+
+                                    
+                                </md-list>
+                            </md-list-item>
+
+                            
+                            <md-list-item @click="clear_all();">
+                                <md-icon>settings_backup_restore</md-icon>
+                                <span class="md-list-item-text">清空瀏覽器報表快取</span>
+                            </md-list-item>
+                            
+                        </md-list>
+                    </template>
+            </md-app-drawer>
+
+            <md-app-content>
+                <div class="wrap wrap--full-page" >
+                    <el-breadcrumb separator-class="el-icon-arrow-right" class="mb-3">
+                        <el-breadcrumb-item v-for="(bp, idx) in breadpath" :key="'bp'+idx">
+                            <a v-text="bp.key" :href="bp.path" v-if="bp.path.length > 0"> </a>
+                            <a v-text="bp.key" v-else></a>
+                        </el-breadcrumb-item>
+                    </el-breadcrumb>
+                    <div class="Content">
+                        <div class="Inner" style="max-width: 1200px">
+
+                        {% block content %}{% endblock %}
+            
+                        <div w3-include-html="template/footer.html"></div>
+                        </div>
+                    </div>
+                
+                </div>
+                
+                <!-- Footer Start -->
+                <div class="footer mt-4">
+                    <div class="footer__copyright">[[ getFooterText ]]</div>
+                </div>
+                <!-- Footer End -->
+            </md-app-content>
+        </md-app>
+        {% block bodybottom %}{% endblock %}
+        </div>
+    </div>
+
+
+    <!-- lightbox-new end -->
+    <!-- 程式說明 -上線前請移除 start-->
+    <script src="/static/style/vue/2.6.10/vue.js"></script>
+    <script
+    src="/static/style/jquery/3.3.1/slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+    ></script>
+    <script src="/static/style/element-ui/2.13.0/index.js"></script>
+    <script src="/static/js/elementui/zh-TW.js"></script>
+    <script src="/static/js/moment-with-locales.js"></script>
+    <script src="/static/style/vue-resource/1.0.3/vue-resource.min.js"></script>
+    <script src="/static/js/vue-material/1.0.0-beta-8/vue-material.min.js"></script>
+    <!-- origin_layout include -->
+
+    <script src="/static/style/vue/2.6.11/vue.js"></script>
+    <script src="/static/style/vue-i18n/8.21.0/vue-i18n.js"></script>
+    <script src="/static/style/vue-resource/1.0.3/vue-resource.min.js"></script>
+    <script src="/static/style/crpyto/3.1.9-1/crypto.js"></script>
+    <script src="/static/style/socket.io/2.1.1/socket.io.js"></script>
+    <script src="/static/style/lodash/4.16.0/lodash.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <script src="/static/style/dmW3/dmW3.js"></script>
+
+    <script src="/static/style/element-ui/2.13.0/index.js"></script>
+    <script src="/static/style/echarts/4.8.0/echarts.min.js"></script>
+    <script src="/static/style/polyfill/7.7.0/polyfill.min.js"></script>
+    <script src="/static/style/bootstrap-vue/2.0.0-rc.11/bootstrap-vue.min.js"></script>
+    <script src="/static/style/jquery/1.12.4/jquery.js"></script>
+    <script src="/static/js/moment-with-locales.js"></script>
+    <script src="/static/js/elementui/zh-TW.js"></script>
+    <script src="/static/style/vue-meta/vue-meta.min.js"></script>
+    <!-- vue-material要改beta8才能支援expanded.sync-->
+    <script src="/static/js/vue-material/1.0.0-beta-8/vue-material.min.js"></script>
+
+    <!-- <script>
+    Vue.use(VueMaterial.default);
+
+    var layoutVue = {
+        delimiters: ["[[", "]]"],
+        data: {
+        dt: moment().format("YYYY"),
+        },
+        computed: {
+        getFooterText() {
+            text = "紅門互動股份有限公司 © " + this.dt + " REDDOOR MEDIA";
+            return text;
+        },
+        },
+    };
+    </script> -->
+
+    <script>
+        ELEMENT.locale(ELEMENT.lang.zhTW);
+        Vue.use(VueMaterial.default);
+
+        var layoutVue = {
+            mixins: [],
+            delimiters: ['[[', ']]'],
+            components: {
+                'content-header': httpVueLoader('/static/style/component/content-header.vue'),
+                'toolbar': httpVueLoader('/static/style/component/toolbar.vue'),
+                'data-info': httpVueLoader('/static/style/component/data-info.vue'),
+                'card-percentage': httpVueLoader('/static/style/component/card-percentage.vue'),
+                'image-status': httpVueLoader('/static/style/component/image-status.vue')
+            },
+            data: {
+                accSettingVisible: false,
+                menuVisible: false,
+                expandwt: true,
+                expandTag: true,
+                expandAudi: true,
+                expandMarket: true,
+                expandSingle: false,
+                expandSetting: true,
+                expandInit: true,
+                expandRpt:false,
+                expandStatistic: true,
+                expandMa: true,
+                expandDem: true,
+                breadpath: [],
+                dt: moment().format('YYYY'),
+            },
+
+            methods: {
+                onmenuclick_logout() {
+                    location.href = "/login?a=out"
+                },
+                click_href(u) {
+                    location.href = u
+                },
+                open_newtab(u){
+                    window.open(u);
+                },
+                addCommas(val) {
+                    return (val + "").replace(/\b(\d+)((\.\d+)*)\b/g, function (a, b, c) {
+                        return (b.charAt(0) > 0 && !(c || ".").lastIndexOf(".") ? b.replace(/(\d)(?=(\d{3})+$)/g, "$1,") : b) + c;
+                    });
+                },
+                clear_all() {
+                    localStorage.clear();
+                    this.$message.success("已清空瀏覽器暫存")
+                },
+                list_show(eid){
+                    var el_items = $(`#${eid} li[class='md-list-item md-inset']`);
+                    if (el_items && el_items.length==0) {
+                        $(`#${eid}`).remove();
+                    }
+                },
+                subheader_show(eid) {
+                    var el = $(`#${eid}`);
+                    if (el && !el.next().hasClass('md-inset')) {
+                        el.remove();
+                    }
+                }
+            },
+            // mounted() {
+            //     // var targets_socket = io.connect();
+            //     if ("{{ 'true' if 'user' in session else ''}}")
+            //     targets_socket.on( "forcedLogout_{{ session['user']['id'] if 'user' in session }}", function (data) {
+            //         Vue.prototype.$alert(data['msg'], '登出提醒', {
+            //             confirmButtonText: '確定',
+            //             callback: action => {
+            //                 location.href = "/login?a=out";
+            //             }
+            //         });
+            //     });
+            // },
+            computed: {
+                getFooterText(){
+                    text = "紅門互動股份有限公司 © " + this.dt + " REDDOOR MEDIA"
+                    return text
+                },
+                getTitle() {
+                    return _.chain(this.breadpath).takeRight(2).reverse().map('key').join(' | ').value();
+                },
+                getDescription() {
+                    return "EagleEye CDP 顧客數據雲。整合線上和線下管道的數據系統，幫您挖掘分析企業數據、快速勾勒顧客輪廓，進而設定精準行銷方案，帶動品牌營收、協助企業成長！";
+                }
+            }
+        }
+
+        //fixed menu white bottom not show
+        var sheet = $("#main_style").get(0).sheet;
+        var styles = 'main {min-height: ' + ($(window).height() - 110) + 'px;}';
+        sheet.insertRule(styles, 0);
+    </script>
+
+    {% block js %}{% endblock %}
+</body>
+</html>

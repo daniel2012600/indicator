@@ -1,0 +1,132 @@
+// element lightbox
+.el-dialog {
+  border-radius: 0;
+  max-width: 100%;
+
+  // 標題
+  &__header {
+    border-bottom: 1px solid $gray-4;
+    padding: 16px;
+    font-weight: bold;
+  }
+
+  // 內容
+  &__body {
+    padding: 16px 20px;
+  }
+
+  // 關閉按鈕
+  &__headerbtn {
+    top: 16px;
+    right: 16px;
+  }
+
+  // 內容按鈕
+  &__actions {
+    margin-top: 35px;
+    margin-bottom: 0;
+    display: flex;
+
+    > *:not(.el-form-item__content) {
+      flex: 1 1 auto;
+    }
+
+    &--form {
+      .el-form-item__content {
+        display: flex;
+
+        > * {
+          flex: 1 1 auto;
+        }
+      }
+    }
+
+    &--small {
+      justify-content: center;
+      .el-button {
+        flex: 1 1 155px;
+        max-width: 155px;
+        margin: 0 5px;
+      }
+    }
+  }
+  // 按鈕與input同列，
+
+  &__action-row {
+    .el-dialog__actions {
+      margin-top: 0;
+      flex: 1 1 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  // 內容
+  .dialog {
+    &__content {
+      &-desc {
+        margin-bottom: 10px;
+      }
+
+      .el-select {
+        width: 100%;
+      }
+    }
+  }
+
+  // 置中
+  &--center {
+    .dialog {
+      &__content {
+        text-align: center;
+
+        .avatar-uploader {
+          margin: 0 auto;
+        }
+
+        .el-form-item__error {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+.el-message-box {
+  padding-bottom: 30px;
+  &__header {
+    color: $deep-purple;
+    font-weight: bold;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+  &__title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  &__content {
+    padding: 25px 25px 35px;
+  }
+  &__btns {
+    padding: 0 25px 0;
+    display: flex;
+    .el-button {
+      flex: 1 1 auto;
+      height: 40px;
+      font-size: 14px;
+    }
+  }
+
+  &--large {
+    width: 630px;
+    .el-message-box__btns {
+      justify-content: center;
+
+      .el-button {
+        flex-basis: 155px;
+        max-width: 155px;
+      }
+    }
+  }
+}

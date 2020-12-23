@@ -1,0 +1,45 @@
+.product-list {
+  margin-bottom: 40px;
+  &__image {
+    border: 1px solid $gray-4;
+    margin-bottom: 6px;
+
+    .el-image {
+      width: 100%;
+      position: relative;
+      display: flex;
+
+      .el-image__inner {
+        position: absolute;
+        width: auto;
+        max-width: 100%;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      &::before {
+        content: '';
+        width: 100%;
+        padding-top: 100%;
+        display: block;
+      }
+    }
+  }
+
+  &__info {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__name {
+    @include line-clamp(1);
+    margin-right: 1em;
+  }
+  &__value {
+    white-space: nowrap;
+  }
+}

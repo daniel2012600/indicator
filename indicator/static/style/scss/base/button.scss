@@ -1,0 +1,18 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+.button-md {
+  width: 90px;
+}
+
+.el-link {
+  + .el-link {
+    margin-left: 10px;
+  }
+}

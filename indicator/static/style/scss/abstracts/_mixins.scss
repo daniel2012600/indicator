@@ -1,0 +1,294 @@
+// @media min-width     !參數:數字 or 斷點(撈$grid-breakpoints)
+// ----------------------------------------------
+// 用法1     @include breakpoint(md) { ... }
+// 用法2     @include breakpoint(1536) { ... }
+
+@mixin breakpoint($breakpoints, $type:min) {
+	// 如果是數字讀數字
+	@if type_of($breakpoints) == number {
+		@media ($type+'-width': $breakpoints + px) {
+			@content;
+		}
+	}
+	// 其他撈 $grid-breakpoints
+	@else {
+		@media (min-width: map-get($grid-breakpoints, $breakpoints)) {
+			@content;
+		}
+	}
+}
+
+
+// IE 專用語法
+// ----------------------------------------------
+// 用法1     @include ie-only { ... }
+
+@mixin ie-only {
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		@content;
+	}
+}
+
+
+// 框線     !參數: 框線顏色(預設 $border-default), 框粗(預設 1px), 框style(預設 solid)
+// ----------------------------------------------
+// 用法1     @include border;
+// 用法2     @include border($border-light);
+// 用法3     @include border($border-default, 2px);
+
+@mixin border($color: $border-default, $w: 1px, $style: solid) {
+	border: $w $style $color;
+}
+
+
+// SIZE     !參數: 寬, 高(預設==寬)
+// ----------------------------------------------
+// 用法1     @include size(10px);
+// 用法2     @include size(10px, 50px);
+
+@mixin size($w:null, $h:$w) {
+	width: $w;
+	height: $h;
+}
+
+
+// FLEX 上下左右置中
+// ----------------------------------------------
+// 用法1     @include flex-center;
+
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// 圖片容器	 !參數: 產生圖片比利的padding-top高度(百分比)
+// ----------------------------------------------
+// 用法1     @image;
+// 用法1     @image(30%);
+
+@mixin image($pt:100%) {
+	&__img-outer {
+		position: relative;
+		overflow: hidden;
+
+		&::after {
+			content: '';
+			display: block;
+			padding-top: $pt;
+		}
+	}
+
+	&__img {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 100%;
+	}
+}
+
+
+// FLEX 左右 justify
+// ----------------------------------------------
+// 用法1     @include flex-seperate;
+
+@mixin flex-seperate {
+	display: flex;
+	justify-content: space-between;
+}
+
+
+// 行數限制       !參數: 幾行(預設2), 行高(預設 == $line-height-base)
+// --------------------------------------------------------------
+// 用法1          @include line-clamp;
+// 用法2          @include line-clamp(3, 1.7);
+
+@mixin text-oneline() {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+// 行數限制       !參數: 幾行(預設2), 行高(預設 == $line-height-base)
+// --------------------------------------------------------------
+// 用法1          @include line-clamp;
+// 用法2          @include line-clamp(3, 1.7);
+
+@mixin line-clamp($line:2, $lh: $line-height-lg) {
+	display: block;
+	display: -webkit-box;
+	-webkit-line-clamp: $line;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-height: $lh * $line * 1em;
+	line-height: $lh;
+}
+
+
+// 各 media 樣式       !參數: 橫線數量 1 or 2 (預設1)
+// --------------------------------------------------------------
+// 用法1          @include media-all { .. }
+// 用法2          @include media-all(2) { .. }
+
+@mixin media-all($dash:1) {
+	@content;
+	@each $breakpoint in map-keys($grid-breakpoints) {
+		@include breakpoint($breakpoint) {
+			// 單線
+			@if($dash==1) {
+				&-#{$breakpoint} {
+					@content;
+				}
+			}
+			// 雙線
+			@else if($dash==2) {
+				&--#{$breakpoint} {
+					@content;
+				}
+			}
+		}
+	}
+}
+
+
+// @mixin btn-solid($color) {
+// 	&--#{$color} {
+// 		$var: map-get($btn_colors, $color);
+// 		$var_hover: map-get($btn_colors, $color+'_hover');
+// 		color: $white;
+// 		background: $var;
+// 		border-color: $var;
+
+// 		@content;
+
+// 		&:focus,
+// 		&:active {
+// 			color: $white;
+// 			background: $var_hover;
+// 			border-color: $var_hover;
+// 		}
+// 		&:hover {
+// 			@include breakpoint(lg) {
+// 				color: $white;
+// 				background: $var_hover;
+// 				border-color: $var_hover;
+// 			}
+// 		}
+
+// 	}
+// }
+
+// 按鈕disabled樣式(含hover)
+// ----------------------------------------------
+// 用法1          @include btn-disabled;
+
+@mixin btn-disabled {
+	&[disabled],
+	&.disabled:hover,
+	&[disabled]:hover,
+	&.disabled:focus,
+	&[disabled]:focus {
+		cursor: not-allowed;
+		background: $disabled;
+		border-color: $disabled;
+		color: $white;
+	}
+}
+
+
+// active + hover 統一樣式
+// ----------------------------------------------
+// 用法1          @include active-hover { ... }
+
+@mixin active-hover {
+	&:focus,
+	&:active {
+		@content;
+	}
+	&:hover {
+		@include breakpoint(lg) {
+			@content;
+		}
+	}
+}
+
+
+// 按鈕顏色       !參數: 顏色種類(撈 $btn_colors)
+// ----------------------------------------------
+// 用法1          @include btn-colors(default);
+// 取$btn_colors 「變數群」-->取「名稱」、「參數名」-->帶入到相對設定
+
+@mixin btn-colors($name:primary) {
+	$target: getMap($btn_colors, $name);
+	@if map-has-key($target, color) {
+		color: map-get($target, color);
+	}
+	@if map-has-key($target, background) {
+			background: map-get($target, background);
+		}
+	@if map-has-key($target, border-color) {
+			border-color: map-get($target, border-color);
+		}
+
+	@include active-hover {
+		@if map-has-key($target, color-hover) {
+			color: map-get($target, color-hover);
+		}
+		@if map-has-key($target, background-hover) {
+			background: map-get($target, background-hover);
+		}
+		@if map-has-key($target, border-color-hover) {
+			border-color: map-get($target, border-color-hover);
+		}
+	}
+}
+
+
+// iconfont使用
+@mixin iconfont() {
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+// 無法反白選取
+@mixin unselectable() {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+// a hover
+@mixin a-hover($color) {
+	color: $color !important;
+	@at-root {
+		a#{&} {
+			color: $color !important;
+
+			&:focus,
+			&:hover {
+				color: $color !important;
+			}
+		}
+	}
+}
+// el-row[type="flex"]下兩個el-col，分別靠左跟靠右
+@mixin col-space-between() {
+	.el-col:nth-child(2) {
+		display: flex;
+		justify-content: flex-end;
+	}
+}

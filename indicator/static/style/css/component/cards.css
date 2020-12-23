@@ -1,0 +1,25 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+.el-card {
+  border-color: #DDDDDD;
+}
+
+.cards {
+  margin-bottom: 10px;
+}
+.cards .el-card {
+  margin-bottom: 20px;
+}
+
+.wrap-card {
+  margin-bottom: 40px;
+}
+
+.card-note {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=cards.css.map */

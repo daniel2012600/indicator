@@ -1,0 +1,60 @@
+.pivot-table {
+  font-size: 14px;
+
+  td,
+  th {
+    border-color: $gray-4;;
+  }
+
+  > div {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) .left-col {
+      display: none!important;
+    }
+    .flex-fill {
+      max-width: none!important;
+    }
+  }
+
+  thead {
+    th {
+      color: $gray-9;
+      background: $gray-3;
+      border-bottom-width: 1px;
+      font-weight: bold;
+      text-align: right;
+    }
+  }
+  tbody {
+    tr {
+      &:nth-child(even) {
+        th,
+        td, {
+          background: #FAFAFA;
+          transition: background-color .25s ease;
+        }
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        th,
+        td, {
+          background: #F3EDF7;
+        }
+      }
+    }
+  }
+  tfoot {
+    th {
+      text-align: right;
+      border-top: 2px solid $primary;
+      color: $primary;
+    }
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+}

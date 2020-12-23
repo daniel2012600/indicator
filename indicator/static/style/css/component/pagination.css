@@ -1,0 +1,82 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@media (max-width: 767px) {
+  .cdp-page {
+    height: auto !important;
+    margin-top: 16px;
+  }
+  .cdp-page .vxe-pager--wrapper {
+    display: -webkit-box;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+            justify-content: center;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--jump,
+.cdp-page .vxe-pager--wrapper > .vxe-pager--total,
+.cdp-page .vxe-pager--wrapper > .vxe-select {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-select {
+    margin-top: 5px;
+    -webkit-box-flex: 1;
+            flex: 1 1 100%;
+    min-width: 100%;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--jump,
+.cdp-page .vxe-pager--wrapper > .vxe-pager--total {
+    -webkit-box-flex: 1;
+            flex: 1 1 50%;
+    max-width: 50%;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+            align-items: center;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--jump-prev,
+.cdp-page .vxe-pager--wrapper > .vxe-pager--jump-next,
+.cdp-page .vxe-pager--wrapper > .vxe-pager--next-btn,
+.cdp-page .vxe-pager--wrapper > .vxe-pager--prev-btn {
+    display: none;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--btn-wrapper {
+    margin-bottom: 10px;
+    -webkit-box-flex: 1;
+            flex: 1 1 100%;
+    min-width: 100%;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--btn-wrapper > *:first-child {
+    margin-left: 0;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--btn-wrapper > *:last-child {
+    margin-right: 0;
+  }
+  .cdp-page .vxe-pager--wrapper > * {
+    -webkit-box-ordinal-group: 2;
+            order: 1;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--btn-wrapper {
+    -webkit-box-ordinal-group: 1;
+            order: 0;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--total {
+    -webkit-box-ordinal-group: 2;
+            order: 1;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-pager--jump {
+    -webkit-box-ordinal-group: 3;
+            order: 2;
+    -webkit-box-pack: end;
+            justify-content: flex-end;
+  }
+  .cdp-page .vxe-pager--wrapper > .vxe-select {
+    -webkit-box-ordinal-group: 4;
+            order: 3;
+  }
+}
+
+/*# sourceMappingURL=pagination.css.map */

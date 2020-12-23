@@ -1,0 +1,142 @@
+@charset "utf-8";
+/*******************************************************************************
+ * Version 1.0 Release;
+ * Copyright 2017, All rights reserved.
+ ******************************************************************************/
+.AccountInfo.Border {
+	border-bottom: 2px solid #f3f3f3;
+}
+.AccountInfo {
+	padding: 13px 0;
+	margin: 0 0 20px;
+}
+.AccountInfo li {
+	display: inline-block;
+	vertical-align: middle;
+	border-right: 2px solid #ddd;
+	padding: 0 13px 0 8px;
+}
+.AccountInfo li:first-child {
+	padding-left: 0;
+}
+.AccountInfo li:last-child {
+	border-right: none;
+}
+.AccountInfo a.BtnDark {
+	font-size: 14px;
+	width: 50px;
+	line-height: inherit;
+	padding: 4px;
+	margin: 0 10px;
+}
+.AccountData {
+	margin: 20px 0;
+}
+.EditItemBox {
+	margin: 0 0 35px;
+	overflow: hidden;
+	border-bottom: 1px solid #7a4c98;
+}
+.EditItem li {
+	float: left;
+	width: 106px;
+	height: 40px;
+	border: 1px solid #7a4c98;
+	border-bottom: none;
+	overflow: hidden;
+	margin-right: -1px;
+}
+.EditItem li:first-child {
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-top-left-radius:5px;
+}
+.EditItem li:last-child {
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	border-top-right-radius:5px;
+}
+.EditItem li a {
+	font-size: 18px;
+	color: #7a4c98;
+	background: #fff;
+	padding:11px 10px;
+	display: block;
+	text-align: center;
+}
+.EditItem li.Current a {
+	color: #fff;
+	background: #7a4c98;
+}
+.ItemBox {
+	display: none;
+}
+.ItemBox.Active {
+	display: block;
+}
+.ItemBox .Heading2 {
+	margin: 0 0 10px;
+}
+.ItemBox .BtnBox {
+	text-align: center;
+	margin: 0 0 50px;
+}
+.ItemBox .BtnBox .BtnBase {
+	width: 90px;
+	margin: 0 10px;
+}
+.ItemBox .Data  {
+	margin: 0 0 50px;
+}
+.BasicFieldset {
+	border: 1px solid #ddd;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 15px;
+}
+.BasicFieldset .PanelBody .Field .Label {
+	float: left;
+	margin:12px 0; 
+}
+.BasicFieldset .PanelBody .Field .InputGroup {
+	padding: 0 0 0 80px;
+}
+.PersonalFieldset .PanelBody ul li:first-child .Field .InputGroup {
+	padding: 0 0 0 48px;
+}
+.BasicFieldset .PanelBody .Field:after {
+	content: "";
+	clear: both;
+	line-height: 0;
+	height: 0;
+	display: block;
+	visibility: hidden;
+}
+.BasicFieldset .PanelBody ul {
+	overflow: hidden;
+	margin: 0 -30px;
+}
+.BasicFieldset .PanelBody ul li {
+	float: left;
+	width: calc(100%/2);
+	padding: 0 30px;
+}
+.PasswordFieldset .PanelBody {
+	max-width: 800px;
+	margin: 0 auto;
+}
+.PasswordData .Heading2 {
+	text-align: center;
+}
+.PasswordFieldset .PanelBody .Field .InputGroup {
+	padding: 0 0 0 96px;
+}
+.TableBox {
+	margin: 0 0 35px;
+}
+.PaginationBox {
+	text-align: left;
+}
+/*如果使用者之視窗寬度>=1280px，將會再載入這裡的 css。*/
+@media (min-width: 1280px) {}

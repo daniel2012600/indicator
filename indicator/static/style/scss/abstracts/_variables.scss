@@ -1,0 +1,196 @@
+/// Color system
+
+
+// stylelint-disable 灰色階
+$white:    #fff !default;
+$gray-0:   #f0f0f0 !default;
+$gray-1: #f4f4f4 !default;
+$gray-2:   #e5e5e5 !default;
+$gray-3:   #eee !default;
+$gray-4: #dddddd !default;
+$gray-5:   #ccc !default;
+$gray-6: #aaaaaa !default;
+$gray-7:   #777 !default;
+$gray-8:   #888 !default;
+$gray-9: #555555 !default;
+$gray-10:  #333 !default;
+$gray-e9: #e9e9e9 !default;
+$gray-e1:  #e1e1e1 !default;
+$gray-f7:  #f7f7f7 !default;
+$gray-b:  #bbb !default;
+$gray-a:  #aaa !default;
+$gray-222:  #222 !default;
+$dark: #211c15 !default;
+$black:    #000 !default;
+$lighter:  #F8F8F9 !default;
+
+// 自訂顏色
+$blue-main:      #002852 !default;
+$blue-light:     #033e7c !default;
+$blue-lighter:   #074d97 !default;
+$blue-white:   	 #F0F2FC !default;
+$gray-blue:      #f3f7fb !default;
+$red:            #b81b25 !default;
+$pink-main:      #ff6e62 !default;
+$pink-dark:      #f96166 !default;
+$aqua:			 #23C6C8 !default;
+$gold:			 #aa6900 !default;
+$red-1:			 #F96166 !default;
+$green:			 #499400 !default;
+$mint:			 #19B394 !default;
+$orange:		 #FF6C5F !default;
+$danger:		 #EF5365 !default;
+$border:		 #707070 !default;
+$purple: #7c4f9d !default;
+$deep-purple:	 #3B2A4B !default;
+$bgcolor:	 	 #F7F7F7 !default;
+$purple-hover:    #F3EDF7 !default;
+
+// 色彩系統
+$primary:       $purple !default;
+$secondary:     $gray-7 !default;
+$success:       #1AB394 !default;
+$warning:       #E6A23C !default;
+$danger:       	#EF5365 !default;
+$info:          $gray-7 !default;
+$disabled:      $gray-4 !default;
+$title:      	$deep-purple !default;
+
+// 圖表用色
+$chart-blue:      	#327DDD !default;
+$chart-red:      	#E25559 !default;
+$chart-yellow:      #F0D16F !default;
+$chart-green:      	#58A355 !default;
+$chart-purple:      #7D4C9B !default;
+
+// 社群用色
+$google:         #dc4e41 !default;
+$google_hover:   #c34236 !default;
+$line:           #09b900 !default;
+$line_hover:     #089601 !default;
+$facebook_hover: #2b4782 !default;
+$instagram:		 #F44D91 !default;
+$youtube:		 #FD0D00 !default;
+$facebook:		 #4267B2 !default;
+$blog:		 	 #FF8933 !default;
+
+// 有使用的灰階
+$bg-gray:            $gray-1 !default;
+$border-default:     $gray-5 !default;
+$border-light:       $gray-3 !default;
+
+// 有使用的文字顏色
+// ------------------------------------------
+
+$text-default:       #555 !default;
+$text-default-hover: #333 !default;
+$text-primary:       $blue-light !default;
+$text-primary-hover: $blue-lighter !default;
+$text-secondary:     $red !default;
+
+
+// 按鈕顏色
+// ------------------------------------------
+
+$btn_colors: () !default;
+$btn_colors: map-merge((
+	default: (
+		background: $white,
+		color: $blue-light,
+		border-color: $blue-light,
+		color-hover: $blue-light,
+		background-hover: $bg-gray,
+	),
+	primary: (
+		color: $white,
+		background:   $blue-main,
+		border-color: $blue-main,
+		color-hover: $white,
+		background-hover:   $blue-light,
+		border-color-hover: $blue-light,
+	),
+	third: (
+		color: $text-default,
+		background: $white,
+		border-color: $gray-4,
+		border-color-hover: $blue-light,
+		color-hover:  $blue-light,
+	),
+	fourth: (
+		color: $white,
+		background: #999,
+		border-color: #999,
+		background-hover: #888,
+		border-color-hover: #888,
+	),
+	share: (
+		color:        #343434,
+		background:   #eeedec,
+		border-color: #eeedec,
+		color-hover:        $white,
+		background-hover:   #222,
+		border-color-hover: #222,
+	),
+	disable: (
+		color: $white,
+		background: $disabled,
+		border-color: $disabled,
+	),
+	carousel: (
+		color: #888,
+		border-color: #bbb,
+		color-hover: $blue-main,
+		border-hover: $blue-lighter,
+	),
+), $btn_colors);
+
+
+// Grid breakpoints 目前在用的
+$grid-breakpoints: (
+	xs: 0,
+	sm: 375px,
+	md: 768px,
+	lg: 992px,
+	xl: 1440px,
+	xxl: 1920px
+);
+
+// Grid containers bootstrap 網格
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1140px
+);
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters  修正bootstrap欄數和gutter.
+
+$grid-columns:                12;
+$grid-gutter-width:           30px;
+
+// Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+$google-font: unquote("Lato");
+$font-family-base: '#{$google-font}', '-apple-system', BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "微軟正黑體", "Microsoft JhengHei", sans-serif !default;
+$font-size-base:              1rem !default;
+$line-height-base:            1.2 !default;
+$line-height-lg:              1.4 !default;
+
+// 這區沒在使用
+$h1-font-size:                $font-size-base * 2.5 !default;
+$h2-font-size:                $font-size-base * 2 !default;
+$h3-font-size:                $font-size-base * 1.75 !default;
+$h4-font-size:                $font-size-base * 1.5 !default;
+$h5-font-size:                $font-size-base * 1.25 !default;
+$h6-font-size:                $font-size-base !default;
+
+$font-size-section-text:      14px !default;
+$line-height-section-text:    1.7 !default;
+
+$cubic-bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$cubic-default: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+$bs: 0 5px 10px rgba(0, 0, 0, 0.1);

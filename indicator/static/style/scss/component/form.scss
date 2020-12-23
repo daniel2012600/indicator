@@ -1,0 +1,39 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+// 單選按鈕
+.el-radio-button {
+  margin-bottom: 0;
+}
+
+// 表單
+.el-form {
+ &:not(.el-form--inline) {
+
+   // input label
+   .el-form-item__label {
+     //line-height: 24px;
+     margin-bottom: 5px;
+   }
+ }
+}
+
+// 輸入框
+.el-input {
+  // 輸入框只有下底下
+  &--only-border-bottom {
+    .el-input__inner {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+}

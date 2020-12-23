@@ -1,0 +1,85 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+// 頁數
+.cdp-page {
+  @include breakpoint(767, max) {
+    height: auto !important;
+    margin-top: 16px;
+
+    .vxe-pager--wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      > .vxe-pager--jump,
+      > .vxe-pager--total,
+      > .vxe-select {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      > .vxe-select {
+        margin-top: 5px;
+        flex: 1 1 100%;
+        min-width: 100%;
+      }
+
+      > .vxe-pager--jump,
+      > .vxe-pager--total {
+        flex: 1 1 50%;
+        max-width: 50%;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+      }
+
+      > .vxe-pager--jump-prev,
+      > .vxe-pager--jump-next,
+      > .vxe-pager--next-btn,
+      > .vxe-pager--prev-btn {
+        display: none;
+      }
+
+      > .vxe-pager--btn-wrapper {
+        margin-bottom: 10px;
+        flex: 1 1 100%;
+        min-width: 100%;
+
+        > * {
+          &:first-child {
+            margin-left: 0;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      > * {
+        order: 1;
+      }
+
+      > .vxe-pager--btn-wrapper {
+        order: 0;
+      }
+
+      > .vxe-pager--total {
+        order: 1;
+      }
+      > .vxe-pager--jump {
+        order: 2;
+        justify-content: flex-end;
+      }
+      > .vxe-select {
+        order: 3;
+      }
+    }
+  }
+}

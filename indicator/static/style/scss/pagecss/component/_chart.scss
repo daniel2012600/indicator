@@ -1,0 +1,69 @@
+// 單數值圓框裝飾
+.value-pie {
+  font-size: 16px;
+  font-weight: bold;
+  color: $gray-222;
+  //background: $secondary;
+  margin: 0 auto;
+  @include flex-center();
+  border-radius: 50%;
+
+  @include breakpoint(1280) {
+    font-size: 28px;
+    //height: 135px;
+    //width: 135px;
+  }
+
+  &__symbol {
+    font-size: 16px;
+    margin-right: 5px;
+  }
+
+  &::after {
+    content: '';
+    //padding-bottom: 100%;
+  }
+
+  &--up {
+    //background: $danger;
+  }
+  &--down {
+    //background: $success;
+  }
+}
+
+// 數值卡片
+.v-value-card {
+  height: 100%;
+  .el-card {
+    height: 100%;
+  }
+  .md-card-content {
+    padding: 0;
+  }
+  .chartbox {
+    margin-bottom: 0;
+  }
+
+  // 單數值圓框類型
+  &--value-pie {
+    .mainbox__chart {
+      //margin-bottom: 0;
+    }
+  }
+}
+
+// 本期/下棋 數字表示
+.number-field {
+  &--colored {
+    display: inline-block;
+    padding: 3px 8px;
+    min-width: 130px;
+    max-width: 100%;
+    background: $gray-3;
+    font-weight: bold;
+  }
+  + .number-field {
+    margin-top: 5px;
+  }
+}

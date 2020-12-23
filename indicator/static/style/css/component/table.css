@@ -1,0 +1,109 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+.cdp-table--border-left {
+  border-left: 2px solid #dddddd;
+}
+.cdp-table--border-right {
+  border-right: 2px solid #dddddd;
+}
+.cdp-table .col--group {
+  border-left: 2px solid #dddddd;
+  border-right: 2px solid #dddddd;
+}
+.cdp-table .col--group + .col--group {
+  border-left: none;
+}
+.cdp-table__text {
+  line-height: 1.4;
+}
+.cdp-table--no-select-all thead .el-table-column--selection .el-checkbox {
+  display: none;
+}
+
+.table-toolbar {
+  height: auto;
+  padding: 14px;
+  background: #fff;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid #dddddd;
+  border-bottom: none;
+}
+.table-toolbar__row {
+  display: -webkit-box;
+  display: flex;
+}
+.table-toolbar__col {
+  -webkit-box-flex: 1;
+          flex: 1 1 50%;
+  max-width: 50%;
+}
+.table-toolbar__col:nth-child(2) {
+  text-align: right;
+}
+.table-toolbar + .wrap-card {
+  border-radius: 0 0 4px 4px;
+}
+.table-toolbar .el-button > span {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  height: 12px;
+}
+.table-toolbar .el-button .md-icon {
+  font-size: 20px !important;
+  margin-right: 2px;
+  margin-top: -6px;
+  margin-left: 0;
+}
+
+.vxe-pager {
+  margin-top: 10px;
+}
+
+.vxe-pager.is--background .vxe-pager--jump-next.is--active,
+.vxe-pager.is--background .vxe-pager--jump-prev.is--active,
+.vxe-pager.is--background .vxe-pager--num-btn.is--active .vxe-pager .vxe-pager--jump-next.is--active,
+.vxe-pager .vxe-pager--jump-prev.is--active,
+.vxe-pager .vxe-pager--num-btn.is--active {
+  background-color: #7C4F9D;
+  color: #fff !important;
+}
+
+.vxe-pager .vxe-pager--num-btn,
+.vxe-pager .vxe-pager--jump-next,
+.vxe-pager .vxe-pager--jump-prev,
+.vxe-pager .vxe-pager--next-btn,
+.vxe-pager .vxe-pager--num-btn,
+.vxe-pager .vxe-pager--prev-btn {
+  border: 1px solid #dddddd !important;
+}
+
+.vxe-pager .vxe-pager--jump-next.is--disabled,
+.vxe-pager .vxe-pager--jump-prev.is--disabled,
+.vxe-pager .vxe-pager--next-btn.is--disabled,
+.vxe-pager .vxe-pager--num-btn.is--disabled,
+.vxe-pager .vxe-pager--prev-btn.is--disabled {
+  background: #dddddd;
+  color: #aaa;
+}
+
+.name-pic {
+  display: -webkit-box;
+  display: flex;
+}
+.name-pic__name, .name-pic__pictrue {
+  -webkit-box-flex: 1;
+          flex: 1 1 auto;
+  max-width: 100%;
+}
+.name-pic__name {
+  padding-left: 10px;
+  line-height: 1.4;
+}
+
+/*# sourceMappingURL=table.css.map */

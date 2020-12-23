@@ -1,0 +1,63 @@
+.el-button {
+  // 超巨大的按鈕
+  &--massive {
+    font-size: 20px;
+    width: 318px;
+    max-width: 100%;
+    height: 80px;
+  }
+
+  .form-buttons & {
+    + .el-button {
+      margin-left: 16px;
+    }
+  }
+
+  // 只有ICON
+  &--only-icon {
+    padding: 0 5px;
+    min-height: 40px;
+    min-width: 40px;
+    color: $gray-a;
+
+    .button-icon {
+      font-size: 24px;
+    }
+  }
+  
+  &-outer {
+    display: flex;
+  }
+}
+.button-auto {
+  padding: 9px 12px;
+  color: $gray-a;
+
+  .button-icon {
+  }
+  .button-content {
+    font-weight: bold;
+    color: $gray-9;
+  }
+}
+.button-md {
+  width: 90px;
+}
+.button-full {
+  width: 100%;
+}
+.button-auto,
+.button-md {
+  > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-icon {
+    font-size: 20px;
+    margin-right: 5px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+  }
+}

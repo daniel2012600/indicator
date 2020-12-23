@@ -1,0 +1,62 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+// tag
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  margin-bottom: -10px;
+
+  .tag {
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.tag {
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+
+  &-button {
+    transition: all .2s;
+    &:hover {
+      cursor: pointer;
+      background: $purple;
+      border-color: $purple;
+      color: $white;
+    }
+  }
+
+  &-select {
+    display: none;
+  }
+
+  &-pop {
+    margin-bottom: 0;
+  }
+
+  .material-icons {
+    font-size: 15px;
+    font-weight: normal;
+    margin: 0 -2.5px;
+  }
+
+  &--normal {
+    background: $gray-1;
+    border: 1px solid $gray-4;
+    font-size: 14px;
+    color: $gray-9;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "cdp-duz",
+  "private_key_id": "f2091c9291c9c270dd8f10cd23c8df67e18b3e11",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC02u0rl3Vf2us6\nYBLL6lLmvjlSI5spXDodEA7U2eDygsbAI3TkIv5JtLb5YzMXuDZs4OEbuQgMB6eQ\nbUa0aryrIwN/KQj/14wA0oGL9ZI+qAgI2r/MI199fJpv2/ADt2EQSw3lsip0hVCL\njsg5L6KivIfq+1VbGxA1odoKrlv92LKU6SY18htHqkmhbigjstVQjGucxru7InQa\nChdAVwkUUVo7AgXk6N0HqhOS+ldmgxCNQQlHc7c4DgvFH+jFNkhm+J00L2VZ9GWH\n/591O0IAj0dK6B1Zjz9XDZZhUsmVBJcndT1IETDc6HltqNbd44vz4D2eahpGr6Gi\n62UEkLpPAgMBAAECggEAPFPOyzyxfXEECCvl+TlHwApyCnEwH8LQ68Lgf6XSAHMZ\nIxxwsGzvz9xFMLkjYOUk2nrE/D9jbMfc4DNjY2k7WAbM8szYYKcg32FYrzwSNW5N\nh86YLdsazjwTM/70d/jimtG+aAFfYhDaRkMxjMnUAV7MI9kEpuhHJuy/U9LHgswH\nUExqtcYWFEw6ph9Tz/ujPhuB2QB+9O2PTmoHiIMlTzPUZckMhqXwYBvWH7W/8Af9\n3lK3eYGfr04HmDtD1+RoEqljczP9QUFWBBmdLvliucqXNY5eObFuiClseMW1Q9+O\nUi5Qm6pMSTgubTMdw9j0BLmGLz8MRB4GeYGj1trvIQKBgQDgbJLewkFtQx0402tK\n/jDTmvkid42rAlObB3lcQ64/qqZz1KOsGYKdApaXrchUmhvu4Y1abRlBUXWvP79X\nWx1/Km2pMmThZiM9TEs1ok0bZGwAjHcP5Egj5b0cw36W4Ggh2f5Dj8Mg6l7OGnog\nv/yDVh5Gb42f+iSe01r6ecMHsQKBgQDOTRBYRAgKa29AcDYn7NkPDOQBdds7EsLI\nlaunM6qmmwNsWO56ZlJpl00Aoy+CUKYQauzR+Dyty4wvDvC7uNuTlDB6SF09o/4K\nLeoOIABLLeSRQVJKwtblXnYR0Exkhrhrlgm+aEEKe/0INPygav65qzfdzzVXcnIt\nmB1ApgJh/wKBgG8kVfgLq+s4eZhS26fgCr5A2XDAVGCEXnNAWFHhEsJk+NoUTJpG\nZ/Dp/zpOzg9X4s2C1kYaEY/Pj8CiiVfxv8HieTx5wIv/0SPiTLzbC+Ss7u+2oKA2\nJaPheq5sAp0ltWxOUSWUZMZAS4M2iZT+f0drtsKbLEA12Tzu3vd8paGBAoGAegU0\n1LAwfVE8NUXpkkXRwMgkGAUIjXE0SoXUSIoTtoVbSftz2muo9RFrlyPuFsry3iUQ\nO8Tyxuzs1myk0LOvFCQDZGBm3e2gdY7gsEgXRGA5n/yd2uBRUMtFVJX6iT7x15if\n3MI3LidV60PD5HJEhbcSzRwg9b8Yb4VYUAOgxysCgYAy1jWZx+YVI2LvgzYz9gRS\nsXfuaO9D+pyYNKDh2UB0A28x6Krh9kTNLelAfWShdCAuM47AdEd1g/eOi8hyRRK6\n0Oyd9JgjdSa18CesqLe8Zv1uqswD4eXu+8hgrlP2hCF4RnTGGqk0T6W4worZQZl3\ng0G/kSqaskQHvZ503GnUdw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "cdp-duz@cdp-duz.iam.gserviceaccount.com",
+  "client_id": "100285627056065479413",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cdp-duz%40cdp-duz.iam.gserviceaccount.com"
+}

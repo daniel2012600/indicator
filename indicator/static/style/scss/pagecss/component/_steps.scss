@@ -1,0 +1,101 @@
+.el-steps {
+  .el-step {
+    &__icon {
+      border-color: $gray-e1;
+    }
+    &__line {
+      border-color: $gray-8;
+    }
+    &__title {
+      color: $gray-9;
+      &.is-process {
+        color: $purple;
+      }
+    }
+    &__head {
+      &.is-wait {
+        color: $gray-b;
+      }
+      &.is-finish {
+        color: $gray-b;
+      }
+    }
+    &.is-horizontal {
+      .el-step__line {
+        height: 1px;
+      }
+    }
+  }
+  &--text-icon {
+    .el-step__head {
+      .el-step__icon {
+        width: auto;
+        background: $gray-e9;
+        border-color: $gray-e9;
+        border-radius: 13px;
+        padding: 0 8px;
+      }
+      &.is-process {
+        .el-step__icon {
+          background: $purple;
+          border-color: $purple;
+          color: $white;
+        }
+      }
+    }
+
+    .el-step {
+      &.is-horizontal {
+        display: flex;
+
+        .el-step__line {
+          height: 1px;
+          top: 12px;
+        }
+      }
+
+      &--danger {
+        .el-step__head {
+          &.is-process {
+            .el-step__icon {
+              background: $danger;
+              border-color: $danger;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  // 大圓圈版本
+  &--large {
+    margin-bottom: 25px;
+    .el-step {
+      &__icon {
+        width: 64px;
+        height: 64px;
+        font-size: 28px;
+        border-width: 1px;
+        //border-color: $gray-e1;
+      }
+
+      &.is-horizontal {
+        .el-step__line {
+          top: 32px;
+        }
+      }
+
+      &__head {
+        &.is-process {
+          .el-step__icon {
+            border-color: $purple;
+            background: $purple;
+            color: $white
+          }
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,406 @@
+@charset "utf-8";
+/*******************************************************************************
+ * Version 1.0 Release;
+ * Copyright 2016, "keri"<keri@dotmore.com.tw>. All rights reserved.
+ ******************************************************************************/
+div.Active {
+	display: block;
+}
+/* LightBoxFrame Start */
+.LightBoxFrameBackground {
+	background: #000;
+	background: rgba(0,0,0,0.5);
+	background: transparent\0/;
+	bottom: 0;
+	display: none;
+	left: 0;
+	overflow-y: hidden;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1000;
+	zoom: 1;
+	*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+/* LightBoxFrame End */
+/* LightBox Basic Start */
+.LightBox {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	display: none;
+	height: 460px;
+	left: 50%;
+	margin: -230px 0 0 -400px;
+	position: fixed;
+	top: 50%;
+	width: 800px;
+	z-index: 1000;
+	zoom: 1;
+}
+.LightBox:after {
+	content: "";
+	background: #000;
+	background: rgba(0,0,0,0.5);
+	background: transparent\0/;
+	bottom: 0;
+	left: 0;
+	overflow-y: hidden;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: -1;
+	zoom: 1;
+	*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+/*LightBox Basic - popup內容*/
+.PopupBox {
+	background: #f2f2f2;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 48px 48px 80px;
+	position: relative;
+}
+.PopupContent {
+	max-width: 540px;
+	margin: 0 auto;
+}
+.Line {
+	width: 100%;
+	height: 1px;
+	margin: 26px auto;
+	background: #888;
+	position: relative;
+	z-index: 1;
+}
+.Line span {
+	font-size: 18px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -8px;
+	margin-left: -19px;
+	z-index: 2;
+	padding: 0 10px;
+	background: #f2f2f2;
+}
+.PopupContent > h3{
+	font-size: 1.5em;
+	color: #333;
+	text-align: center;
+	border-bottom: 1px solid #333; 
+	padding: 0 0 10px 0;
+}
+.PopupContent .Desc {
+	color: #333;
+	font-size: 18px;
+	text-align: left;
+	line-height: 1.33;
+	margin: 32px auto;
+}
+.PopupContent .Desc .Less{
+	text-align: center;
+}
+.PopupContent > .InfoContent {
+	background: #fff;
+	padding: 10px 14px;
+}
+.PopupContent > .InfoContent .ContactType {
+	font-size: 18px;
+	line-height: 2;
+	color: #333;
+}
+.PopupContent > .InfoContent .ContactItem {
+	font-size: 16px;
+	line-height: 1.6;
+	color: #7a4c98;
+}
+.PopupBox .BtnBox {
+	text-align: center;
+	margin: 80px auto 0;
+}
+.PopupBox .BtnBox .BtnDark {
+	width: 150px;
+	height: 44px;
+}
+.BtnCloseBox {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.BtnCloseBox i {
+	font-size: 14px;
+	color: #7a4c98;
+}
+.BtnCloseBox a {
+	display: block;
+	padding: 17px 18px;
+}
+/*LightBox Basic - popup－標題*/
+.LightBox > .PopupContent .Title {
+	color: #7c4a9a;
+	font-size: 1.625em;/*26px/16px*/
+	margin: 0 0 4px;
+	text-align: center;
+}
+.LightBox > .PopupContent .Desc {
+	font-size: 1.25em;/*20px/16px*/
+	text-align: center;
+}
+.LightBox > .PopupContent > .BtnBox {
+	margin: 0;
+	text-align: center;
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 2.1875em;/*35px/16px*/
+}
+.LightBox > .PopupContent > .BtnBox > .Btn {
+	font-size: 1em;
+	height: 2.5em;
+	line-height: 2.5;
+}
+.LightBox > .PopupContent > .BtnBox > .Btn.Dark {
+	color: #fff;
+}
+
+.LightBox > .BtnBox {
+	background: #7c4a9a;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 40px;
+	width: 40px;
+}
+.LightBox > .BtnBox > .CloseBtn {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 40px;
+	height: 40px;
+}
+.LightBox > .BtnBox > .CloseBtn > i.icon_cross {
+	color: #fff;
+	font-size: 1em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 16px;
+	height: 16px;
+	margin: -8px;
+}
+.LightBox > .BtnBox > .CloseBtn > i.icon_cross:before {
+	margin: 0 0 0 -38px;
+}
+/*重複確認*/
+.LightBox.M.ConfirmBox {
+	background: #f2f2f2;
+	height: auto;
+	top: 20%;
+	margin: 0 0 0 -48vw;
+}
+.LightBox.ConfirmBox > .PopupContent {
+	height: auto;
+}
+.LightBox.ConfirmBox > .PopupContent > .Content {
+	margin: 0 0 70px;
+}
+.ConfirmBox .AdvertInfo {
+	margin: 1.875em auto;/*30/16 auto*/
+	max-width: 480px;
+}
+.ConfirmBox .AdvertInfo > div {
+	background: #fff;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #888;
+	font-size: 1.25em;/*20/16*/
+	margin: 0 0 1.5em;/*0 0 24/16*/
+	padding: 4px 0.8em;
+}
+.ConfirmBox .WebData {
+	background: #fff;
+	border-radius: 4px;
+	color: #888;
+	font-size: 1.25em;/*20/16*/
+	padding: 4px 16px;
+	/*width: 480px;*/
+	margin: 20px auto;
+}
+.ConfirmBox .WebData.WebSelect {
+	padding: 0;
+}
+.ConfirmBox .WebData.WebSelect select {
+	font-size: 16px;
+	width: 100%;
+	padding: 9px 16px;
+	line-height: 1.25;
+	background: url(../images/icon/icon_select.svg) no-repeat scroll 97% 50% #fff;
+	background-size: 14px 14px;
+}
+/*Loading*/
+.Loading {
+	display: none;
+	width:46.666666666666664px;
+	margin: 0 auto;
+	padding: 30px 0;
+	height: 20px;
+	left: 50%;
+	margin: -10px 0 0 -23.33333333333332px;
+	position: fixed;
+	top: 50%;
+	z-index: 1001;
+	zoom: 1;
+}
+.CircleG{
+	background-color:#FFFFFF;
+	float:left;
+	height:10px;
+	margin-left:5px;
+	width:10px;
+	-moz-animation-name:bounce_circleG;
+	-moz-animation-duration:1.35s;
+	-moz-animation-iteration-count:infinite;
+	-moz-animation-direction:linear;
+	-moz-border-radius:7px;
+	-webkit-animation-name:bounce_circleG;
+	-webkit-animation-duration:1.35s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-direction:linear;
+	-webkit-border-radius:7px;
+	-ms-animation-name:bounce_circleG;
+	-ms-animation-duration:1.35s;
+	-ms-animation-iteration-count:infinite;
+	-ms-animation-direction:linear;
+	-ms-border-radius:7px;
+	-o-animation-name:bounce_circleG;
+	-o-animation-duration:1.35s;
+	-o-animation-iteration-count:infinite;
+	-o-animation-direction:linear;
+	-o-border-radius:7px;
+	animation-name:bounce_circleG;
+	animation-duration:1.35s;
+	animation-iteration-count:infinite;
+	animation-direction:linear;
+	border-radius:7px;
+}
+.CircleG1{
+	-moz-animation-delay:0.27s;
+	-webkit-animation-delay:0.27s;
+	-ms-animation-delay:0.27s;
+	-o-animation-delay:0.27s;
+	animation-delay:0.27s;
+}
+.CircleG2{
+	-moz-animation-delay:0.63s;
+	-webkit-animation-delay:0.63s;
+	-ms-animation-delay:0.63s;
+	-o-animation-delay:0.63s;
+	animation-delay:0.63s;
+}
+.CircleG3{
+	-moz-animation-delay:0.8099999999999999s;
+	-webkit-animation-delay:0.8099999999999999s;
+	-ms-animation-delay:0.8099999999999999s;
+	-o-animation-delay:0.8099999999999999s;
+	animation-delay:0.8099999999999999s;
+}
+@-moz-keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background-color:#666666
+	}
+	100%{
+	}
+
+}
+@-webkit-keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background-color:#666666}
+	100%{
+	}
+}
+@-ms-keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background-color:#666666
+	}
+	100%{
+	}
+}
+@-o-keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background-color:#666666
+	}
+	100%{
+	}
+}
+@keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background-color:#666666
+	}
+	100%{
+	}
+
+}
+/*如果使用者之視窗寬度>=1024px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1024px) {
+	/*Lightbox size*/
+	.LightBox.S {}
+	.LightBox.M {
+		margin: -200px 0 0 -385px;
+		height: 400px;
+		width: 770px;
+	}
+	.LightBox.L {}
+	.LightBox > .BtnBox {
+		border: 1px solid #fff;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		top: -20px;
+		right: -20px;
+	}
+	.LightBox > .PopupContent > .BtnBox {
+		bottom: 2.5em;
+	}
+	/*重複確認*/
+	.LightBox.M.ConfirmBox {
+		height: auto;
+		margin: 0 0 0 -385px;
+	}
+	.LightBox.ConfirmBox > .PopupContent > .Content {
+		margin: 0 0 100px;
+	}
+}
+/*如果使用者之視窗寬度>=1152px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1152px) {}
+/*如果使用者之視窗寬度>=1280px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1280px) {
+}
+/*如果使用者之視窗寬度>=1360px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1360px) {
+}
+/*如果使用者之視窗寬度>=1400px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1400px) {
+}
+/*如果使用者之視窗寬度>=1600px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1600px) {
+}
+/*如果使用者之視窗寬度>=1680px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1680px) {
+}
+/*如果使用者之視窗寬度>=1920px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1920px) {}

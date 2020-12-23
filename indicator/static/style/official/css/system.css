@@ -1,0 +1,104 @@
+@charset "utf-8";
+/*******************************************************************************
+ * Version 1.0 Release;
+ * Copyright 2017
+ ******************************************************************************/
+/*系統box*/
+.BoxSystem {
+	margin: 60px 0;
+	text-align: center;
+	color: #333;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+/* 圖示框 */
+.BoxSystemImgbox {
+	margin: 0 auto 20px;
+	max-width: 220px;
+}
+/* 圖示icon */
+.BoxSystemImg{
+
+}
+/* 資訊 */
+.BoxSystemInfo{
+}
+/* 主標 */
+.BoxSystemTitle {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: #7a4c98;
+}
+/* 副標 */
+.BoxSystemSubtitle {
+	font-size: 1.5em;
+}
+/* 描述 */
+.BoxSystemDesc {
+	line-height: 1.75;
+	margin-bottom: 30px;
+}
+/* 按鈕區 */
+.BoxSystemBtnbox{
+	margin: 25px auto;
+}
+.BoxSystemBtnbox.Half{
+	margin: 0 -5px;
+	font-size: 0;
+	letter-spacing: -4px;
+	word-spacing: 0;
+}
+.BoxSystemBtnbox.Half .Btn{
+	width: calc(100% / 2 - 10px);
+	margin: 0 5px;
+	font-size: 16px;
+	letter-spacing: normal;
+	word-spacing: normal;
+	zoom: 1;
+}
+/* 按鈕 */
+.BoxSystemBtn {
+	max-width: 140px;
+}
+/* BoxSystem-construction */
+@media screen and (min-width: 768px) {
+	/*系統box*/
+	.BoxSystem {
+		margin: 110px auto;
+	}
+	/* 圖示框 */
+	.BoxSystemImgbox {
+		margin-bottom: 50px;
+		max-width: 100%;
+	}
+	.BoxSystemImg{
+		width: auto;
+	}
+	/* 資料 */
+	.box-systemInfo {
+	}
+	/* 主標 */
+	.BoxSystemTitle {
+		font-size: 36px;/*48/16*/
+		margin-bottom: 20px;
+	}
+	/* 描述 */
+	.BoxSystemDesc{
+		font-size: 1.125em;/*18/16*/
+		line-height: 1.4;
+		margin-bottom: 30px;
+	}
+	.BoxSystemBtnbox.Half{
+		margin: 0 10px;
+	}
+	.BoxSystemBtnbox.Half .Btn{
+		width: 140px;
+		margin: 0 10px;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1024px) {
+}

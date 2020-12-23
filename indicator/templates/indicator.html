@@ -1,0 +1,130 @@
+{% extends "layout_mini_daniel.html" %}
+{% block title %}CDP-行銷自動化整合報表{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/style/morris/0.5.1/morris.css" />
+
+<style type="text/css">
+  /*修複sparkline tooltips樣式跑版*/
+  .jqstooltip {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  .el-table .cell {
+        white-space: pre-line;
+    }
+  .el-table .cell {
+        white-space: pre-line;
+    }
+
+  .el-range-separator {
+    /* 修正”至”樣式錯誤 */
+    width: 27px !important;
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<!-- 頁面標題-右側-無功能 start -->
+<el-row type="flex" justify="space-between" :gutter="25" class="mb-4">
+    <el-col :span="24">
+    <div class="grid-content">
+        <h1>CDP-indicator</h1>  
+    </div>
+    </el-col>
+</el-row>
+<!-- 頁面標題-右側-無功能 end -->
+<!-- 1欄 start -->
+
+
+
+
+ 
+
+<el-row :gutter="25" class="mb-4">
+    <el-col :span="24">
+        <div class="grid-content">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">Example</h2>
+            <v-echarts-bar
+            id="click1"
+            :data="get_mdata()"
+            :meskeys="['人數']"
+            xaxis_location="'start'"
+            bar_color="#c35a20"
+            :gird_bottom="30">
+            </v-echarts-bar>
+        </el-card>
+        </div>
+    </el-col>
+</el-row>
+
+
+
+<!-- 1欄 end -->
+
+{% endblock %} 
+
+{% block js %}
+<script src="/static/style/echarts/4.8.0/echarts.min.js"></script>
+<script src="/static/style/lodash/4.16.0/lodash.js"></script>
+<script src="/static/js/v-echarts-rfm-chart.js"></script>
+<script src="/static/js/v-echarts-bar.js"></script>
+
+
+<script>
+
+    var obj = new Vue({
+        el: '#app',
+        mixins: [layoutVue],
+        data:  {
+            breadpath: [{key: '首頁', path: '/'},{key: '標題', path: ''}],
+            daterangeopts: [
+                {'v': '1w', 'label': '一週內'},
+                {'v': '2w', 'label': '二週內'},
+                {'v': '1m', 'label': '一個月內'},
+                {'v': '2m', 'label': '二個月內'},
+                {'v': '3m', 'label': '三個月內'},
+                {'v': '2yr', 'label': '兩年內'},
+            ],
+            sel_period: '1m',
+            datalist : [{"pid":"chatime:34303","rebuy_day":4.5,"buy_count":2,"total_price":75,"R":5,"F":5,"M":3},{"pid":"chatime:35924","rebuy_day":14,"buy_count":1,"total_price":35,"R":1,"F":4,"M":1},{"pid":"chatime:41550","rebuy_day":21,"buy_count":1,"total_price":50,"R":1,"F":4,"M":2},{"pid":"chatime:43194","rebuy_day":11,"buy_count":1,"total_price":40,"R":2,"F":4,"M":1},{"pid":"chatime:50803","rebuy_day":6.5,"buy_count":2,"total_price":185,"R":4,"F":5,"M":5},{"pid":"chatime:51113","rebuy_day":15,"buy_count":1,"total_price":50,"R":1,"F":4,"M":2},{"pid":"chatime:59689","rebuy_day":6.67,"buy_count":3,"total_price":344,"R":4,"F":6,"M":6},{"pid":"chatime:62318","rebuy_day":9,"buy_count":1,"total_price":40,"R":2,"F":4,"M":1},{"pid":"chatime:64437","rebuy_day":6.75,"buy_count":4,"total_price":215,"R":4,"F":6,"M":6},{"pid":"chatime:67212","rebuy_day":2,"buy_count":1,"total_price":50,"R":6,"F":4,"M":2},{"pid":"chatime:68016","rebuy_day":13,"buy_count":1,"total_price":50,"R":2,"F":4,"M":2},{"pid":"chatime:71035","rebuy_day":6.5,"buy_count":2,"total_price":85,"R":4,"F":5,"M":3},{"pid":"chatime:71595","rebuy_day":2.67,"buy_count":3,"total_price":264,"R":6,"F":6,"M":6},{"pid":"chatime:72194","rebuy_day":4,"buy_count":1,"total_price":40,"R":5,"F":4,"M":1},{"pid":"chatime:22166","rebuy_day":2.5,"buy_count":10,"total_price":850,"R":6,"F":6,"M":6},{"pid":"chatime:26633","rebuy_day":1.5,"buy_count":2,"total_price":228,"R":6,"F":5,"M":6},{"pid":"chatime:28276","rebuy_day":4,"buy_count":2,"total_price":238,"R":5,"F":5,"M":6},{"pid":"chatime:40091","rebuy_day":18,"buy_count":1,"total_price":50,"R":1,"F":4,"M":2},{"pid":"chatime:45534","rebuy_day":3.5,"buy_count":2,"total_price":100,"R":5,"F":5,"M":4},{"pid":"chatime:56549","rebuy_day":12,"buy_count":1,"total_price":199,"R":2,"F":4,"M":5}],
+            check_data: [],
+            my_data: []
+        },
+        methods: {
+            get_mdata(){
+                var M_data = this.datalist
+                var my_test = _.countBy(M_data,'M')
+                this.my_data = [
+                    {'次數': 1, '人數': my_test[1]},
+                    {'次數': 2, '人數': my_test[2]},
+                    {'次數': 3, '人數': my_test[3]},
+                    {'次數': 4, '人數': my_test[4]},
+                    {'次數': 5, '人數': my_test[5]},
+                    {'次數': 6, '人數': my_test[6]},
+                ]
+                console.log(this.my_data)
+                return this.my_data
+            }
+
+        },
+        mounted () {
+            $.post('/report/rfm_api', { 
+                    period: JSON.stringify(this.sel_period)
+                }, result => {
+                    console.log(result)
+                    this.check_data = result;
+                }, 'json');
+
+        }
+    });
+
+    
+</script>
+
+
+{% endblock %}
+

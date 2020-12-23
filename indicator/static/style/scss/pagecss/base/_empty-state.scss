@@ -1,0 +1,59 @@
+.empty-state {
+  max-width: 450px;
+  margin-bottom: 25px;
+  &.md-empty-state.md-theme-default.md-rounded {
+    background: $white;
+  }
+
+  &__label {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  &__img {
+    margin-top: -20px;
+    flex: 1 1 350px;
+    max-width: 350px;
+    transition: all .2s;
+  }
+
+  // 無資料狀態的下方資訊
+  &-info {
+    text-align: center;
+
+    &__btn {
+      width: 200px;
+      height: 60px;
+      font-size: 20px;
+      margin-bottom: 14px;
+      font-weight: bold;
+    }
+
+    &__text {
+      font-weight: bold;
+      color: $purple;
+    }
+  }
+
+  &--gray {
+    &.md-empty-state.md-theme-default.md-rounded {
+      background: $gray-f7;
+    }
+  }
+
+  // 小型
+  &--small {
+    max-width: 350px;
+
+    .empty-state {
+      &__img {
+        flex: 1 1 270px;
+        max-width: 270px;
+        margin-top: 0;
+      }
+      &__label {
+        margin-top: 20px;
+      }
+    }
+  }
+
+}

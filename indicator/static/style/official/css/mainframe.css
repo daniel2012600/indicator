@@ -1,0 +1,83 @@
+@charset "utf-8";
+/*******************************************************************************
+ * Version 1.0 Release;
+ * Copyright 2016, "keri"<keri@dotmore.com.tw>. All rights reserved.
+ ******************************************************************************/
+html, body {
+	height:100%;
+}
+*{
+	/* outline: 1px solid #f00 !important; */
+}
+/*-------------------- Wrap --------------------*/
+.Wrap {
+	position: relative;
+	min-height: 100%;
+	padding-bottom: 56px;
+}
+.Content{
+	padding: 15px 0 30px;
+}
+.Inner{
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+/*-------------------- Header --------------------*/
+.Header {
+	background: #7c4a9a;
+	padding: 15px 13px;
+	-webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),0 4px 5px 0 rgba(0,0,0,0.06),0 1px 10px 0 rgba(0,0,0,0.08);
+	-moz-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),0 4px 5px 0 rgba(0,0,0,0.06),0 1px 10px 0 rgba(0,0,0,0.08);
+	box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06),0 4px 5px 0 rgba(0,0,0,0.06),0 1px 10px 0 rgba(0,0,0,0.08);
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	transition: all .25s;
+}
+/*-------------------- logo-------------------- */
+/*Logo*/
+.Logo {
+	overflow:hidden;
+	text-indent:100%;
+	vertical-align: top;
+	white-space:nowrap;
+	width: 100px;
+	height: 20px;
+	margin: 0 auto 1px;/*0 0 16px/16px*/
+}
+.Logo > a {
+	display: block;
+	position: relative;
+}
+.Logo > a > img {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+/*-------------------- Footer --------------------*/
+.Footer {
+	background: #f2f2f2;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 4;
+	font-size: 12px;
+}
+.Footer .Inner{
+	position: relative;
+	padding: 20px 0;
+}
+/*如果使用者之視窗寬度>=768px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 768px) {
+	.Content{
+		padding: 50px 0;
+	}
+	.Logo {
+		width: 154px;
+		height: 32px;
+	}
+}
+
+

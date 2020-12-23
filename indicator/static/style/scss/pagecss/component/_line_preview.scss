@@ -1,0 +1,88 @@
+.line-preview {
+  //border: 1px solid $gray-2;
+  //background: #7294c2;
+  background: $gray-3;
+  border: 1px solid $gray-2;
+  width: 100%;
+  padding: 20px 12px;
+
+  &__dialog {
+    display: flex;
+
+    // 對話中上傳的圖片
+    &--image {
+      .line-preview__content {
+        padding: 0;
+        background: transparent;
+
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+  &__user {
+    flex: 1 1 50px;
+    max-width: 50px;
+    padding-right: 10px;
+  }
+
+  &__content {
+    flex: 1 1 calc(100% - 50px);
+    max-width: 255px;
+    position: relative;
+    border-radius: 15px;
+    z-index: 1;
+    word-break: break-all;
+    padding: 15px;
+    margin-bottom: 8px;
+    background: $white;
+
+    &::before {
+      content: "";
+      position: absolute;
+      border: 0 solid $white;
+      border-top: 13px solid $white;
+      border-radius: 26px 0 0 0;
+      width: 40px;
+      height: 27px;
+      z-index: -1;
+      left: -4px;
+      top: -7px;
+      bottom: auto;
+      right: auto;
+      -webkit-transform: rotateX(180deg) rotateZ(12deg);
+      transform: rotateX(180deg) rotateZ(20deg);
+    }
+  }
+
+  &__time {
+    font-size: 12px;
+    flex: 1 0 65px;
+    max-width: 65px;
+    padding-left: 5px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 8px;
+  }
+
+  &__image {
+    border-radius: 6px;
+    overflow: hidden;
+    display: inline-flex;
+    border: 1px solid $gray-2;
+  }
+
+  .el-link {
+    color: #347af4!important;
+    text-decoration: underline !important;
+
+    &:hover {
+      text-decoration: none !important;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}

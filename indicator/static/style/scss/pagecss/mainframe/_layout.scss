@@ -1,0 +1,118 @@
+// 搜尋/過濾工具列
+.tool-bar {
+  margin-bottom: 20px;
+  background: rgba($white, 0.7);
+
+  &__text {
+    display: flex;
+    align-items: center;
+    line-height: 24px;
+
+    + * {
+      margin-left: 20px;
+    }
+  }
+
+  .el-form-item {
+    margin-bottom: 0;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+
+    > *.el-form-item {
+      &:last-child {
+        margin-right: 0;
+      }
+
+      > .el-form-item__content {
+        @include breakpoint(md) {
+          display: flex;
+        }
+
+        > *.el-col {
+          &:not(:first-child) {
+            @include breakpoint(md) {
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    @include breakpoint(767, max) {
+      flex-wrap: wrap;
+
+      > *.el-form-item {
+        margin-right: 0;
+        width: 100%;
+
+        > .el-form-item__content {
+          width: 100%;
+
+          > * {
+            margin-right: 0;
+            margin-left: 0;
+          }
+        }
+
+        .el-col {
+          &:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+
+      .el-select {
+        width: 100%;
+      }
+
+      .el-button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+// breadcrumb
+.el-breadcrumb {
+  &:empty {
+    display: none;
+  }
+}
+.wrap {
+  padding-bottom: 40px;
+  > * {
+    &:last-child {
+      margin-bottom: 0!important;
+    }
+  }
+
+  > .wrap {
+    padding-bottom: 0;
+  }
+}
+
+// empty-state under row--flex
+.el-row--flex {
+  > .md-empty-state-container {
+    width: 100%;
+  }
+}
+
+[v-cloak] {
+  display: none;
+}
+
+// row後方的連結
+.row-end-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

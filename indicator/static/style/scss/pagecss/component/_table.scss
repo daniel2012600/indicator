@@ -1,0 +1,623 @@
+.vxe-table {
+  .vxe-body--row {
+    &.row--hover,
+    &.row--hover.row--hover {
+      background: $purple-hover;
+    }
+  }
+}
+
+// table共用屬性
+.cdp-table {
+  // 左邊線
+  &--border-left {
+    border-left: 1px solid $gray-4;
+  }
+  // 右邊線
+  &--border-right {
+    border-right: 1px solid $gray-4;
+  }
+
+  // column群組
+  .col--group {
+    border-left: 1px solid $gray-4;
+    border-right: 1px solid $gray-4;
+
+    // 並排的column群組
+    + .col--group {
+      border-left: none;
+    }
+  }
+
+  &__text {
+    line-height: 1.4;
+  }
+
+  &.vxe-table {
+    th {
+      background: $gray-3;
+
+      .vxe-sort--asc-btn,
+      .vxe-sort--desc-btn {
+        color: $gray-a;
+      }
+    }
+    .vxe-cell--checkbox {
+      .vxe-checkbox--icon {
+        width: 14px;
+        height: 14px;
+
+        &::before {
+          border-width: 1px;
+          width: 14px;
+          height: 14px;
+        }
+
+        &::after {
+          height: .52em;
+          width: .28em;
+          border-width: 1px;
+          top: 46%;
+          left: 56%;
+        }
+      }
+    }
+  }
+
+  // element
+  &.el-table  {
+    color: $gray-9;
+    border-color: $gray-4;
+
+    // table底線
+    &::before {
+      background: $gray-4;
+    }
+
+    td, th {
+      border-color: $gray-4;
+      padding: 10px 0;
+    }
+    th {
+      background: $gray-3;
+    }
+
+    thead {
+      color: $gray-9;
+    }
+    thead.is-group th {
+      background: $gray-3;
+    }
+
+    .cell {
+      // 標籤
+      .tags {
+        padding: 0;
+      }
+    }
+
+    // 標籤
+    .el-tag {
+      .el-tag__close {
+        width: 14px;
+        height: 14px;
+        @include flex-center();
+
+        &::before {
+          height: 15px;
+          line-height: 14px;
+          transform: scale(0.9);
+        }
+      }
+    }
+
+    th > .cell {
+      font-size: 14px;
+
+      // 排序
+      .caret-wrapper {
+        height: 24px;
+
+        .sort-caret.ascending {
+          top: 0;
+        }
+
+        .sort-caret.descending {
+          bottom: 1px;
+        }
+      }
+    }
+
+    .el-table {
+      &__header,
+      &__body {
+        //width: 100% !important;
+      }
+
+      &__row {
+        &.hover-row,
+        &.current-row,
+        &.el-table__row--striped.current-row,
+        &:hover {
+          > td {
+            background: $purple-hover;
+          }
+        }
+      }
+
+      // 修改展開table子層icon方向
+      &__expand-column{
+        .el-table__expand-icon {
+          transform: rotate(90deg);
+
+          &.el-table__expand-icon--expanded {
+            transform: rotate(-90deg);
+          }
+        }
+
+        &--hide {
+          .cell {
+            display: none;
+          }
+        }
+      }
+
+      &__expanded-cell {
+        padding: 0 0 30px;
+      }
+    }
+
+    .cell {
+      &.el-table__cell--selection-text {
+        &::before {
+          content: "選取";
+        }
+      }
+    }
+  }
+
+  &--header-center {
+    &.el-table  {
+      thead.is-group th {
+        text-align: center;
+      }
+    }
+  }
+
+  // 子表格
+  &--sub-table {
+    &.el-table  {
+      &:last-child::before {
+        background: transparent;
+      }
+      th, td {
+        padding: 5px 0;
+      }
+      td {
+        border-bottom: none;
+      }
+    }
+  }
+
+  // 沒有header的表格
+  &--header-less {
+    &.el-table  {
+      .el-table__header-wrapper {
+        display: none;
+      }
+
+      .el-table__row:hover > td {
+        background: #fff;
+      }
+
+      .el-table__column {
+        &--v-top {
+          vertical-align: top;
+        }
+        &--border-top {
+          border-top: 1px solid $gray-4;
+        }
+      }
+    }
+  }
+
+  // tr分開的表格
+  &--background-separate {
+    &::before {
+      display: none;
+    }
+    &.el-table {
+      td {
+        background:transparent;
+        border: none;
+        padding-top: 0;
+        padding-bottom: 10px;
+        .cell {
+          background: $lighter;
+          padding: 10px;
+          height: 55px;
+          display: flex;
+          align-items: center;
+        }
+        &.is-right {
+          .cell {
+            justify-content: flex-end;
+          }
+        }
+      }
+      .el-table__row {
+        &:first-child {
+          td {
+            padding-top: 10px;
+          }
+        }
+        &:last-child {
+          td {
+            padding-bottom: 0;
+          }
+        }
+        &.hover-row,
+        &.current-row,
+        &.el-table__row--striped.current-row,
+        &:hover {
+          > td {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  // 在collapse 裡面的table
+  &--collapse {
+    thead th {
+      border-top: 1px solid $gray-4;
+      color: $purple;
+
+      &.is-leaf {
+        border-bottom: 1px solid $gray-5;
+      }
+    }
+    &.el-table {
+      thead th {
+        background: #fff;
+      }
+    }
+    .el-table {
+      &__body {
+        border-bottom: 2px solid $gray-4;
+        width: 100% !important;
+      }
+    }
+  }
+
+  th.el-table-column--selection {
+    .cell {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+  }
+
+  &--color-three {
+    &.el-table {
+      .el-table__row {
+        td {
+          &.el-table__column {
+            .cell > div {
+              background: $gray-4;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              padding: 0 8px;
+              border-radius: 4px;
+              height: 26px;
+              min-width: 26px;
+            }
+          }
+          &.el-table__column--one {
+            .cell > div {
+              background: #F36237;
+              color: $white;
+            }
+          }
+          &.el-table__column--two {
+            .cell > div {
+              background: #F38E37;
+              color: $white;
+            }
+          }
+          &.el-table__column--three {
+            .cell > div {
+              background: #EECA56;
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// table工具列
+.vxe-toolbar.table-toolbar .table-toolbar {
+  height: auto;
+  padding: 14px;
+  background: $white;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid $gray-4;
+  border-bottom: none;
+
+  //內容分欄
+  &__row {
+    display: flex;
+  }
+
+  &__col {
+    flex: 1 1 50%;
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+
+    &:nth-child(2) {
+      justify-content: flex-end;
+    }
+
+    &--center {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  + .wrap-card {
+    border-radius: 0 0 4px 4px;
+  }
+
+  // 工具列按鈕
+  .el-button {
+    > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 12px;
+    }
+    .md-icon {
+      font-size: 20px!important;
+      margin-right: 2px;
+      margin-top: -6px;
+      margin-left: 0;
+    }
+  }
+}
+
+// 頁數
+.vxe-pager {
+  margin-top: 20px;
+
+  .vxe-pager--total {
+    margin-right: 1.25em;
+  }
+}
+
+// vxe-table的頁數按鈕(acvtive)
+.vxe-pager.is--background .vxe-pager--jump-next.is--active,
+.vxe-pager.is--background .vxe-pager--jump-prev.is--active,
+.vxe-pager.is--background .vxe-pager--num-btn.is--active
+.vxe-pager .vxe-pager--jump-next.is--active,
+.vxe-pager .vxe-pager--jump-prev.is--active,
+.vxe-pager .vxe-pager--num-btn.is--active {
+  background-color: $primary;
+  color: $white!important;
+}
+
+// vxe-table的頁數按鈕
+.vxe-pager .vxe-pager--num-btn,
+.vxe-pager .vxe-pager--jump-next,
+.vxe-pager .vxe-pager--jump-prev,
+.vxe-pager .vxe-pager--next-btn,
+.vxe-pager .vxe-pager--num-btn,
+.vxe-pager .vxe-pager--prev-btn {
+  border: 1px solid $gray-4 !important;
+}
+
+// vxe-table的頁數按鈕(disabled)
+.vxe-pager .vxe-pager--jump-next.is--disabled,
+.vxe-pager .vxe-pager--jump-prev.is--disabled,
+.vxe-pager .vxe-pager--next-btn.is--disabled,
+.vxe-pager .vxe-pager--num-btn.is--disabled,
+.vxe-pager .vxe-pager--prev-btn.is--disabled {
+  background: $gray-4;
+  color: $gray-6;
+}
+
+// 圖片搭配名稱
+.name-pic {
+  display: flex;
+  &__name,
+  &__pictrue {
+    flex: 0 1 auto;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &__name {
+    text-align: left;
+    padding-left: 28px;
+    line-height: 1.4;
+  }
+}
+
+// 總計footer
+
+
+// vxe-footer
+.vxe-table {
+  &--footer-wrapper {
+  }
+}
+.el-table__footer,
+.vxe-table .vxe-table--footer-wrapper {
+  border-top: 2px solid $purple;
+  z-index: 1;
+  position: relative;
+
+  .el-table__footer-wrapper tbody  {
+    background: $white;
+    color: $purple;
+    font-weight: bold;
+  }
+  .vxe-footer--column {
+    color: $purple;
+    font-weight: bold;
+  }
+}
+
+.el-pagination {
+  margin-top: 20px;
+
+  // 總共/筆數/跳頁
+  &__sizes {
+    height: 2.15em;
+    margin-right: .25em;
+  }
+  &__total {
+    margin-right: 1.75em;
+  }
+  &__jump {
+    margin-left: .75em;
+  }
+
+  // 按鈕
+  button {
+    border: 1px solid $gray-4;
+    border-radius: .25em;
+    padding: 0;
+    min-width: 2.15em;
+    height: 2.15em;
+
+
+    &.btn-next,
+    &.btn-prev {
+      .el-icon {
+        @include iconfont();
+      }
+    }
+    &.btn-prev {
+      .el-icon {
+        &::before {
+          content: "\e900";
+        }
+      }
+    }
+    &.btn-next {
+      .el-icon {
+        &::before {
+          content: "\e901";
+        }
+      }
+    }
+    &.btn-next,
+    &.btn-prev,
+    &[disabled] {
+      padding: 0;
+      border-color: $gray-4;
+    }
+    &[disabled] {
+      background: $gray-4;
+      color: $gray-6;
+    }
+  }
+  .el-input--mini {
+    .el-input__inner {
+      height: 2.15em;
+      padding: 0.6em;
+    }
+  }
+
+  // 分頁筆數選擇器
+  .el-select .el-input {
+    width: 7em;
+    .el-input__inner {
+      font-size: 12px;
+      padding-right: 1.8em;
+    }
+  }
+
+  // 分頁
+  .el-pager {
+    .number {
+      border: 1px solid $gray-4;
+      width: 2.15em;
+      height: 2.15em;
+      border-radius: .25em;
+      margin: 0 .25em;
+
+      &:first-child {
+        margin-left: .5em;
+      }
+      &:last-child {
+        margin-right: .5em;
+        border-color: $gray-4;
+        height: 2.15em;
+      }
+
+      &.active {
+        background: $purple;
+        color: $white;
+      }
+    }
+
+  }
+
+  // small類型
+  &--small {
+    button,
+    span:not([class*=suffix]),
+    &__sizes .el-input .el-input__inner {
+      font-size: 12px;
+    }
+    button {
+      &.btn-next,
+      &.btn-prev {
+        min-width: 2.15em;
+        height: 2.15em;
+      }
+    }
+
+    .el-pagination__editor {
+      width: 3.2em;
+      padding: 0;
+      margin: 0 .25em;
+    }
+
+    .el-pagination__editor,
+    .el-pagination__editor.el-input .el-input__inner {
+      font-size: 12px;
+      height: 2.15em;
+    }
+  }
+
+}
+
+// 自訂table class
+.table {
+  // 輸入
+  &-input {
+    width: 120px;
+
+    + * {
+      margin-left: .5em;
+    }
+
+    ~ .el-form-item__error {
+      position: relative;
+      display: inline-block;
+      margin-left: 1em;
+    }
+  }
+}

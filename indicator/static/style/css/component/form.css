@@ -1,0 +1,21 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+.el-radio-button {
+  margin-bottom: 0;
+}
+
+.el-form:not(.el-form--inline) .el-form-item__label {
+  margin-bottom: 5px;
+}
+
+.el-input--only-border-bottom .el-input__inner {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=form.css.map */

@@ -1,0 +1,180 @@
+.el-card {
+  border-color: #DDDDDD;
+  &__header {
+    h2 {
+      margin-bottom: 0;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 16px 0;
+    }
+  }
+  &__title {
+    font-size: 20px;
+    color: $deep-purple;
+  }
+}
+
+// 卡片列表
+.cards {
+  margin-bottom: 10px;
+
+  .wrap > &:last-child {
+    margin-bottom: -20px!important;
+  }
+
+  .el-card {
+    margin-bottom: 20px;
+  }
+}
+
+// 頁面內容外框
+.wrap-card {
+  margin-bottom: 40px;
+}
+
+.box-card {
+  &--text-field {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    .el-form-item {
+      margin-bottom: .75em;
+
+      &__label,
+      &__content {
+        line-height: 1;
+      }
+
+      &__content {
+        font-weight: bold;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &--max-width {
+    .el-card {
+      &__body {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+    }
+  }
+  &--max-width-small {
+    .el-card {
+      &__body {
+        max-width: 1110px;
+        margin: 0 auto;
+      }
+    }
+  }
+  &--max-width-medium {
+    .el-card {
+      &__body {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+    }
+  }
+  &--max-width-large {
+    .el-card {
+      &__body {
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  +.box-card {
+    margin-top: 30px;
+  }
+}
+
+// 百分比卡片
+.card-percentage {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px 50px;
+
+  &__item {
+    flex: 1 1 20%;
+    max-width: 20%;
+    padding: 0 10px;
+
+    $items: ('5n+1', '5n+2', '5n+3', '5n+4', '5n') !default;
+    $colors: ($chart-blue, $chart-red, $chart-yellow, $chart-green, $chart-purple) !default;
+
+
+    @for $i from 1 through 5 {
+      @if( $i < 5) {
+        &:nth-child(5n+#{$i}) {
+          .el-progress-bar__inner {
+            background-color: nth($colors, $i);
+          }
+        }
+      } @else {
+        &:nth-child(5n) {
+          .el-progress-bar__inner {
+            background-color: nth($colors, $i);
+          }
+        }
+      }
+    }
+  }
+  &__header {
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &__title {
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+  &__rate {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  &__content {
+    margin-bottom: 8px;
+  }
+  &__value {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  &__unit {
+    font-size: 14px;
+  }
+}
+
+// 卡片header的分欄用列
+.card-header-row {
+  &.el-row.el-row--flex {
+    padding: 10px 0;
+    min-height: 0;
+    justify-content: space-between;
+    overflow: hidden;
+
+    .el-col {
+      display: flex;
+      align-items: center;
+
+      &:nth-child(1) {
+        flex: 1 1 auto;
+        @include line-clamp(1);
+      }
+    }
+  }
+}
+
+// 僅有表單的card
+.form-card {
+  > .el-card__body {
+    padding: 42px 20px 20px;
+  }
+}

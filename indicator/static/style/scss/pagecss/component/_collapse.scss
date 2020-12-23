@@ -1,0 +1,93 @@
+.el-collapse {
+  .el-collapse-item {
+
+    &__arrow {
+      transform: rotate(90deg);
+      &.is-active {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  // 工具列
+  &-tool {
+    margin-bottom: 16px;
+    > .el-row {
+      > .el-col {
+        &:nth-child(2) {
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  // 標題明顯
+  &--header-strong {
+    .el-collapse-item {
+      &:nth-child(2n+1) {
+        .el-collapse-item__header {
+          background: $gray-3;
+        }
+      }
+      &:nth-child(2n) {
+        background: #000;
+        .el-collapse-item__header {
+          background: $lighter;
+        }
+      }
+      &__header {
+        //background: $purple;
+        //color: $white;
+        padding: 0 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border-color: $white;
+      }
+      &:last-child {
+        .el-collapse-item__wrap {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  // 假卡片
+  &--card {
+    border-color: $gray-4;
+
+    .el-collapse-item {
+      &:not(:last-child) {
+        margin-bottom: 50px;
+      }
+      &:not(:first-child) {
+        .el-collapse-item__header {
+          border-top: 1px solid $gray-4;
+        }
+      }
+      &__header {
+        font-weight: bold;
+        font-size: 18px;
+        color: $purple;
+        padding: 35px 30px;
+        border-left: 1px solid $gray-4;
+        border-right: 1px solid $gray-4;
+        border-bottom: 1px solid $gray-4;
+
+        .header-icon {
+          margin-left: 16px;
+          font-size: 20px;
+          color: $gray-7;
+        }
+      }
+      &__wrap {
+        border-left: 1px solid $gray-4;
+        border-right: 1px solid $gray-4;
+        border-color: $gray-4;
+      }
+      &__content {
+        padding: 30px 30px 40px;
+      }
+    }
+  }
+}

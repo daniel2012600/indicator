@@ -1,0 +1,134 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+// 切換內容類頁籤的radio-buttons
+.tab {
+  &__button-group {
+    @include breakpoint(1023, max) {
+      display: flex;
+      overflow-x: auto;
+    }
+    .el-radio-button {
+      .el-radio-button__inner {
+        min-width: 120px;
+        font-size: 18px;
+        font-weight: bold;
+        background: $gray-4;
+        border-left: 1px solid $gray-4;
+      }
+      &.is-active {
+        .el-radio-button__inner {
+          background: $white;
+          color: $primary;
+          border-color: $gray-4;
+          box-shadow: none;
+        }
+      }
+      &:not(:last-child) {
+        margin-right: 1px;
+      }
+      &:nth-child(4) {
+        @include breakpoint(1024) {
+          margin-left: -1px;
+        }
+      }
+      &:first-child,
+      &:last-child {
+        .el-radio-button__inner {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+  }
+
+  // 內容卡片
+  &__card {
+    margin-top: 1px;
+  }
+  // 內容
+  &__content {
+    // 清單
+    &-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    // 項目
+    &-item {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+    // 標題
+    &-title {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 0;
+      border-bottom: 1px solid $gray-4;
+      margin-bottom: 20px;
+    }
+    // 子項目
+    &-child-col {
+      margin-bottom: 20px;
+
+      @include breakpoint(1439, max) {
+        width: 100%;
+        @include breakpoint(md) {
+          width: 33.333%;
+        }
+        @include breakpoint(1280) {
+          width: 20%;
+        }
+      }
+    }
+    // 子標題
+    &-child-title {
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 10px;
+
+      a:not(.md-button) {
+        text-decoration: none;
+        color: $black;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+    // 圖片
+    &-child-image {
+      border: 1px solid $gray-4;
+      position: relative;
+      width: 100%;
+      transition: border-color .3s cubic-bezier(.25,.8,.25,1);
+
+      &::after {
+        content: '';
+        display: block;
+        padding-bottom: 78.57%;
+      }
+
+      &:hover {
+        border-color: $primary;
+      }
+
+      > * {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+}
+

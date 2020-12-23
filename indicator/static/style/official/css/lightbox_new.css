@@ -1,0 +1,304 @@
+/*--------------------global start--------------------*/
+/*按鈕*/
+.Btn{
+	cursor: pointer;/*預設為手型*/
+	border: none;/*去除button元素border*/
+	display: inline-block;
+	text-decoration: none;
+	text-align:center;
+	font-family:"蘋果儷中黑", "微軟正黑體", Verdana, Arial, sans-serif, "新細明體";
+	/*以下依設計調整*/
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	font-size: 1em;
+	line-height: 1;
+	padding: 8px 0 9px;
+	max-height: 44px;
+}
+/*按鈕*/
+.Btn.BtnBase {
+	background: #fff;
+	color: #7c4a9a;
+}
+.Btn.BtnBase:active,
+.Btn.BtnBase:focus,
+.Btn.BtnBase:hover {
+	background: #7a4c98;
+	color: #fff;
+}
+.Btn.BtnDark {
+	background: #7a4c98;
+	color: #fff;
+}
+.Btn.BtnDark:active,
+.Btn.BtnDark:focus,
+.Btn.BtnDark:hover {
+	background: #61357d;
+	color: #fff;
+}
+/*按鈕 - Size*/
+.Btn.BtnSm {
+}
+.Btn.BtnMd {
+	padding: 13px 0 15px;
+}
+.Btn.BtnLg {
+}
+/* 最大寬 */
+.BtnMax{
+	max-width: 150px;
+}
+.Btn.BtnBlock{
+	width: 100%;
+}
+.BtnBox {
+}
+/*按鈕區-二顆*/
+.BtnBox--2{
+	margin: 0 -10px;
+	font-size: 0;
+	letter-spacing: -4px;
+	word-spacing: 0;
+}
+/*按鈕區-二顆*/
+.BtnBox--2 .Btn{
+	font-size: 16px;
+	letter-spacing: normal;
+	word-spacing: normal;
+	zoom: 1;
+	width: calc(100% / 2 - 20px);
+	margin: 0 10px;
+}
+
+.lightbox-new *{
+	-mox-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	word-break: break-all;
+}
+.lightbox-new a{
+	color: #7a4c98;
+}
+.lightbox-new a:hover,
+.lightbox-new a:visited,
+.lightbox-new a:active {
+
+}
+.lightbox-new a:active,
+.lightbox-new a:hover {
+	text-decoration: none;
+}
+/*i元素 - 目前專給icon使用*/
+.lightbox-new i {
+	display: inline-block;
+	vertical-align: middle;
+}
+/*強調重點*/
+.lightbox-new strong{
+	font-weight: 100;
+}
+/*--------------------global end --------------------*/
+/*訊息燈箱*/
+.lightbox-new {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background: rgba(0,0,0,.5);
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+	z-index: -1;
+	opacity: 0;
+	-webkit-transition: opacity .2s linear;
+	-o-transition: opacity .2s linear;
+	transition: opacity .2s linear;
+	padding: 13px;
+	line-height: 1;
+	color: #333;
+	font: 100%/1 Helvetica,"蘋果儷中黑","微軟正黑體",Verdana,Arial,sans-serif,"新細明體"; /*defult font-size=16px*/
+}
+/*訊息燈箱-開啟*/
+.lightbox-new--active {
+	opacity: 1;
+	top: 0;
+	bottom: 0;
+	z-index: 1000;
+}
+/*訊息燈箱-內容盒*/
+.lightbox-new__box {
+	position: relative;
+	width: auto;
+	-webkit-transform: translate(0,-25%);
+	-ms-transform: translate(0,-25%);
+	-o-transform: translate(0,-25%);
+	transform: translate(0,-25%);
+	-webkit-transition: -webkit-transform .2s ease-out;
+	-moz-transition: -moz-transform .2s ease-out;
+	-o-transition: -o-transform .2s ease-out;
+	transition: transform .2s ease-out;
+	margin: 10px auto;
+	background: #f7f7f7;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.lightbox-new--active .lightbox-new__box {
+	-webkit-transform: translate(0,0);
+	-ms-transform: translate(0,0);
+	-o-transform: translate(0,0);
+	transform: translate(0,0);
+}
+/* 尺寸 */
+.lightbox-new--sm .lightbox-new__box{
+	max-width: 340px;
+}
+.lightbox-new--md .lightbox-new__box{
+	max-width: 500px;
+}
+.lightbox-new--lg .lightbox-new__box{
+	max-width: 800px;
+}
+/* 滿版-phone */
+.lightbox-new--full .lightbox-new__box{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.lightbox-new--full .lightbox-new__content{
+	margin-top: 0;
+}
+.lightbox-new__content{
+	background-clip: padding-box;
+	position: relative;
+	margin-top: 85px;
+}
+/* 標題 */
+.lightbox-new__head{
+	padding: 46px 15px 0 15px;/*12/18 20/18*/
+	text-align: center;
+	margin-bottom: 25px;
+}
+/* 標題-文字 */
+.lightbox-new__title{
+	color: #333;
+	font-size: 28px;
+	font-weight: bold;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 15px;
+	margin: 0;
+	font-weight: normal;
+}
+/*關閉 按鈕 */
+.lightbox-new__btn-close{
+	display: block;
+	width: 44px;
+	height: 44px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 44px;
+	text-align: center;
+	margin: 4px;
+	color: #7a4c98;
+}
+.lightbox-new__btn-close:active{
+	color: #333;
+}
+/* 關閉按鈕-文字 */
+.lightbox-new__close-text{
+	font-size: 14px;
+}
+/* 關閉按鈕-icon */
+.lightbox-new__close-icon{
+	text-decoration: none;
+	font-size: 16px;
+}
+/* 內容 */
+.lightbox-new__body{
+	padding: 0 15px 15px;
+	/* overflow-y: auto; */
+	margin-bottom: 20px;
+}
+.lightbox-new__footer{
+	padding: 0 0 25px;
+	text-align: center;
+}
+/* 描述 */
+.lightbox-new__desc {
+	color: #555;
+	line-height: 1.5;
+	text-align: center;
+	overflow: hidden;
+}
+/* 有大圖標的樣式 */
+.lightbox-new--symbol .lightbox-new__content {
+	min-height: 285px;
+}
+.lightbox-new--symbol .lightbox-new__head{
+	margin-bottom: 15px;
+}
+.lightbox-new--symbol .lightbox-new__body {
+	text-align: center;
+	padding-bottom: 0;
+}
+.lightbox-new--symbol .lightbox-new__icon {
+	font-size: 72px;
+	color: #744c8e;
+}
+.lightbox-new--symbol .lightbox-new__title {
+	border: none;
+	padding-bottom: 10px;
+}
+/*如果使用者之視窗寬度>=768px，將會再載入這裡的 css。*/
+@media screen and (min-width: 768px) {
+	.Btn.BtnMd {
+		font-size: 18px;
+	}
+	/*一般提示燈箱*/
+	.lightbox-new__box {
+	}
+	/* 滿版 */
+	.lightbox-new--full .lightbox-new__box{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.lightbox-new--full .lightbox-new__content{
+		margin-top: 85px;
+	}
+	/* 標題 */
+	.lightbox-new__head{
+		padding: 46px 60px 0;
+	}
+	/* 標題-文字 */
+	.lightbox-new__title{
+		font-size: 36px;
+		border-bottom: 1px solid #ddd;
+	}
+	/* 內容 */
+	.lightbox-new__body{
+		padding: 0 60px 15px;
+		margin-bottom: 20px;
+	}
+	.lightbox-new__footer{
+		padding-bottom: 40px;
+	}
+	/* 有大圖標的樣式 */
+	.lightbox-new--symbol .lightbox-new__content {
+		min-height: 380px;
+	}
+	.lightbox-new--symbol .lightbox-new__icon {
+		margin-top: 20px;
+		font-size: 96px;
+	}
+}
+/*如果使用者之視窗寬度>=1024px，將會再載入這裡的 css。*/
+@media screen and (min-width: 1024px) {
+	/*關閉 按鈕 */
+	.lightbox-new__btn-close:hover{
+		color: #333;
+	}
+}

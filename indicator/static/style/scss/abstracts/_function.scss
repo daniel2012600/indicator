@@ -1,0 +1,26 @@
+// px轉換em #參數: 目標字級, 基數(預設16)
+// ---------------------------------------
+// Ex1: px-em(14)      ==> 0.875em
+// Ex2: px-em(14, 24)  ==> 0.58333em
+@function px-em($px1, $px2:16) {
+	@return $px1 / $px2 * 1em;
+}
+
+
+
+@function getMap($map,$key) {
+	@if map-has-key($map, $key) {
+		@return map-get($map, $key);
+	}
+	@warn "Unknown `#{$key}` in $map.";
+	@return null;
+}
+
+
+
+// 寬高轉換 #參數: 寬度, 高度
+// ---------------------------------------
+// Ex1: w-h(320, 280) ==> 0.875%
+@function w-h($w, $h) {
+	@return $h / $w * 100%;
+}

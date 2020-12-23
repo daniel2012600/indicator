@@ -1,0 +1,146 @@
+{% extends "layout_mini_daniel.html" %}
+{% block title %}CDP元件展覽網站{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/style/morris/0.5.1/morris.css" />
+
+<style type="text/css">
+  /*修複sparkline tooltips樣式跑版*/
+  .jqstooltip {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  .el-table .cell {
+        white-space: pre-line;
+    }
+
+  .el-range-separator {
+    /* 修正”至”樣式錯誤 */
+    width: 27px !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 頁面標題-右側-無功能 start -->
+<el-row type="flex" justify="space-between" :gutter="25" class="mb-4">
+    <el-col :span="24">
+    <div class="grid-content">
+        <h1>v-echarts.heatmap.js 使用方式</h1>  
+    </div>
+    </el-col>
+</el-row>
+<!-- 頁面標題-右側-無功能 end -->
+<!-- 1欄 start -->
+
+<el-row :gutter="25" class="mb-4">
+    <el-col :span="24">
+        <el-table
+            :data="tableData"
+            border
+            :show-header=false
+            style="width: 100%">
+            <el-table-column
+                prop="name"
+                width="180">
+            </el-table-column>
+            
+            <el-table-column 
+                prop="value">
+                <!-- <template slot-scope="scope">
+
+                </template> -->
+            </el-table-column>
+
+        </el-table>
+    </el-col>
+</el-row>
+
+
+
+
+
+<!-- 1欄 end -->
+
+{% endblock %} 
+
+{% block js %}
+<script src="/static/style/echarts/4.8.0/echarts.min.js"></script>
+<script src="/static/style/lodash/4.16.0/lodash.js"></script>
+<script src="/static/js/v-echarts.heatmap.js"></script>
+
+
+<script>
+
+    var obj = new Vue({
+        el: '#app',
+        mixins: [layoutVue],
+        data:  {
+            breadpath: [{key: '首頁', path: '/'},{key: '標題', path: ''}],
+            datalist:[{"index":"0點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":0},
+            {"index":"1點","星期一":0,"星期二":0,"星期三":1,"星期四":1,"星期五":1,"星期六":1,"星期日":0},
+            {"index":"7點","星期一":0,"星期二":0,"星期三":0,"星期四":1,"星期五":0,"星期六":1,"星期日":1},
+            {"index":"8點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":1,"星期日":0},
+            {"index":"9點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":1,"星期六":0,"星期日":0},
+            {"index":"10點","星期一":0,"星期二":0,"星期三":0,"星期四":1,"星期五":0,"星期六":0,"星期日":0},
+            {"index":"11點","星期一":2,"星期二":1,"星期三":1,"星期四":1,"星期五":1,"星期六":0,"星期日":7},
+            {"index":"12點","星期一":2,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":1},
+            {"index":"13點","星期一":2,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":10},
+            {"index":"14點","星期一":2,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":8},
+            {"index":"15點","星期一":2,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":7},
+            {"index":"16點","星期一":0,"星期二":0,"星期三":0,"星期四":7,"星期五":7,"星期六":7,"星期日":7},
+            {"index":"17點","星期一":7,"星期二":7,"星期三":7,"星期四":0,"星期五":0,"星期六":0,"星期日":7},
+            {"index":"18點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":8},
+            {"index":"19點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":9},
+            {"index":"20點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":8},
+            {"index":"21點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":6},
+            {"index":"22點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":1},
+            {"index":"23點","星期一":0,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0,"星期日":0}],
+            tableData:[{
+                name: '描述',
+                value: '熱點圖'
+            },{
+                name: '維度量值',
+                value: 'g, x, y'
+            },{
+                name: 'html',
+                value: 'id:必填，元件id，要有唯一性'
+            },{
+                name: '屬性',
+                value: `data : [{x軸維度:'abc', y軸維度11:44 , y軸維度2:44 , y軸維度3:44},....]
+                        ex:[{"時段":"0點","星期日":0.02,"星期一":0.04,"星期二":0.01,"星期三":0.02,"星期四":0.01,"星期五":0.02,"星期六":0.05},{"時段":"1點","星期日":0,"星期一":0.01,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0}]
+                        fromcolor : 最小量值的顏色
+                        tocolor : 最大量值的顏色
+                        plotheight : 圖型的高度，一定要設，預設值300
+                        valuelabelunit : 字串，預設空值。有設定時，會加在值的最後面`
+            },{
+                name: '參考',
+                value: 'https://echarts.apache.org/examples/zh/editor.html?c=heatmap-cartesian'
+            }],
+        },
+    });
+
+    
+</script>
+
+
+{% endblock %}
+
+
+<!-- 
+描述：
+    熱地圖
+html:
+    id : 注意，不是屬性，元性的id，同一個頁面要有唯一性，裏面會用到，一定要設
+屬性：
+    data : [{x軸維度:'abc', y軸維度11:44 , y軸維度2:44 , y軸維度3:44},....]
+    ex:[{"時段":"0點","星期日":0.02,"星期一":0.04,"星期二":0.01,"星期三":0.02,"星期四":0.01,"星期五":0.02,"星期六":0.05},{"時段":"1點","星期日":0,"星期一":0.01,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0},
+    fromcolor : 最小量值的顏色
+    tocolor : 最大量值的顏色
+    plotheight : 圖型的高度，一定要設，預設值300
+    valuelabelunit : 字串，預設空值。有設定時，會加在值的最後面
+維度量值:
+    維度1個，量值n個；維度是x軸，量值的key是y軸
+參考:
+    https://echarts.apache.org/examples/zh/editor.html?c=heatmap-cartesian -->

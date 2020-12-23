@@ -1,0 +1,35 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+.el-card {
+  border-color: #DDDDDD;
+}
+
+// 卡片列表
+.cards {
+  margin-bottom: 10px;
+
+  .el-card {
+    margin-bottom: 20px;
+  }
+}
+
+// 頁面內容外框
+.wrap-card {
+  margin-bottom: 40px;
+}
+
+// 卡片 自訂
+.card {
+  // 表格下方的備註字
+  &-note {
+    font-weight: bold;
+    font-size: 14px;
+  }
+}

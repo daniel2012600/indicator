@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+$offset: 30px;
+$time: 1s;
+
+.js-animate {
+  &--fadein,
+  &--pop {
+    opacity: 0;
+  }
+
+  &--fadein {
+    &-up {
+      opacity: 0;
+      transform: translate(0, -$offset);
+    }
+
+    &-down {
+      opacity: 0;
+      transform: translate(0, $offset);
+    }
+
+    &-left {
+      opacity: 0;
+      transform: translate(-$offset, 0);
+    }
+
+    &-right {
+      opacity: 0;
+      transform: translate($offset, 0);
+    }
+  }
+
+  &--active {
+    opacity: 1;
+    transform: none;
+    transition: opacity $time, transform $time;
+  }
+}
+
+.animate-dur1500 {
+  transition-duration: 1.5s;
+}
+
+$total: 30; // *50(100s-1500s)
+@for $i from 2 through $total {
+  .animate-delay {
+    &#{$i*50} {
+      transition-delay: $i*(0.05)+s;
+    }
+  }
+}
+
+@include breakpoint(md) {
+  @for $i from 2 through $total {
+    .animate-delay {
+      &#{$i*50}-md {
+        transition-delay: $i*(0.05)+s;
+      }
+    }
+  }
+}
+
+@include breakpoint(lg) {
+  @for $i from 2 through $total {
+    .animate-delay {
+      &#{$i*50}-lg {
+        transition-delay: $i*(0.05)+s;
+      }
+    }
+  }
+}

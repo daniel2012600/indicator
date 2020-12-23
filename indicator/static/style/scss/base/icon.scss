@@ -1,0 +1,32 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+// el-input裡面的md-icon
+.el-input__icon.md-icon {
+  height: 100%;
+  width: 25px;
+  text-align: center;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  line-height: 40px;
+}
+
+// input前綴ICON
+.el-input__prefix {
+  .md-icon.md-theme-default.md-icon-font {
+    color: #C0C4CC;
+  }
+}
+
+// icon旋轉180deg(select的箭頭用)
+[class*='icon-'] {
+  &.rotate180 {
+    transform: rotate(180deg);
+  }
+}

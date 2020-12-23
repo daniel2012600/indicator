@@ -1,0 +1,337 @@
+// 會員資料
+.member-info {
+  display: grid;
+  //grid-template:
+  //        "base activity rfm rfm rfm balance" 1fr
+  //        "base level first-purchase recent-purchase total-purchase balance" 1fr
+  //        "base tag tag tag tag tag" 250px / 250px 1fr 1fr 1fr 1fr 2fr;
+  grid-template:
+          "base activity rfm rfm rfm" 1fr
+          "base level first-purchase recent-purchase total-purchase" 1fr
+          "base balance balance balance balance" 200px
+          "base tag tag tag tag" 250px / 250px 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+  margin-bottom: 60px;
+
+  @include breakpoint(1920) {
+    grid-template:
+          "base activity rfm rfm rfm balance" 1fr
+          "base level first-purchase recent-purchase total-purchase balance" 1fr
+          "base tag tag tag tag tag" 260px / 360px 1fr 1fr 1fr 1fr 2fr;
+    grid-gap: 20px;
+  }
+
+  &__header {
+    border-bottom: 1px solid $gray-4;
+    padding: 18px 30px;
+    font-size: 20px;
+    color: $gray-222;
+    line-height: 1;
+    .el-col {
+      display: flex;
+      align-items: center;
+      &:nth-child(2) {
+        justify-content: flex-end;
+      }
+    }
+  }
+  &__content {
+    &-center {
+      .member-info__value {
+        text-align: center;
+      }
+    }
+  }
+
+  &__limit-content {
+    max-height: 135px;
+    height: 100%;
+    overflow-y: auto;
+
+    &.md-content.md-theme-default {
+      background: transparent;
+    }
+    .tags {
+      padding: 0;
+      margin-bottom: -10px;
+    }
+  }
+
+  &__column {
+    background: $white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $gray-4;
+
+    .member-info__inner {
+      padding: 24px 32px 28px;
+      flex: 1 1 auto;
+    }
+
+    $classes: ("base", "activity", "rfm", "level", "first-purchase", "recent-purchase", "total-purchase", "balance", "tag");
+    @each $class in $classes {
+      &.column-#{$class} {
+        grid-area: #{$class};
+
+        @if($class == 'base') {
+          .member-info__inner {
+            padding: 35px 35px 40px;
+            display: flex;
+            flex-direction: column;
+
+            @include breakpoint(1920) {
+              padding: 35px 70px 40px;
+            }
+
+            .member-info__content {
+              flex: 1 1 auto;
+              display: flex;
+              flex-direction: column;
+            }
+            .member-info__edit-button {
+              margin-top: auto;
+            }
+          }
+        }
+
+        @if($class == 'rfm') {
+          .member-info__inner {
+            >.el-row > .el-col {
+              display: flex;
+
+              &:nth-child(1) {
+                justify-content: flex-start;
+              }
+              &:nth-child(2) {
+                justify-content: center;
+              }
+              &:nth-child(3) {
+                justify-content: flex-end;
+              }
+            }
+          }
+        }
+
+        @if($class == 'balance') {
+          display: flex;
+
+          .balance-group {
+            flex: 1 1 auto;
+            overflow: hidden;
+          }
+          .member-info__header {
+            position: relative;
+
+            &::before {
+              content: '';
+              width: calc(100% + 20px);
+              height: 100%;
+              border-bottom: 1px solid $gray-4;
+              left: 0;
+              bottom: -1px;
+              position: absolute;
+              z-index: 0;
+            }
+
+            &::after {
+              content: '';
+              width: 100%;
+              height: 100%;
+              border-bottom: 4px solid $purple;
+              left: 0;
+              bottom: -4px;
+              position: absolute;
+              z-index: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 頭相
+  &__el-avatar {
+    margin-bottom: 20px;
+  }
+
+  // 項目區域
+  &__field {
+    margin-bottom: 20px;
+  }
+
+  // 項目標題
+  &__label,
+  &__value {
+    font-size: 14px;
+  }
+  &__label {
+    margin-bottom: 8px;
+    color: $gray-9;
+    line-height: 1;
+  }
+  // 項目內容
+  &__value {
+    color: $gray-222;
+    font-weight: bold;
+    word-break: break-all;
+
+    // 名稱
+    &.member-info__name {
+      font-size: 20px;
+      color: $gray-9;
+      font-weight: normal;
+    }
+    &.member-info__id {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+// 圖示狀態
+.image-status {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 20px;
+    color: $gray-222;
+    margin-bottom: 5px;
+  }
+  &__value,
+  &__desc {
+    color: $gray-9;
+  }
+  &__value {
+    color: $gray-9;
+    margin-bottom: 10px;
+  }
+  &__desc {
+    color: $gray-9;
+    margin-top: auto;
+    font-size: 14px;
+  }
+  &__status {
+    display: flex;
+    justify-content: center;
+
+    &-text {
+      width: 70px;
+      height: 70px;
+      color: $white;
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 1;
+      border-radius: 50%;
+      @include flex-center();
+
+      @include breakpoint(1920) {
+        width: 80px;
+        height: 80px;
+      }
+
+      &--empty {
+        background: #d8d4dc;
+      }
+      &--low {
+        background: #BAB0AC;
+      }
+      &--medium {
+        background: #FDC701;
+      }
+      &--high {
+        background: #F15A29;
+      }
+    }
+  }
+  &__icon {
+    font-size: 75px;
+
+    @include breakpoint(1920) {
+      font-size: 96px;
+    }
+    &.icon-nesl-0 {
+      color: #ddd;
+    }
+    &.icon-nesl-1 {
+      color: #d8d4dc;
+    }
+    &.icon-nesl-2 {
+      color: #dbd4df;
+    }
+    &.icon-nesl-3 {
+      color: #cbb9d8;
+    }
+    &.icon-nesl-4 {
+      color: #d8cbe2;
+    }
+    &.icon-level-0 {
+      color: #ddd;
+    }
+    &.icon-level-1 {
+      color: #d8cbe2;
+    }
+    &.icon-level-2 {
+      color: #cbb9d8;
+    }
+  }
+}
+
+
+// 主要數值
+.member-text-info {
+  &__value {
+    font-size: 28px;
+    color: $gray-222;
+    line-height: 1;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  &__desc {
+    font-size: 14px;
+  }
+  &__unit {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  &__tag {
+    margin-top: 12px;
+    font-size: 14px;
+    background: $gray-3;
+    padding: 4px 8px;
+    display: inline-flex;
+  }
+}
+
+// 餘額群組
+.balance-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+
+  &__inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    .member-info__inner {
+      flex: 1 1 auto;
+    }
+  }
+
+  &__col {
+    flex: 1 1 25%;
+    max-width: 25%;
+    padding: 0 10px;
+    @include breakpoint(1920) {
+      flex: 1 1 50%;
+      max-width: 50%;
+    }
+    &--disabled {
+      .member-info__inner > * {
+        display: none;
+      }
+    }
+  }
+}

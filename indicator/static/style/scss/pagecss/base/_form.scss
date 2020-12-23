@@ -1,0 +1,313 @@
+.el-form {
+  // 表單項目
+  &-item {
+    // 文字
+    &__text {
+      line-height: 1.5;
+      font-weight: bold;
+
+      &--small {
+        font-size: 12px;
+        line-height: 24px;
+      }
+
+     .el-form-item__content,
+      .el-form-item__label {
+        line-height: 1.5;
+        font-weight: bold;
+      }
+
+      .el-input + & {
+        margin-top: .25em;
+      }
+    }
+  }
+
+  // 文字版的form，內的small input
+  .box-card--text-field & {
+    .el-form-item__content,
+    .el-form-item__label {
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+    .el-form-item__text {
+      .el-form-item__content,
+      .el-form-item__label {
+        line-height: 1.5;
+      }
+    }
+
+    .el-form-item--input {
+      .el-form-item__content,
+      .el-form-item__label {
+        line-height: 32px;
+        font-weight: normal;
+      }
+      .el-input {
+        &:not(:first-child) {
+          margin-left: .5em;
+          margin-right: .5em;
+        }
+      }
+    }
+  }
+
+  // label換行
+  &--wrap-label {
+    .el-form-item__label {
+      display: block;
+      width: 100%;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .link-after-input {
+      display: inline-flex;
+      align-items: center;
+      line-height: 24px;
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+  }
+
+  .wrap-card > .el-card__body > & {
+    .el-form {
+      &-item {
+        &__label {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// 表單輸入框
+.el-input {
+  &__desc {
+    font-size: 12px;
+    line-height: 2;
+  }
+}
+
+// 唯獨或禁止的樣式
+.el-input {
+  .el-input__inner[readonly] {
+    //background: $gray-f7;
+  }
+  &.is-disabled {
+    .el-input__inner {
+      background: $gray-f7;
+    }
+  }
+  &.el-date-editor--date {
+    .el-input__inner {
+      //text-align: center;
+    }
+  }
+}
+.el-textarea {
+  .el-textarea__inner[readonly] {
+    background: $gray-f7;
+    color: $gray-9;
+    resize: none;
+  }
+  &.is-disabled {
+    .el-textarea__inner {
+      background: $gray-f7;
+      resize: none;
+    }
+  }
+}
+
+// 移除bootstrap樣式
+label.el-radio {
+  margin-bottom: 0;
+}
+.el-checkbox {
+  //background: $white;
+}
+.form-inline-group {
+ > .el-form-item__content {
+   > * {
+     &:not(:first-child) {
+       margin-left: 1rem;
+     }
+   }
+ }
+}
+
+// input row has multiple columns
+.flex-input-row {
+  > .el-col {
+    display: flex;
+    > * {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+// checbox
+.el-checkbox {
+  margin-bottom: 0;
+  &.is-bordered {
+    display: flex;
+    align-items: center;
+    background: $white;
+  }
+}
+
+// 日期選擇器
+.el-date-editor {
+  .el-input__icon {
+    &.el-icon-date {
+      @include flex-center();
+
+      &::before {
+        @include iconfont();
+        content: "\e905";
+        transform: scale(1.4);
+      }
+      &::after {
+        display: none;
+      }
+    }
+
+    &.el-icon-time {
+      font-weight: bold;
+      font-size: 19px;
+    }
+  }
+
+  &.el-range-editor {
+    width: 250px;
+
+    .el-range__icon {
+      @include flex-center();
+
+      &::before {
+        @include iconfont();
+        content: "\e905";
+        transform: scale(1.4);
+      }
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+// radio
+.el-radio-group {
+  &--separate {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px -20px;
+
+    .el-radio-button {
+      margin: 0 10px 20px;
+      &:focus:not(.is-focus):not(:active):not(.is-disabled) {
+        box-shadow: none;
+        filter: drop-shadow(0 0 5px $purple);
+      }
+
+      &__inner {
+        width: 90px;
+        height: 94px;
+        padding: 5px;
+        flex-wrap: wrap;
+        border-radius: 10px !important;
+        border: 1px solid $gray-6;
+
+        > * {
+          flex: 1 1 100%;
+          max-width: 100%;
+        }
+      }
+      &.is-disabled {
+        .el-radio-button {
+          &__inner {
+            background: $gray-3;
+          }
+        }
+      }
+      &__icon {
+        @include flex-center();
+        font-size: 30px;
+        height: 40px;
+      }
+      &__text {
+        font-size: 14px;
+        font-weight: bold;
+        white-space: normal;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+.el-form-item {
+  &--label-large {
+    .el-form-item {
+      &__label {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 24px;
+      }
+    }
+  }
+}
+
+.el-divider {
+  &--form {
+    margin: 0;
+  }
+}
+
+// 日期選擇器
+.el-date-editor {
+  // 沒有清除按鈕
+  &--clear-less {
+    &.el-date-editor--daterange {
+      width: 220px;
+      .el-range-input {
+        width: 45%;
+      }
+      .el-range__close-icon {
+        display: none;
+      }
+    }
+  }
+}
+
+// 並列的日期與時間選擇器
+.el-date-time {
+  display: flex;
+  .el-form-item {
+    flex: 1 1 200px;
+    max-width: 200px;
+
+    .el-date-editor {
+      width: 200px;
+    }
+
+    .el-input__inner {
+      text-align: center;
+    }
+
+    + .el-form-item {
+      margin-left: 14px;
+    }
+  }
+}
+
+// 表單的按鈕
+.form-buttons {
+  .el-button {
+    min-width: 90px;
+  }
+}
+
+// selector
+.el-tag--mini {
+  padding: 0 8px 0 5px;
+}

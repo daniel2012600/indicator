@@ -1,0 +1,28 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+//sparkline
+.chart-spl {
+  text-align: center;
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__chart {
+    margin-bottom: 24px;
+  }
+
+  &__value {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: $deep-purple;
+  }
+}

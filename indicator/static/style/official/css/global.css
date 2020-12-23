@@ -1,0 +1,1025 @@
+@charset "utf-8";
+/*******************************************************************************
+ * Version 1.0 Release;
+ * Copyright 2017, "ryan"<ryan@dotmore.com.tw>. All rights reserved.
+ ******************************************************************************/
+/*-------------------- Reset Start --------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, input, textarea, select,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption,
+footer, header, hgroup, menu, nav,
+output, ruby, section, summary, time, mark, audio, video {
+	-mox-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+/*標題*/
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+body {
+	line-height: 1;
+}
+/*項目清單-取消項目符號*/
+ol, ul {
+	list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*圖片*/
+img {
+	border: 0;
+	margin: 0;
+}
+/*表單元素 - 去除ios預設外觀 input*/
+textarea, button, select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border-radius: 0;
+}
+select {
+	text-indent: 0.01px;
+	text-overflow: '';
+}
+/*預設focus效果*/
+:focus {
+	outline: 0;
+}
+/*-------------------- 全域基本樣式 --------------------*/
+body {
+	color: #333;
+	font: 100%/1 Helvetica,"蘋果儷中黑","微軟正黑體",Verdana,Arial,sans-serif,"新細明體"; /*defult font-size=16px*/
+}
+/*文字連結*/
+a {
+	color: #333;
+	text-decoration: none;
+}
+a:hover, a:visited, a:active, a:active, .Current > a {
+	text-decoration: none;
+}
+a:active,
+.Current > a {
+	color: #7c4a9a;
+}
+/*文字連結*/
+.Link{
+	text-decoration: underline;
+}
+.Link:hover{
+	text-decoration: none;
+}
+/*文字對齊*/
+.AlignLeft{
+	text-align: left;
+}
+.AlignCenter{
+	text-align: center;
+}
+.AlignRight{
+	text-align: right;
+}
+/*img元素*/
+img {
+	max-width: 100%;
+	vertical-align: middle;
+	width: 100%;
+}
+/*i元素 - 目前專給icon使用*/
+i {
+	display: inline-block;
+	vertical-align: middle;
+}
+/*強調重點*/
+strong{
+	font-weight: 100;
+}
+/*隱藏*/
+.Hide{
+	display: none;
+}
+/*按鈕*/
+a.Btn,
+button,
+input[type=button],
+input[type=reset],
+input[type=submit] {
+	cursor: pointer;/*預設為手型*/
+	border: none;/*去除button元素border*/
+	display: inline-block;
+	text-decoration: none;
+	text-align:center;
+	font-family:"蘋果儷中黑", "微軟正黑體", Verdana, Arial, sans-serif, "新細明體";
+	/*以下依設計調整*/
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	font-size: 1em;
+	line-height: 1;
+	padding: 8px 0 9px;
+	max-height: 44px;
+}
+/*-------------------- 全域樣式 --------------------*/
+/*無序列*/
+.UlList {
+	padding: 0 0 0 1.5625em;/*0 0 0 25px/16px*/
+}
+/*無序列-實心圓形*/
+.Disc > li {
+	list-style-type: disc;
+}
+/*無序列-空心圓點*/
+.Circle > li {
+	list-style-type:circle;
+}
+/*無序列-實心方形*/
+.Square > li {
+	list-style-type: square;
+}
+/*有序列*/
+.OlList {
+	padding: 0 0 0 1.5625em;/*0 0 0 25px/16px*/
+}
+/*有序列-數字(1,2,3)*/
+.Decimal > li {
+	list-style-type: decimal;
+}
+/*有序列-中文數字(一,二,三)*/
+.Cjk > li {
+	list-style-type: cjk-ideographic;
+}
+/*有序列-小寫英文字母*/
+.LowerLatin > li {
+	list-style-type: lower-latin;
+}
+/*圓圈*/
+.Circle {
+	height: 28px;
+	width: 28px;
+	display: inline-block;
+	vertical-align: middle;
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+}
+.SolidCircle {
+	background: #ccc;
+}
+/*圓圈*/
+.HollowCircle {
+	border:2px solid #ccc;
+}
+/*--------------------按鈕區--------------------*/
+.BtnBox {
+	margin: 3.125em 0;
+}
+/*按鈕區-二顆*/
+.BtnBoxHalf .Btn{
+	margin: 0 10px;
+}
+/*按鈕*/
+.Btn.BtnBase {
+	background: #fff;
+	color: #7c4a9a;
+}
+.Btn.BtnBase:active,
+.Btn.BtnBase:focus,
+.Btn.BtnBase:hover {
+	background: #7a4c98;
+	color: #fff;
+}
+.Btn.BtnDark {
+	background: #7a4c98;
+	color: #fff;
+}
+.Btn.BtnDark:active,
+.Btn.BtnDark:focus,
+.Btn.BtnDark:hover {
+	background: #61357d;
+	color: #fff;
+}
+.Btn.BtnGoogle {
+	background: #de5348;
+	border: 1px solid #de5348;
+	color: #fff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	position: relative;
+}
+.Btn.BtnGoogle:active,
+.Btn.BtnGoogle:focus,
+.Btn.BtnGoogle:hover {
+	background: #ce4d43;
+	border-color: #ce4d43;
+	color: #fff;
+}
+.BtnGoogle .IconWrap{
+	border-right: 1px solid #d71000;
+	padding: 5px 15px;
+	line-height: 1;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+/*按鈕 - Size*/
+.Btn.BtnSm {
+}
+.Btn.BtnMd {
+	padding: 13px 0 15px;
+}
+.Btn.BtnLg {
+}
+/* 最大寬 */
+.BtnMax{
+	max-width: 150px;
+}
+.Btn.BtnBlock{
+	width: 100%;
+}
+/*按鈕 - 功能*/
+/*粗體字*/
+.TextBold{
+	font-weight: bold;
+}
+/*--------------------標題--------------------*/
+/*標題*/
+.MainTitle {
+	color: #7c4a9a;
+	font-size: 22px;/*22px/16px*/
+	margin: 5px 0;/*6px/16px 0*/
+}
+/*標題2*/
+.Heading1{
+	font-size: 22px;
+	color: #333;
+	margin: 0 0 20px;
+	text-align: center;
+}
+/*標題2*/
+.Heading2{
+	font-size: 22px;
+	margin-bottom: 30px;
+}
+/*標題3*/
+.Heading3{
+	font-size: 16px;
+	color: #333;
+	margin: 10px 0 8px;
+}
+/*標題3*/
+.Heading4{
+	color: #333;
+	margin: 0 0 8px;
+}
+/*標題-隱藏*/
+.Heading2.TitleHide,
+.Heading3.TitleHide{
+	display: none;
+}
+/*標題-icon*/
+.Heading2 > i,
+.Heading3 > i{
+	vertical-align: middle;
+	margin: -5px 5px 0 0;
+	color: #919191;
+}
+/*表單*/
+/*Input Start*/
+/*單行輸入欄位(文字、密碼)、下拉選單、多行輸入欄位(留言)*/
+.FormSetItem .Field .InputGroup .FormControl,
+.Wrap .FormControl{
+	font-family: Helvetica,"蘋果儷中黑","微軟正黑體",Verdana,Arial,sans-serif,"新細明體";
+	font-size: 1em;
+	line-height: 1.15;
+	width: 100%;
+	/*color: #333;*/
+	padding: 13px 10px;
+	min-height: 40px;
+	border: 1px solid #ccc;
+	background: #fff;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	/*border-radius: 0;去除圓角*/
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+/*select設定*/
+select.FormControl{
+	padding: 13px 10px;
+	/*-moz-border-radius: 3px;*/
+	/*-webkit-border-radius: 3px;*/
+	/*border-radius: 3px;*/
+	background: #fff url(../images/icon/icon_select.svg) no-repeat right center;
+}
+
+/*控制項-focus*/
+.Wrap .FormControl:focus {
+	border-color: #333;/*可改為主色*/
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.FormControl::-webkit-input-placeholder { /* WebKit browsers */
+	color: #aaa;
+}
+.FormControl:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color: #aaa;
+}
+.FormControl::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color: #aaa;
+}
+.FormControl:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color: #aaa;
+}
+.FormControl[disabled],
+.FormControl[readonly],
+fieldset[disabled] .FormControl {
+	cursor: not-allowed;
+	filter: alpha(opacity=65);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: .65;
+	background: #ccc;
+	border-color: #ccc;
+	color: #fff;
+}
+textarea.FormControl {
+	height: 150px;
+}
+input[type="search"] {
+	-webkit-appearance: none;
+}
+/*表單*/
+.BasicFieldset {}
+.BasicFieldset .ErrorMeg {
+	color: #f03800;
+	font-size: 1em;
+	margin: 10px 0 0;
+	padding: 0 16px;
+	display: none;
+}
+.BasicFieldset .FieldError + .ErrorMeg {
+	display: block;
+}
+.BasicFieldset .PanelBody.FieldError > .ErrorMeg {
+	display: block;
+	margin: -10px 0 0;
+	text-align: left;
+	padding: 0 10px;
+}
+.BasicFieldset .Field {
+	margin: 0 0 20px;
+}
+.BasicFieldset .Field:last-child {
+	margin-bottom: 0;
+}
+.BasicFieldset ul.InputGroup{
+	margin: 0 -5px;
+}
+.BasicFieldset ul.InputGroup li {
+	width: calc(100%/2 - 10px);
+	margin: 0 5px;
+	float: left;
+}
+.BasicFieldset ul.InputGroup:after {
+	content: "";
+	clear: both;
+	display: block;
+	line-height: 0;
+	height: 0;
+	visibility: hidden;
+}
+.BasicFieldset .Field .FieldCol .Remember {
+	/*display: inline-block;*/
+	/*margin: -3px 0 0;*/
+}
+.BasicFieldset .Field .FieldCol + label {
+	display: inline-block;
+}
+/*預設radio、checkbox*/
+/*input - 多擇一選項*/
+input[type=radio] {
+	vertical-align: top;
+}
+/*input - checkbox核取方塊*/
+input[type=checkbox] {
+ 	vertical-align: middle;
+}
+/*radio-摸擬成按鈕*/
+.RadioBtn {
+	margin: 0 -5px;
+}
+.RadioBtn > li{
+	display: inline-block;
+	margin: 0 5px;
+	background: #fff;
+	overflow: hidden;
+}
+.RadioBtn > li input{
+	position: absolute;
+	display: none;
+}
+.RadioBtn > li > label {
+	display: block;
+	cursor: pointer;
+	padding: 12px 30px;
+	border: 1px solid #ddd;
+	margin: 0;
+	text-align: center;
+	font-size: 16px;
+	font-weight: normal;
+	background: #fff;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.RadioBtn > li:hover > label{
+	border-color: #999;
+	position: relative;
+	z-index: 3;
+}
+/*隱藏input*/
+.RadioBtn > li > input[type=radio]{
+	position: absolute;
+	z-index: -1;
+	display: none;
+}
+/*已選中*/
+.RadioBtn > li > input[checked] + label {
+	color: #fff;
+	background: #7a4c98;
+	position: relative;
+	border-color: #7a4c98;
+	z-index: 1;
+}
+/*已選中:hover*/
+.RadioBtn > li:hover > input[checked] + label{
+	border-color: #7a4c98;
+}
+/*無法選擇*/
+.RadioBtn > li > input:disabled + label {
+	background: #ccc;
+	cursor: default;
+}
+.RadioBtn > li > input[checked]:disabled + label:after{
+	display: block;
+	background: #78858b;
+}
+/*按鈕摸擬成radio-組合*/
+.RadioFilter {
+	margin: 3px;
+}
+.RadioFilter > li {
+	display: inline-block;
+	margin: 0 -3px;
+	background: #fff;
+	overflow: hidden;
+}
+.RadioFilter > li > label {
+	display: block;
+	cursor: pointer;
+	padding: 10px 15px;
+	border: 1px solid #ddd;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	background: #fff;
+}
+.RadioFilter > li:hover > label{
+	border-color: #999;
+	position: relative;
+	z-index: 3;
+}
+/*first label*/
+.RadioFilter > li:first-child label{
+	-moz-border-radius-topleft: 3px;
+	-webkit-border-top-left-radius: 3px;
+	border-top-left-radius:3px;
+	-moz-border-radius-bottomleft: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	border-bottom-left-radius:3px;
+}
+/*last label*/
+.RadioFilter > li:last-child label{
+	-moz-border-radius-topright: 3px;
+	-webkit-border-top-right-radius: 3px;
+	border-top-right-radius:3px;
+	-moz-border-radius-bottomright: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+/*隱藏input*/
+.RadioFilter > li > input[type=radio]{
+	position: absolute;
+	z-index: -1;
+	display: none;
+}
+/*已選中*/
+.RadioFilter > li > input[checked] + label {
+	color: #fff;
+	background: #7a4c98;
+	position: relative;
+	border-color: #7a4c98;
+	z-index: 3;
+}
+/*已選中:hover*/
+.RadioFilter > li:hover > input[checked] + label{
+	border-color: #7a4c98;
+}
+/*無法選擇*/
+.RadioFilter > li > input:disabled + label {
+	background: #ccc;
+	cursor: default;
+}
+.RadioFilter > li > input[checked]:disabled + label:after{
+	display: block;
+	background: #78858b;
+}
+/******************************摸擬成預設radio、checkbox******************************/
+.RadioCheckedWrap{
+	display: inline-block;
+	vertical-align: text-top;
+	margin: 0 0 0 20px;
+}
+.RadioCheckedWrap > li{
+	display: inline-block;
+	margin: 0 30px 0 0;
+}
+/*表單元件-input - radio、checkbox*/
+.RadioDefault,
+.CheckBoxDefault {
+	position: absolute;
+	display: none;
+}
+.RadioDefault[disabled],
+.CheckBoxDefault[disabled] {
+	cursor: not-allowed;
+}
+/*label*/
+.RadioDefault + label,
+.CheckBoxDefault + label {
+	color: #333;
+	cursor: pointer;
+	display: block;
+	padding: 0 0 0 28px;/*14/16 16/16*/
+	position: relative;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: normal;
+	display: inline-block;
+}
+.RadioDefault + label:hover:before,
+.CheckBoxDefault + label:hover:before {
+	animation-duration: 0.4s;
+	animation-fill-mode: both;
+	animation-name: hover-color;
+}
+/*勾選框*/
+.RadioDefault + label:before,
+.CheckBoxDefault + label:before {
+	border: 1px solid #ddd;
+	content: "";
+	display: inline-block;
+	height: 20px;
+	left: 0;
+	margin-top: -10px;
+	position: absolute;
+	top: 50%;
+	width: 20px;
+	background: #fff;
+}
+/*選框-radio*/
+.RadioDefault + label:before{
+	width: 16px;
+	height: 16px;
+	margin-top: -8px;
+	border-radius: 50%;
+}
+/*勾選框-打勾及實心圓*/
+.RadioDefault + label:after,
+.CheckBoxDefault + label:after {
+	content: '';
+	display: none;
+	position: absolute;
+}
+/*勾選框-disable*/
+.RadioDefault[disabled] + label,
+.CheckBoxDefault[disabled] + label {
+	color: #e4e4e4;
+	cursor: not-allowed;
+}
+.RadioDefault[disabled] + label:hover,
+.RadioDefault[disabled] + label:before,
+.RadioDefault[disabled] + label:after,
+.CheckBoxDefault[disabled] + label:hover,
+.CheckBoxDefault[disabled] + label:before,
+.CheckBoxDefault[disabled] + label:after {
+	cursor: not-allowed;
+}
+.RadioDefault[disabled] + label:hover:before,
+.CheckBoxDefault[disabled] + label:hover:before {
+	animation-name: none;
+	border: 1px solid #e4e4e4;
+}
+.RadioDefault[disabled] + label:before,
+.CheckBoxDefault[disabled] + label:before {
+	border-color: #e4e4e4;
+}
+/***************************已選中***************************/
+.RadioDefault[checked] + label,
+.CheckBoxDefault[checked] + label {
+}
+.RadioDefault[checked] + label:before,
+.CheckBoxDefault[checked] + label:before {
+	animation-name: none;
+}
+.RadioDefault[checked] + label:after,
+.CheckBoxDefault[checked] + label:after {
+	display: block;
+}
+/*選中-實心圓*/
+.RadioDefault + label:after {
+	background: #7a4c98;
+	border-radius: 50%;
+	height: 10px;
+	left: 3px;
+	top: 50%;
+	margin-top: -5px;
+	width: 10px;
+}
+/*選中-實心圓*/
+.RadioDefault[checked] + label:before {
+}
+.RadioDefault[checked][disabled] + label:before {
+	border: 1px solid #ccc;
+}
+.RadioDefault[checked][disabled] + label:after {
+	background: #ccc;
+}
+.CheckBoxDefault + label:before {
+}
+/*選中-打勾*/
+.CheckBoxDefault + label:after {
+	top: 0px;
+	left: 6px;
+	box-sizing: border-box;
+	width: 8px;
+	height: 12px;
+	transform: rotate(45deg);
+	border-width: 3px;
+	border-style: solid;
+	border-color: #7a4c98;
+	border-top: 0;
+	border-left: 0;
+}
+/*已選中不能選*/
+.CheckBoxDefault[checked] + label:before {
+}
+.CheckBoxDefault[checked][disabled] + label:after {
+	border-color: #ccc;
+}
+/*蓋版loading*/
+.Overlay{
+	display: none;
+	position: absolute;
+	top: 0em !important;
+	left: 0em !important;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.85);
+	opacity: 0;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-duration: 0.5s;
+	animation-duration: 0.5s;
+	-webkit-transition: background-color 0.5s linear;
+	transition: background-color 0.5s linear;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	will-change: opacity;
+	z-index: 1000;
+	overflow-x: hidden;
+}
+.Overlay.Active{
+	display: block;
+	opacity: 1;
+}
+/* 蓋版loading-icon */
+.Loader {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: 0px;
+	z-index: 1000;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	width: auto!important;
+	height: auto!important;
+	text-align: center;
+	font-style: normal;
+	min-width: 2.28571429rem;
+	padding-top: 3.07142857rem;
+	color: rgba(255,255,255,.9);
+	font-size: 1em;
+}
+
+.Overlay.Active .Loader{
+	display: block;
+}
+/* Static Shape */
+
+.Loader:before {
+	position: absolute;
+	content: '';
+	top: 0%;
+	left: 50%;
+	width: 2.28571429rem;
+	height: 2.28571429rem;
+	margin: 0 0 0 -1.14285714rem;
+	border-radius: 500rem;
+	border: 0.2em solid rgba(255,255,255,.15);
+}
+
+/* Active Shape */
+
+.Loader:after {
+	position: absolute;
+	content: '';
+	top: 0%;
+	left: 50%;
+	width: 2.28571429rem;
+	height: 2.28571429rem;
+	margin: 0 0 0 -1.14285714rem;
+	-webkit-animation: loader 0.6s linear;
+	animation: loader 0.6s linear;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	border-radius: 500rem;
+	border-color: #fff transparent transparent;
+	border-style: solid;
+	border-width: 0.2em;
+	box-shadow: 0px 0px 0px 1px transparent;
+}
+
+/* Active Animation */
+
+@-webkit-keyframes loader {
+	from {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	to {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes loader {
+	from {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	to {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+/*loading*/
+.Loading{
+	position: relative;
+	cursor: default;
+	/*pointer-events: none;*/
+}
+.Loading:before {
+	position: absolute;
+	content: '';
+	top: 0%;
+	left: 0%;
+	background: rgba(255, 255, 255, 0.8);
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+}
+
+.Loading:after {
+	position: absolute;
+	content: '';
+	top: 50%;
+	left: 50%;
+	margin: -1.5em 0em 0em -1.5em;
+	width: 3em;
+	height: 3em;
+	-webkit-animation: form-spin 0.4s linear;
+	animation: form-spin 0.4s linear;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	border-radius: 500rem;
+	border-color: #767676 rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1);
+	border-style: solid;
+	border-width: 0.2em;
+	box-shadow: 0px 0px 0px 1px transparent;
+	visibility: visible;
+	z-index: 101;
+}
+
+@-webkit-keyframes form-spin {
+	from {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+	}
+
+	to {
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);
+	}
+}
+
+@keyframes form-spin {
+	from {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+	}
+
+	to {
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);
+	}
+}
+/*全局loading*/
+body.Loading:before{
+	background: rgba(0, 0, 0, 0.45);
+}
+body.Loading:after{
+	position: fixed;
+	border-color: #767676 rgba(255, 255, 255, 0.85) rgba(255, 255, 255, 0.85) rgba(255, 255, 255, 0.85);
+}
+.Btn.Loading{
+	text-shadow: none !important;/*確保文字不顯示*/
+	color: transparent !important;/*確保文字不顯示*/
+	pointer-events: none;
+}
+.Btn.Loading:before {
+}
+.Btn.Loading:after {
+	margin: -0.7em 0em 0em -0.7em;
+	width: 1.4em;
+	height: 1.4em;
+}
+
+.Btn.Loading i {
+	background-color: transparent;
+	box-shadow: none;
+}
+/*loading-填寫欄位*/
+.InputGroup.Loading:after {
+	margin: -0.7em 0em 0em -0.7em;
+	width: 1.4em;
+	height: 1.4em;
+}
+/*Loading start*/
+.LoadingP{
+}
+.LoadP{
+	display: inline-block;
+	background:#666;
+	/*float:left;*/
+	height:15px;
+	margin-left:5px;
+	width:15px;
+	-moz-animation-name:bounce_circleG;
+	-moz-animation-duration:1.35s;
+	-moz-animation-iteration-count:infinite;
+	-moz-animation-direction:linear;
+	-moz-border-radius:7px;
+	-webkit-animation-name:bounce_circleG;
+	-webkit-animation-duration:1.35s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-direction:linear;
+	-webkit-border-radius:7px;
+	-ms-animation-name:bounce_circleG;
+	-ms-animation-duration:1.35s;
+	-ms-animation-iteration-count:infinite;
+	-ms-animation-direction:linear;
+	-ms-border-radius:7px;
+	-o-animation-name:bounce_circleG;
+	-o-animation-duration:1.35s;
+	-o-animation-iteration-count:infinite;
+	-o-animation-direction:linear;
+	-o-border-radius:7px;
+	animation-name:bounce_circleG;
+	animation-duration:1.35s;
+	animation-iteration-count:infinite;
+	animation-direction:linear;
+	border-radius:7px;
+}
+.Load1{
+	-moz-animation-delay:0.27s;
+	-webkit-animation-delay:0.27s;
+	-ms-animation-delay:0.27s;
+	-o-animation-delay:0.27s;
+	animation-delay:0.27s;
+}
+.Load2{
+	-moz-animation-delay:0.63s;
+	-webkit-animation-delay:0.63s;
+	-ms-animation-delay:0.63s;
+	-o-animation-delay:0.63s;
+	animation-delay:0.63s;
+}
+.Load3{
+	-moz-animation-delay:0.8099999999999999s;
+	-webkit-animation-delay:0.8099999999999999s;
+	-ms-animation-delay:0.8099999999999999s;
+	-o-animation-delay:0.8099999999999999s;
+	animation-delay:0.8099999999999999s;
+}
+@-moz-keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background:#bababa;
+	}
+	100%{
+	}
+}
+@-webkit-keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background:#bababa;
+	}
+	100%{
+	}
+}
+@keyframes bounce_circleG{
+	0%{
+	}
+	50%{
+		background:#bababa;
+	}
+	100%{
+	}
+}
+/*如果使用者之視窗寬度>=768px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 768px) {
+	.Heading1{
+		font-size: 36px;
+		margin-bottom: 30px;
+	}
+	.Btn.BtnMd {
+		font-size: 18px;
+	}
+}
+/*如果使用者之視窗寬度>=1024px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1024px) {
+	/*文字連結*/
+	a:hover,
+	a:visited,
+	a:active {
+		color: #7c4a9a;
+	}
+}

@@ -1,0 +1,139 @@
+@charset "utf-8";
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+@import '../abstracts/variables',
+'../abstracts/function',
+'../abstracts/mixins';
+
+// table共用屬性
+.cdp-table {
+  // 左邊線
+  &--border-left {
+    border-left: 2px solid $gray-4;
+  }
+  // 右邊線
+  &--border-right {
+    border-right: 2px solid $gray-4;
+  }
+
+  // column群組
+  .col--group {
+    border-left: 2px solid $gray-4;
+    border-right: 2px solid $gray-4;
+
+    // 並排的column群組
+    + .col--group {
+      border-left: none;
+    }
+  }
+
+  &__text {
+    line-height: 1.4;
+  }
+
+  &--no-select-all {
+    thead {
+      .el-table-column--selection {
+        .el-checkbox {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// table工具列
+.table-toolbar {
+  height: auto;
+  padding: 14px;
+  background: $white;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid $gray-4;
+  border-bottom: none;
+
+  //內容分欄
+  &__row {
+    display: flex;
+  }
+
+  &__col {
+    flex: 1 1 50%;
+    max-width: 50%;
+
+    &:nth-child(2) {
+      text-align: right;
+    }
+  }
+
+  + .wrap-card {
+    border-radius: 0 0 4px 4px;
+  }
+
+  // 工具列按鈕
+  .el-button {
+    > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 12px;
+    }
+    .md-icon {
+      font-size: 20px!important;
+      margin-right: 2px;
+      margin-top: -6px;
+      margin-left: 0;
+    }
+  }
+}
+
+// 頁數
+.vxe-pager {
+  margin-top: 10px;
+}
+
+// vxe-table的頁數按鈕(acvtive)
+.vxe-pager.is--background .vxe-pager--jump-next.is--active,
+.vxe-pager.is--background .vxe-pager--jump-prev.is--active,
+.vxe-pager.is--background .vxe-pager--num-btn.is--active
+.vxe-pager .vxe-pager--jump-next.is--active,
+.vxe-pager .vxe-pager--jump-prev.is--active,
+.vxe-pager .vxe-pager--num-btn.is--active {
+  background-color: $primary;
+  color: $white!important;
+}
+
+// vxe-table的頁數按鈕
+.vxe-pager .vxe-pager--num-btn,
+.vxe-pager .vxe-pager--jump-next,
+.vxe-pager .vxe-pager--jump-prev,
+.vxe-pager .vxe-pager--next-btn,
+.vxe-pager .vxe-pager--num-btn,
+.vxe-pager .vxe-pager--prev-btn {
+  border: 1px solid $gray-4 !important;
+}
+
+// vxe-table的頁數按鈕(disabled)
+.vxe-pager .vxe-pager--jump-next.is--disabled,
+.vxe-pager .vxe-pager--jump-prev.is--disabled,
+.vxe-pager .vxe-pager--next-btn.is--disabled,
+.vxe-pager .vxe-pager--num-btn.is--disabled,
+.vxe-pager .vxe-pager--prev-btn.is--disabled {
+  background: $gray-4;
+  color: $gray-6;
+}
+
+// 圖片搭配名稱
+.name-pic {
+  display: flex;
+  &__name,
+  &__pictrue {
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+  &__name {
+    padding-left: 10px;
+    line-height: 1.4;
+  }
+}

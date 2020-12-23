@@ -1,0 +1,25 @@
+.data-info {
+  background: rgba($white, 0.7);
+  border-radius: 4px;
+  min-height: 50px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  @include flex-center();
+
+  &__row {
+    flex: 1 1 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    > .el-col {
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+
+      &:nth-child(2) {
+        text-align: right;
+      }
+    }
+  }
+}

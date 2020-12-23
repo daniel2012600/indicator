@@ -1,0 +1,23 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+.el-input__icon.md-icon {
+  height: 100%;
+  width: 25px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  line-height: 40px;
+}
+
+.el-input__prefix .md-icon.md-theme-default.md-icon-font {
+  color: #C0C4CC;
+}
+
+[class*=icon-].rotate180 {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+/*# sourceMappingURL=icon.css.map */

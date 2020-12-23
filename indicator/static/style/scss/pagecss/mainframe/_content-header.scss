@@ -1,0 +1,74 @@
+.content {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+
+    .wrap__title {
+      max-width: 50%;
+    }
+    .wrap__title,
+    .wrap__sub-title {
+      margin-bottom: .25em;
+
+      @include breakpoint(md) {
+        margin-bottom: 0;
+      }
+
+      > span {
+        @include line-clamp(1);
+      }
+    }
+
+    .wrap__sub-title {
+      margin-bottom: 0;
+    }
+
+    // 固定上方的頁面標題
+    &--fixed {
+      padding: 14px 16px;
+      margin: 0;
+      position: fixed;
+      width: 100%;
+      top: 64px;
+      left: 0;
+      z-index: 1000;
+      animation: topIn .2s;
+      background: rgba($white, 1);
+      box-shadow: 0 2px 2px rgba($black, 0.1);
+      .wrap__title {
+        //color: $white;
+
+        .info-tooltip {
+          color: $white;
+        }
+      }
+    }
+
+    .el-checkbox {
+      margin-bottom: 0;
+      width: 100%;
+    }
+  }
+}
+
+.el-card__header {
+  > .el-row.el-row--flex {
+     > .el-col {
+       flex: 0 0 auto;
+       width: auto;
+     }
+  }
+}
+
+@keyframes topIn {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

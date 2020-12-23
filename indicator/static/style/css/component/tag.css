@@ -1,0 +1,56 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+.tags {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  margin-bottom: -10px;
+}
+.tags .tag {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.tags .tag:last-child {
+  margin-right: 0;
+}
+
+.tag {
+  border-radius: 40px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+.tag-button {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.tag-button:hover {
+  cursor: pointer;
+  background: #7C4F9D;
+  border-color: #7C4F9D;
+  color: #fff;
+}
+.tag-select {
+  display: none;
+}
+.tag-pop {
+  margin-bottom: 0;
+}
+.tag .material-icons {
+  font-size: 15px;
+  font-weight: normal;
+  margin: 0 -2.5px;
+}
+.tag--normal {
+  background: #F4F4F4;
+  border: 1px solid #dddddd;
+  font-size: 14px;
+  color: #555555;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=tag.css.map */

@@ -1,0 +1,21 @@
+/*******************************************************************************
+ * version 1.0 release;
+ * copyright 2020
+ ******************************************************************************/
+.chart-spl {
+  text-align: center;
+}
+.chart-spl__title {
+  font-weight: bold;
+}
+.chart-spl__chart {
+  margin-bottom: 24px;
+}
+.chart-spl__value {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #3B2A4B;
+}
+
+/*# sourceMappingURL=chart_sparkline.css.map */

@@ -1,0 +1,178 @@
+@charset "utf-8";
+/*******************************************************************************
+ * Version 1.0 Release;
+ * Copyright 2016, "keri"<keri@dotmore.com.tw>. All rights reserved.
+ ******************************************************************************/
+.Desc {
+	color: #fff;
+	font-size: 2.5em;/*40px/16px*/
+	text-align: center;
+}
+/*-------------------- Content --------------------*/
+.FormBox {
+	/* max-width: 800px; */
+	background: #f2f2f2;
+	border: 1px solid #ddd;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius: 4px;
+	margin: 0 auto 30px;
+	padding: 35px 15px 15px;
+}
+.FormBox .Title {
+	line-height: 1.33;
+	margin: 30px auto;
+	text-align: center;
+}
+.FormBox .Title i {
+	font-size: 42px;
+	color: #7b4d98;
+	display: block;
+	background: #fff;
+	width: 80px;
+	height: 80px;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	border-radius: 50%;
+	margin: 0 auto 20px;
+}
+.FormBox .Title i:before {
+	margin: 18px 0;
+	display: inline-block;
+}
+.FormBox .Title .Heading2 {
+}
+.FormBox .Title strong {
+	display: block;
+}
+.FormBox .BasicFieldset{
+	/* width: 400px; */
+	margin: 0 auto 20px;
+	max-width: 320px;
+}
+/* 使用其他方式 */
+.LoginOther{
+	max-width: 320px;
+	margin: 0 auto;
+}
+.FormBox .Invite{
+	line-height: 1.4;
+	padding: 10px;
+	border: 3px solid #fff;
+	margin-bottom: 80px;
+}
+.FormBox .BasicFieldset .ErrorMeg {
+	padding: 0 10px;
+}
+.FormBox .BasicFieldset .Btn {
+}
+.FormBox .FieldsetLogin .BtnBox {
+	margin: 20px 0;
+	overflow: hidden;
+}
+.FormBox .FieldsetLogin .BtnBox .Link {
+	float: right;
+	margin: 14px 0;
+}
+.FormBox .FieldsetForgetPassword .BtnBox {
+	text-align: center;
+	margin: 20px 0 36px;
+}
+.ReLoginBox .BtnBox,
+.Notice {
+	width: 265px;
+	margin: 40px auto;
+}
+.FormBox .FieldsetMemberKey,
+.ReLoginBox .BtnBox {
+}
+.ReLoginBox .BtnBox a {
+	margin: 18px 0;
+	display: block;
+}
+.Notice {
+	text-align: center;
+}
+.Notice i {
+	margin: 2px 0 0;
+}
+.Notice i, .Notice p {
+	display: inline-block;
+	vertical-align: top;
+}
+.Notice p {
+	text-align: left;
+	line-height: 1.5;
+}
+.FormBox .FieldsetMemberKey .BtnBox {
+	margin: 20px auto;
+	text-align: center;
+}
+.FormBox .FieldsetMemberKey .BtnBox a {
+	font-size: 18px;
+}
+.FormBox .FieldsetMemberKey .BtnSend {
+	display: block;
+	width: 100%;
+	margin: 20px auto;
+}
+.FieldsetForgetPassword .BtnBox{
+
+}
+.FieldsetForgetPassword .BtnBox .Btn{
+	margin: 0 10px;
+}
+.Or{
+	background: #888;
+	content: " ";
+	display: block;
+	height: 1px;
+	position: relative;
+	top: 0;
+	right: 0;
+	left: 0;
+	width: 100%;
+	z-index: 0;
+	margin: 1.875em 0;
+}
+.OrText{
+	background: #f2f2f2;
+	display: inline-block;
+	padding: 0 9px;
+	position: relative;
+	text-align: center;
+	z-index: 1;
+	top: -8px;
+	left: 50%;
+	margin-left: -17px;
+}
+/*如果使用者之視窗寬度>=600px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 600px) {
+	.FormBox .BasicFieldset{
+		/* width: 400px; */
+		max-width: 400px;
+	}
+	/* 使用其他方式 */
+	.LoginOther{
+		max-width: 400px;
+	}
+}
+/*-------------------- Footer --------------------*/
+/*如果使用者之視窗寬度>=768px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 768px) {
+	.FormBox{
+		padding: 45px 0 45px;
+	}
+}
+
+/*-------------------- Footer --------------------*/
+/*如果使用者之視窗寬度>=1024px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1024px) {
+}
+
+/*如果使用者之視窗寬度>=1280px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1280px) {
+}
+/*如果使用者之視窗寬度>=1400px，將會再載入這裡的 CSS。*/
+@media screen and (min-width: 1400px) {
+}
