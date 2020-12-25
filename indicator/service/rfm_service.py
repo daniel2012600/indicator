@@ -111,6 +111,7 @@ class RFM_DataService():
             SUM(daily_price)  OVER (PARTITION BY pid) AS total_price
             FROM 
             (
+                --排除無回購天數會員 及 pid為none的會員
                 SELECT  pid , dt, leaddt, day_diff,daily_price  FROM d
                 WHERE day_diff is not Null and pid is not null
             )
@@ -217,21 +218,63 @@ class RFM_DataService():
             FROM ALL_LABEL 
             CROSS JOIN UNNEST(ALL_LABEL.T) AS VAL
         )
-        
-        SELECT rfm, rank, cnt, label1, label2,
-            CASE 
-                WHEN rfm = 'R' THEN '天'
-                WHEN rfm = 'F' THEN '次'
-                ELSE '元'
-            END AS unit
-        FROM USR_CNT
-        LEFT JOIN RESULT
-        USING (rfm, rank)
-        ORDER BY rank DESC
+        ,my_table AS
+        (
+            SELECT rfm, rank, cnt, label1, label2,
+                CASE 
+                    WHEN rfm = 'R' THEN '天'
+                    WHEN rfm = 'F' THEN '次'
+                    ELSE '元'
+                END AS unit
+            FROM USR_CNT
+            LEFT JOIN RESULT
+            USING (rfm, rank)
+            ORDER BY rank DESC
+        )
 
-        # SELECT pid, rebuy_day, buy_count, total_price, R, F, M
-        # FROM RFM_rank
-        # LIMIT 20
+        ,calculation AS
+        (
+            SELECT 
+            ROUND(AVG(rebuy_day),2) AS R_average , 
+            ROUND(AVG(buy_count),2) AS F_average , 
+            ROUND(AVG(total_price),2) AS M_average , 
+            ROUND(STDDEV_POP(rebuy_day),2) AS R_std,
+            ROUND(STDDEV_POP(buy_count),2) AS F_std,
+            ROUND(STDDEV_POP(total_price),2) AS M_std,
+            r3 AS R_median,
+            f3 AS F_median,
+            m3 AS M_median,
+            FROM RFM_rank
+            GROUP BY r3,f3,m3
+        )
+        , first_order AS
+        (
+            --無回購天數會員，回購天數為0
+            SELECT  count(pid) as first_order
+            FROM d
+            WHERE day_diff is Null 
+        )
+
+        ,no_cost AS
+        (        
+        SELECT COUNT(DISTINCT user_id) AS no_cost_member
+        FROM `level1_table_{self._owner}.user_origin_{self._ds_nodash }` AS a
+        LEFT JOIN `level1_table_{self._owner}.user_first_order` AS b
+        ON a.user_id = b.pid
+        )
+
+
+        SELECT *
+        FROM my_table
+        CROSS JOIN calculation,first_order,no_cost;
+
+
         """
         return self._exec_sql_get_data_dict(sql, ["會員編號","回購天數","會員消費次數","會員消費金額","R","F","M"])
 
+# ROUND(AVG(rebuy_day),2) AS R_average , 
+#             ROUND(AVG(buy_count),2) AS F_average , 
+#             ROUND(AVG(total_price),2) AS M_average , 
+#             ROUND(STDDEV(rebuy_day),2) AS R_std,
+#             ROUND(STDDEV(buy_count),2) AS F_std,
+#             ROUND(STDDEV(total_price),2) AS M_std,

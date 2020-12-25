@@ -38,27 +38,133 @@
 <!-- 頁面標題-右側-無功能 end -->
 <!-- 1欄 start -->
 
+<el-row :gutter="25" class="mb-4">
+    <el-card shadow="never" class="box-card wrap-card">
+        <h2 class="card__title">回購平均天數</h2>
+            <el-col :sm="12" :md="6">
+                <el-card shadow="never" class="box-card wrap-card">
+                    <h2 class="card__title">xxxxx</h2>
+                </el-card>
+            </el-col>
 
+            <el-col :sm="12" :md="6">
+                <el-card shadow="never" class="box-card wrap-card">
+                    <h2 class="card__title">xxxxx</h2>
+                </el-card>
+            </el-col>
 
+            <el-col :sm="12" :md="6">
+                <el-card shadow="never" class="box-card wrap-card">
+                    <h2 class="card__title">xxxxx</h2>
+                </el-card>
+            </el-col>
 
- 
+            <el-col :sm="12" :md="6">
+                <el-card shadow="never" class="box-card wrap-card">
+                    <h2 class="card__title">xxxxx</h2>
+                </el-card>
+            </el-col>
+
+            <el-col :span="24">
+                <div class="grid-content">
+                    <v-echarts-bar
+                    id="click1"
+                    :data="r_data()"
+                    :meskeys="['人數']"
+                    xaxis_location="'start'"
+                    :gird_bottom="30"
+                    >
+                    </v-echarts-bar>
+                </div>
+            </el-col>
+    </el-card>
+</el-row>
 
 <el-row :gutter="25" class="mb-4">
+    <el-card shadow="never" class="box-card wrap-card">
+        <h2 class="card__title">會員消費次數</h2>
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
     <el-col :span="24">
         <div class="grid-content">
-        <el-card shadow="never" class="box-card wrap-card">
-            <h2 class="card__title">Example</h2>
             <v-echarts-bar
-            id="click1"
-            :data="get_mdata()"
+            id="click2"
+            :data="m_data()"
             :meskeys="['人數']"
             xaxis_location="'start'"
             bar_color="#c35a20"
-            :gird_bottom="30">
+            :gird_bottom="30"
+            >
             </v-echarts-bar>
-        </el-card>
         </div>
     </el-col>
+</el-card>
+
+<el-row :gutter="25" class="mb-4">
+    <el-card shadow="never" class="box-card wrap-card">
+        <h2 class="card__title">會員消費金額</h2>
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
+    <el-col :sm="12" :md="6">
+        <el-card shadow="never" class="box-card wrap-card">
+            <h2 class="card__title">xxxxx</h2>
+        </el-card>
+    </el-col>
+
+    <el-col :span="24">
+        <div class="grid-content">
+            <v-echarts-bar
+            id="click3"
+            :data="f_data()"
+            :meskeys="['人數']"
+            xaxis_location="'start'"
+            bar_color="#aad091"
+            :gird_bottom="30"
+            >
+            </v-echarts-bar>
+        </div>
+    </el-col>
+</el-card>
+
+
 </el-row>
 
 
@@ -72,7 +178,7 @@
 <script src="/static/style/lodash/4.16.0/lodash.js"></script>
 <script src="/static/js/v-echarts-rfm-chart.js"></script>
 <script src="/static/js/v-echarts-bar.js"></script>
-
+<script src="/static/js/v-value-card.js"></script>
 
 <script>
 
@@ -90,34 +196,69 @@
                 {'v': '2yr', 'label': '兩年內'},
             ],
             sel_period: '1m',
-            datalist : [{"pid":"chatime:34303","rebuy_day":4.5,"buy_count":2,"total_price":75,"R":5,"F":5,"M":3},{"pid":"chatime:35924","rebuy_day":14,"buy_count":1,"total_price":35,"R":1,"F":4,"M":1},{"pid":"chatime:41550","rebuy_day":21,"buy_count":1,"total_price":50,"R":1,"F":4,"M":2},{"pid":"chatime:43194","rebuy_day":11,"buy_count":1,"total_price":40,"R":2,"F":4,"M":1},{"pid":"chatime:50803","rebuy_day":6.5,"buy_count":2,"total_price":185,"R":4,"F":5,"M":5},{"pid":"chatime:51113","rebuy_day":15,"buy_count":1,"total_price":50,"R":1,"F":4,"M":2},{"pid":"chatime:59689","rebuy_day":6.67,"buy_count":3,"total_price":344,"R":4,"F":6,"M":6},{"pid":"chatime:62318","rebuy_day":9,"buy_count":1,"total_price":40,"R":2,"F":4,"M":1},{"pid":"chatime:64437","rebuy_day":6.75,"buy_count":4,"total_price":215,"R":4,"F":6,"M":6},{"pid":"chatime:67212","rebuy_day":2,"buy_count":1,"total_price":50,"R":6,"F":4,"M":2},{"pid":"chatime:68016","rebuy_day":13,"buy_count":1,"total_price":50,"R":2,"F":4,"M":2},{"pid":"chatime:71035","rebuy_day":6.5,"buy_count":2,"total_price":85,"R":4,"F":5,"M":3},{"pid":"chatime:71595","rebuy_day":2.67,"buy_count":3,"total_price":264,"R":6,"F":6,"M":6},{"pid":"chatime:72194","rebuy_day":4,"buy_count":1,"total_price":40,"R":5,"F":4,"M":1},{"pid":"chatime:22166","rebuy_day":2.5,"buy_count":10,"total_price":850,"R":6,"F":6,"M":6},{"pid":"chatime:26633","rebuy_day":1.5,"buy_count":2,"total_price":228,"R":6,"F":5,"M":6},{"pid":"chatime:28276","rebuy_day":4,"buy_count":2,"total_price":238,"R":5,"F":5,"M":6},{"pid":"chatime:40091","rebuy_day":18,"buy_count":1,"total_price":50,"R":1,"F":4,"M":2},{"pid":"chatime:45534","rebuy_day":3.5,"buy_count":2,"total_price":100,"R":5,"F":5,"M":4},{"pid":"chatime:56549","rebuy_day":12,"buy_count":1,"total_price":199,"R":2,"F":4,"M":5}],
+            datalist : [{"rfm":"F","rank":4,"cnt":628,"label1":"1","label2":"2","unit":"次","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"R","rank":4,"cnt":106,"label1":"6","label2":"7","unit":"天","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"R","rank":6,"cnt":133,"label1":"1","label2":"3","unit":"天","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"F","rank":6,"cnt":229,"label1":"3","label2":"20","unit":"次","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"R","rank":5,"cnt":226,"label1":"3","label2":"6","unit":"天","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"M","rank":2,"cnt":104,"label1":"50","label2":"55","unit":"元","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"F","rank":5,"cnt":230,"label1":"2","label2":"3","unit":"次","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"R","rank":2,"cnt":155,"label1":"10","label2":"14","unit":"天","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"M","rank":1,"cnt":178,"label1":"0","label2":"50","unit":"元","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"R","rank":3,"cnt":260,"label1":"7","label2":"10","unit":"天","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"R","rank":1,"cnt":207,"label1":"14","label2":"30","unit":"天","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"M","rank":4,"cnt":189,"label1":"90","label2":"130","unit":"元","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"M","rank":3,"cnt":243,"label1":"55","label2":"90","unit":"元","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"M","rank":5,"cnt":191,"label1":"130","label2":"205","unit":"元","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319},{"rfm":"M","rank":6,"cnt":182,"label1":"205","label2":"1035","unit":"元","R_average":8.54,"F_average":2.03,"M_average":133,"R_std":5.69,"F_std":2.08,"M_std":131.59,"R_median":7,"F_median":1,"M_median":90,"first_order":4335,"no_cost_member":22319}]
+            ,
             check_data: [],
-            my_data: []
+            my_data: [
+                    {'次數': 1, '人數': "my_test[0]"},
+                    {'次數': 2, '人數': "my_test[1]"},
+                    {'次數': 3, '人數': "my_test[2]"},
+                    {'次數': 4, '人數': "my_test[3]"},
+                    {'次數': 5, '人數': "my_test[4]"},
+                    {'次數': 6, '人數': "my_test[5]"},
+                ]
         },
         methods: {
-            get_mdata(){
-                var M_data = this.datalist
-                var my_test = _.countBy(M_data,'M')
-                this.my_data = [
-                    {'次數': 1, '人數': my_test[1]},
-                    {'次數': 2, '人數': my_test[2]},
-                    {'次數': 3, '人數': my_test[3]},
-                    {'次數': 4, '人數': my_test[4]},
-                    {'次數': 5, '人數': my_test[5]},
-                    {'次數': 6, '人數': my_test[6]},
+            r_data(){
+                var my_data = this.datalist
+                var r_list = _.filter(my_data, {'rfm':'R'} )
+                var my_test = _.map(r_list,d=>{return d.cnt})
+                var data = [
+                    {'次數': 1, '人數': my_test[0]},
+                    {'次數': 2, '人數': my_test[1]},
+                    {'次數': 3, '人數': my_test[2]},
+                    {'次數': 4, '人數': my_test[3]},
+                    {'次數': 5, '人數': my_test[4]},
+                    {'次數': 6, '人數': my_test[5]},
                 ]
-                console.log(this.my_data)
-                return this.my_data
+                return data
+            },
+            f_data(){
+                var my_data = this.datalist
+                var f_list = _.filter(my_data, {'rfm':'F'} )
+                var my_test = _.map(f_list,d=>{return d.cnt})
+                var data = [
+                    {'次數': 1, '人數': my_test[0]},
+                    {'次數': 2, '人數': my_test[1]},
+                    {'次數': 3, '人數': my_test[2]},
+                    {'次數': 4, '人數': my_test[3]},
+                    {'次數': 5, '人數': my_test[4]},
+                    {'次數': 6, '人數': my_test[5]},
+                ]
+                return data
+            },
+            m_data(){
+                var my_data = this.datalist
+                var m_list = _.filter(my_data, {'rfm':'M'} )
+                var my_test = _.map(m_list,d=>{return d.cnt})
+                var data = [
+                    {'次數': 1, '人數': my_test[0]},
+                    {'次數': 2, '人數': my_test[1]},
+                    {'次數': 3, '人數': my_test[2]},
+                    {'次數': 4, '人數': my_test[3]},
+                    {'次數': 5, '人數': my_test[4]},
+                    {'次數': 6, '人數': my_test[5]},
+                ]
+                return data
             }
-
         },
         mounted () {
-            $.post('/report/rfm_api', { 
-                    period: JSON.stringify(this.sel_period)
-                }, result => {
-                    console.log(result)
-                    this.check_data = result;
-                }, 'json');
+            // $.post('/report/rfm_api', { 
+            //         period: JSON.stringify(this.sel_period)
+            //     }, result => {
+            //         console.log(result)
+            //         this.check_data = result;
+            //     }, 'json');
 
         }
     });
