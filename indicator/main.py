@@ -10,7 +10,7 @@ app.secret_key = pd.util.testing.rands(24)  # 使用session必要初始值
 
 @app.route('/report/rfm_api', methods=['POST'])
 def rfm_api():
-    owner = 'lkf'
+    owner = json.loads(request.form['owner'])
     ser = RFM_DataService(owner,cfg.BQGCS_CONFIG['BQ_PRIVATE_KEY_PATH'])
     period = json.loads(request.form['period'])
     dt_list = ser.trans_time(period)
@@ -27,7 +27,7 @@ def rfm_api():
         }
         return res
         '''
-    data = ser.get_daydiff(dt_list,js)
+    data = ser.get_rfm(dt_list,js)
     orrrr = [{'d':'ee'}]
     return json.dumps(data)
 

@@ -25,21 +25,25 @@ class RFM_DataService():
         day_delta = dt.timedelta(days=1)
         yesterday = today - day_delta
         dt_list = [str(yesterday)]
-
-        if period == "1m" :
+        
+        if period == '1w' :
+            day_delta2 = dt.timedelta(days = 7 )
+        elif period == '2w' :
+            day_delta2 = dt.timedelta(days = 14 )
+        elif period == "1m" :
             day_delta2 = dt.timedelta(days=30)
-            dr_2 = yesterday - day_delta2
         elif period == "2m" :
             day_delta2 = dt.timedelta(days=60)
-            dr_2 = yesterday - day_delta2
-                
-        
+        elif period == '3m' :
+            day_delta2 = dt.timedelta(days = 90 )
+        elif period == '2yr':
+            day_delta2 = dt.timedelta(days = 730)
+
+        dr_2 = yesterday - day_delta2
         dt_list.append(str(dr_2))
         return dt_list
 
-
-
-    def _exec_sql_get_data_dataframe(self, sql, columns,use_query_cache=True):
+    def _exec_sql_get_data(self, sql, use_query_cache=True):
         #執行sql語法，返回資料(dataframe格式)
     
         bq_client = bigquery.Client.from_service_account_json(self._bqjson)
@@ -49,31 +53,18 @@ class RFM_DataService():
         job_config.use_query_cache= use_query_cache
 
         result = bq_client.query(sql, job_config=job_config)
-
-        # https://googleapis.github.io/google-cloud-python/latest/bigquery/generated/google.cloud.bigquery.job.QueryJob.html
         
         df = result.to_dataframe()
-        # # 重設欄位名稱
-        # df.columns = columns
-
-        # print(f"是否開啟快取:{job_config.use_query_cache},資料來至快取:{result.cache_hit},歷時：{result.slot_millis}")
         # 回傳結果
-        print(df)
-        return df
-
-    def _exec_sql_get_data_dict(self, sql, columns,use_query_cache=True):
-        #執行sql語法，返回資料(字典格式)
-        df = self._exec_sql_get_data_dataframe(sql, columns, use_query_cache)
         data = df.fillna(0).to_dict('records')
+
         return data
 
-
-    def get_daydiff(self, dt_list,js):
+    def get_rfm(self, dt_list,js):
         #報表 > 回購間隔佔比
         sql = f"""
         #standardSQL
         CREATE TEMPORARY FUNCTION get_rank(v FLOAT64,rg0 FLOAT64,rg1 FLOAT64,rg2 FLOAT64,rg3 FLOAT64,rg4 FLOAT64,rg5 FLOAT64,rg6 FLOAT64, revert INT64) RETURNS INT64 LANGUAGE js AS '''{js}''';
-
 
         WITH a as
         (
@@ -231,7 +222,6 @@ class RFM_DataService():
             USING (rfm, rank)
             ORDER BY rank DESC
         )
-
         ,calculation AS
         (
             SELECT 
@@ -254,7 +244,6 @@ class RFM_DataService():
             FROM d
             WHERE day_diff is Null 
         )
-
         ,no_cost AS
         (        
         SELECT COUNT(DISTINCT user_id) AS no_cost_member
@@ -263,18 +252,10 @@ class RFM_DataService():
         ON a.user_id = b.pid
         )
 
-
         SELECT *
         FROM my_table
         CROSS JOIN calculation,first_order,no_cost;
 
-
         """
-        return self._exec_sql_get_data_dict(sql, ["會員編號","回購天數","會員消費次數","會員消費金額","R","F","M"])
+        return self._exec_sql_get_data(sql)
 
-# ROUND(AVG(rebuy_day),2) AS R_average , 
-#             ROUND(AVG(buy_count),2) AS F_average , 
-#             ROUND(AVG(total_price),2) AS M_average , 
-#             ROUND(STDDEV(rebuy_day),2) AS R_std,
-#             ROUND(STDDEV(buy_count),2) AS F_std,
-#             ROUND(STDDEV(total_price),2) AS M_std,
