@@ -57,7 +57,7 @@ class RFM_DataService():
         df = result.to_dataframe()
         # 回傳結果
         data = df.fillna(0).to_dict('records')
-
+        print(df)
         return data
 
     def get_rfm(self, dt_list,js):
@@ -211,12 +211,7 @@ class RFM_DataService():
         )
         ,my_table AS
         (
-            SELECT rfm, rank, cnt, label1, label2,
-                CASE 
-                    WHEN rfm = 'R' THEN '天'
-                    WHEN rfm = 'F' THEN '次'
-                    ELSE '元'
-                END AS unit
+            SELECT rfm, rank, cnt, label1, label2
             FROM USR_CNT
             LEFT JOIN RESULT
             USING (rfm, rank)
@@ -244,14 +239,25 @@ class RFM_DataService():
             FROM d
             WHERE day_diff is Null 
         )
-        ,no_cost AS
+        ,all_member AS
         (        
-        SELECT COUNT(DISTINCT user_id) AS no_cost_member
-        FROM `level1_table_{self._owner}.user_origin_{self._ds_nodash }` AS a
-        LEFT JOIN `level1_table_{self._owner}.user_first_order` AS b
-        ON a.user_id = b.pid
+        SELECT *
+        FROM `level1_table_{self._owner}.user_origin_{self._ds_nodash }` 
         )
-
+        ,first_buy AS
+        (
+        SELECT *
+        FROM `level1_table_{self._owner}.user_first_order` 
+        WHERE (DATE(first_order_dt) >= '{dt_list[1]}' AND DATE(first_order_dt) <= '{dt_list[0]}')
+        )
+        ,no_cost AS
+        (
+        SELECT COUNT(DISTINCT  user_id) AS no_cost_member
+        FROM all_member AS a
+        LEFT JOIN first_buy AS b
+        ON a.user_id = b.pid
+        WHERE pid is null
+        )
         SELECT *
         FROM my_table
         CROSS JOIN calculation,first_order,no_cost;

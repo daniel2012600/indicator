@@ -158,11 +158,11 @@ Vue.component("v-echarts-bar", {
                     nameLocation: this.xaxis_location,
                     nameGap: 35,
                     type: 'category',
-                    data: this.data.map(d => d[dimkey]),
+                    data: this.data.map(d => d[dimkey]), // dimkey == 次數
                     axisLabel: {
                         formatter: params => this.x_label_format(params)
-                        }
-                    }],
+                        }                    
+                }],
                 yAxis: [{
                     name: meskeys[0],
                     type: 'value',

@@ -130,7 +130,6 @@ Vue.component("v-echarts-heatmap", {
             var data = data.map(function (item) {
                 return [item[1], item[0], item[2] || null];
             });
-
             // if colors is set, ignore fromcolor & tocolor
             var thisColor;
             if (this.fromcolor === undefined && this.tocolor === undefined ) {
@@ -147,7 +146,7 @@ Vue.component("v-echarts-heatmap", {
                         var text = p["name"];
                         var value = p["value"][2];
                         var label = addlabel;
-                        return  label + " " + color + text + ": " + value + "%" + "666666666666"
+                        return  label + " " + color + text + ": " + value + "%" +"<br>" +  "666666666666"
                     },
                 },
                 animation: true,

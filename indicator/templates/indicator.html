@@ -25,20 +25,36 @@
 
 {% block content %}
 <!-- 頁面標題-右側-無功能 start -->
+<el-row type="flex" justify="space-between" :gutter="25" class="mb-4">
+    <el-col :span="24">
+    <div class="grid-content">
+        <h1>RFM 輔助報表</h1>  
+    </div>
+    </el-col>
+</el-row>
 <el-row :gutter="25" class="mb-4">
-
-            <!-- button -->
-            <el-select id="selowner" v-model="sel_owner" placeholder="" class="float-left">
-                <el-option v-for="item in owneropts" :key="item.label" :label="item.label"
-                    :value="item.v">
-                </el-option>
-            </el-select>
-            <!-- button -->
-            <el-select id="seldaterange" v-model="sel_period" placeholder="" class="float-left">
-                <el-option v-for="item in daterangeopts" :key="item.label" :label="item.label"
-                    :value="item.v">
-                </el-option>
-            </el-select>
+    <!-- button -->
+    
+        <el-select id="selowner" v-model="sel_owner" placeholder="" class="float-left">
+            <el-option v-for="item in owneropts" :key="item.label" :label="item.label"
+                :value="item.v">
+            </el-option>
+        </el-select>
+        <!-- button -->
+        <el-select id="seldaterange" v-model="sel_period" placeholder="" class="float-left">
+            <el-option v-for="item in daterangeopts" :key="item.label" :label="item.label"
+                :value="item.v">
+            </el-option>
+        </el-select>
+        <el-link :underline="false" @click="compute_warring()">
+            <el-button type="primary" style="height: 40px;">計算</el-button>
+        </el-link>
+        <v-data-info
+        custom_text1 = "至"
+        :dtrange_text1="'本期' + 1" 
+        :dtrange_text2="'前期' + 2"
+        :data_count = "datalist.length">
+        </v-data-info>
 </el-row>
 <!-- 主標題及下拉選單 end -->
 
@@ -58,157 +74,161 @@
 <el-row :gutter="25" class="mb-4">
     <el-card shadow="never" class="box-card wrap-card">
         <h2 class="card__title">回購平均天數</h2><br>
-            <el-col :sm="12" :md="6">
-                <el-card shadow="never" class="box-card wrap-card" align ="middle">
-                    <h2 class="card__title">0天(首購)</h2><br>
-                    <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length" >
-                        [[ datalist[0].first_order + '人']]
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :sm="12" :md="6">
-                <el-card shadow="never" class="box-card wrap-card" align ="middle">
-                    <h2 class="card__title">標準差</h2><br>
-                    <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                        [[ datalist[0].R_std + ' 天']]
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :sm="12" :md="6">
-                <el-card shadow="never" class="box-card wrap-card" align ="middle">
-                    <h2 class="card__title">平均數</h2><br>
-                    <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                        [[ datalist[0].R_average + ' 天']]
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :sm="12" :md="6">
-                <el-card shadow="never" class="box-card wrap-card" align ="middle">
-                    <h2 class="card__title">中位數</h2><br>
-                    <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                        [[ datalist[0].R_median + ' 天']]
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :span="24" v-loading="loading" element-loading-text="資料載入中．．．">
-                <div class="grid-content">
-                    <v-echarts-bar
-                    id="click1"
-                    :data="rfm_data('R')"
-                    :meskeys="['人數']"
-                    xaxis_location="'start'"
-                    :gird_bottom="30"
-                    :x_label_format="(val) => ` ${val} `"
-                    >
-                    </v-echarts-bar>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">0天(首購)</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length" >
+                    [[ datalist[0].first_order + '人']]
                 </div>
-            </el-col>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">標準差</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].R_std + ' 天']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">平均數</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].R_average + ' 天']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">中位數</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].R_median + ' 天']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :span="24" v-loading="loading" element-loading-text="資料載入中．．．">
+            <div class="grid-content">
+                <v-echarts-bar
+                id="click1"
+                :data="rfm_bardata('R')"
+                :meskeys="['人數']"
+                xaxis_location="'start'"
+                :gird_bottom="30"
+                :x_label_format="(val) => {  return val.split(',')[0] +'\n' + val.split(',')[1]  + '~' +val.split(',')[2]  + '天' }  "
+                >
+                </v-echarts-bar>
+            </div>
+        </el-col>
+    </el-card>
 </el-row>
 
 <el-row :gutter="25" class="mb-4">
     <el-card shadow="never" class="box-card wrap-card">
         <h2 class="card__title">會員消費次數</h2><br>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">0次(未購買)</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].no_cost_member + ' 人']]
-            </div>
-        </el-card>
-    </el-col>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">標準差</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].F_std + ' 次']]
-            </div>
-        </el-card>
-    </el-col>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">平均數</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].F_average + ' 次']]
-            </div>
-        </el-card>
-    </el-col>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">中位數</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].F_median + ' 次']]
-            </div>
-        </el-card>
-    </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">0次(未購買)</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].no_cost_member + ' 人']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">標準差</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].F_std + ' 次']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">平均數</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].F_average + ' 次']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">中位數</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].F_median + ' 次']]
+                </div>
+            </el-card>
+        </el-col>
 
-    <el-col :span="24" v-loading="loading" element-loading-text="資料載入中．．．">
-        <div class="grid-content">
-            <v-echarts-bar
-            id="click2"
-            :data="rfm_data('F')"
-            :meskeys="['人數']"
-            xaxis_location="'start'"
-            bar_color="#c35a20"
-            :gird_bottom="30"
-            >
-            </v-echarts-bar>
-        </div>
-    </el-col>
-</el-card>
+        <el-col :span="24" v-loading="loading" element-loading-text="資料載入中．．．">
+            <div class="grid-content">
+                <v-echarts-bar
+                id="click2"
+                :data="rfm_bardata('F')"
+                :meskeys="['人數']"
+                xaxis_location="'start'"
+                bar_color="#c35a20"
+                :gird_bottom="30"
+                :x_label_format="(val) => {  return val.split(',')[0] +'\n' + val.split(',')[1]  + '~' +val.split(',')[2]  + '次' }  "
+                >
+                </v-echarts-bar>
+            </div>
+        </el-col>
+    </el-card>
+</el-row>
 
 <el-row :gutter="25" class="mb-4">
     <el-card shadow="never" class="box-card wrap-card">
         <h2 class="card__title">會員消費金額</h2><br>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">0次(未購買)</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].no_cost_member + ' 次']]
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">0次(未購買)</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].no_cost_member + ' 次']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">標準差</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].M_std + ' 次']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">平均數</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].M_average + ' 次']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
+            <el-card shadow="never" class="box-card wrap-card" align ="middle">
+                <h2 class="card__title">中位數</h2><br>
+                <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
+                    [[ datalist[0].M_median + ' 次']]
+                </div>
+            </el-card>
+        </el-col>
+        <el-col :span="24" v-loading="loading" element-loading-text="資料載入中．．．">
+            <div class="grid-content">
+                <v-echarts-bar
+                id="click3"
+                :data="rfm_bardata('M')"
+                :meskeys="['人數']"
+                xaxis_location="'start'"
+                bar_color="#aad091"
+                :gird_bottom="30"
+                :x_label_format="(val) => {  
+                    var test = val.split(',')[0] +'\n' + val.split(',')[1]  + '~' +val.split(',')[2]  + '元' 
+                    return test }  "
+                >
+                </v-echarts-bar>
             </div>
-        </el-card>
-    </el-col>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">標準差</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].M_std + ' 次']]
-            </div>
-        </el-card>
-    </el-col>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">平均數</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].M_average + ' 次']]
-            </div>
-        </el-card>
-    </el-col>
-    <el-col :sm="12" :md="6">
-        <el-card shadow="never" class="box-card wrap-card" align ="middle">
-            <h2 class="card__title">中位數</h2><br>
-            <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                [[ datalist[0].M_median + ' 次']]
-            </div>
-        </el-card>
-    </el-col>
-    <el-col :span="24" v-loading="loading" element-loading-text="資料載入中．．．">
-        <div class="grid-content">
-            <v-echarts-bar
-            id="click3"
-            :data="rfm_data('M')"
-            :meskeys="['人數']"
-            xaxis_location="'start'"
-            bar_color="#aad091"
-            :gird_bottom="30"
-            >
-            </v-echarts-bar>
-        </div>
-    </el-col>
-</el-card>
-
+        </el-col>
+    </el-card>
 
 </el-row>
-
 
 
 <!-- 1欄 end -->
@@ -216,13 +236,13 @@
 {% endblock %} 
 
 {% block js %}
+<script src="/static/js/v-data-info.js"></script>
 <script src="/static/js/v-el-card.js"></script>
 <script src="/static/style/echarts/4.8.0/echarts.min.js"></script>
 <script src="/static/style/lodash/4.16.0/lodash.js"></script>
-<script src="/static/js/v-echarts-rfm-chart.js"></script>
 <script src="/static/js/v-echarts-rfm-bar.js"></script>
-<script src="/static/js/v-value-card.js"></script>
 <script src="/static/js/v-echarts.rfm-indicator.js"></script>
+<script src="/static/js/v-value-card.js"></script>
 <script>
     const is_etl_done = '{{ is_etl_done | safe }}' == 'True'
     var obj = new Vue({
@@ -249,9 +269,13 @@
             sel_period : '1w',
             sel_owner : 'lkf',
             loading: false,
+            dialog: false,
             is_etl_done: is_etl_done,
-            datalist : []
-            ,
+            filter_data: {
+                dr: [],
+                compare_def: 'YOY'
+            },
+            datalist :[{"rfm":"M","rank":1,"cnt":20,"label1":"10","label2":"40","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":4,"cnt":26,"label1":"65","label2":"90","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":1,"cnt":31,"label1":"5","label2":"7","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":5,"cnt":51,"label1":"1","label2":"2","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":3,"cnt":38,"label1":"2","label2":"3","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":3,"cnt":36,"label1":"50","label2":"65","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"F","rank":5,"cnt":125,"label1":"1","label2":"2","unit":"次","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":6,"cnt":29,"label1":"120","label2":"920","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":5,"cnt":30,"label1":"90","label2":"120","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":2,"cnt":44,"label1":"3","label2":"5","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"F","rank":6,"cnt":39,"label1":"2","label2":"6","unit":"次","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":2,"cnt":23,"label1":"40","label2":"50","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056}],
             map_data:[
             {"index":"1","一":0,"二":0,"三":1,"四":1,"五":1,"六":1,"日":0},
             {"index":"2","一":0,"二":0,"三":0,"四":1,"五":0,"六":1,"日":1},
@@ -260,16 +284,47 @@
             {"index":"5","一":0,"二":0,"三":0,"四":1,"五":0,"六":0,"日":0},
             {"index":"6","一":2,"二":1,"三":1,"四":1,"五":1,"六":0,"日":7}],
         },
-        watch: {
-            sel_owner() {
-                this.get_rfm();
-            },
-            sel_period() {
-                this.get_rfm();
-            }
-        },
         methods: {
-            rfm_data(param){
+            cmp_date() {
+                var data = {
+                    day: moment().subtract(1, 'day').format("YYYY-MM-DD"),
+                    day_prev_7d: moment().subtract(8, 'day').format("YYYY-MM-DD"),
+                    day_prev_7d_text: moment().subtract(1, 'day').locale('zh-tw').format("dd"),
+                    this_w1: moment().startOf('isoweek').format("YYYY-MM-DD"),
+                    this_w2: moment().endOf('isoweek').format("YYYY-MM-DD"),
+                    prev_w1: moment().startOf('isoweek').subtract(7, 'day').format("YYYY-MM-DD"),
+                    prev_w2: moment().endOf('isoweek').subtract(7, 'day').format("YYYY-MM-DD"),
+                    prev_2w1: moment().startOf('isoweek').subtract(14, 'day').format("YYYY-MM-DD"),
+                    prev_2w2: moment().endOf('isoweek').subtract(14, 'day').format("YYYY-MM-DD"),
+                    this_m1: moment().startOf('month').format("YYYY-MM-DD"),
+                    this_m2: moment().endOf('month').format("YYYY-MM-DD"),
+                    prev_m1: moment().subtract(1, 'month').startOf('month').format("YYYY-MM-DD"),
+                    prev_m2: moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD"),
+                    prev_2m1: moment().subtract(2, 'month').startOf('month').format("YYYY-MM-DD"),
+                    prev_2m2: moment().subtract(2, 'month').endOf('month').format("YYYY-MM-DD"),
+                }
+                return data
+            },
+            get_rfm() {
+                this.loading = true;
+                $.post('/report/rfm_api', {
+                    owner: JSON.stringify(this.sel_owner),
+                    period: JSON.stringify(this.sel_period),
+                }, result => {
+                    this.datalist = result;
+                    this.loading = false;
+                }, 'json')
+            },
+            indicator_data(){
+                var s_data = this.datalist
+                var my_test = _.groupBy(s_data, 'rank',"asc")
+                var index = _.keyBy(my_test, (o) => {
+                                return o;
+                                });
+                
+                return index
+            },
+            rfm_bardata(param){
                 var my_data = this.datalist
                 var d_list = _.filter(my_data, {'rfm': param} )
                 var my_test = _.sortBy(d_list, 'rank')
@@ -280,20 +335,24 @@
 
                 return data
             },
-            get_rfm(){
-                this.loading = true;
-                $.post('/report/rfm_api', {
-                    owner: JSON.stringify(this.sel_owner),
-                    period: JSON.stringify(this.sel_period),
-                }, result => {
-                    this.datalist = result;
-                    this.loading = false;
-                }, 'json')
-            }
-
+            compute_warring() {
+                this.dialog =  false,
+                this.$confirm('點選「確認」後，將耗費成本重新計算，是否確認？', '通知', {
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.get_rfm()
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消'
+                    });
+                });
+            },
         },
         mounted () {
-            this.get_rfm();
+            // this.get_rfm();
         }
     });
 
