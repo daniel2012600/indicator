@@ -214,7 +214,26 @@
                         <svg class="logo-s"></svg>
                     </span>
                     <span style="flex: 1 1 auto;"></span>
-
+                    <md-button class="md-icon-button" title="檢閱帳號" v-popover:popover>
+                        <md-icon>person</md-icon>
+                    </md-button>
+                    <el-popover ref="popover"
+                                placement="bottom"
+                                trigger="click">
+                        <div class="separator" style="float: left;">
+                            <md-avatar class="md-avatar-icon md-large">
+                                {{ session['user']['acc_name'][0:1].upper() if 'user' in session }}
+                            </md-avatar>
+                        </div>
+                        <div class="separator" style="float: left;margin-left:15px;min-width:240px;">
+                            <p>帳號資訊</p>
+                            <p>{{ session['user']['email'] if 'user' in session }}</p>
+                            <p>企業: {{ session['user']['owner']['name'] if 'user' in session }}</p>
+                        </div>
+                        <div style="text-align: right; margin: 0;clear:both;">
+                            <el-button type="primary" title="登出" @click="onmenuclick_logout">登出</el-button>
+                        </div>
+                    </el-popover>
                 </div>
                 {% block toolbarrow %}{% endblock %}
             </md-app-toolbar>
@@ -236,11 +255,8 @@
                                 <md-icon>theaters</md-icon>
                                 <span class="md-list-item-text">元件展示區</span>
                                 <md-list slot="md-expand">
-
-                                    <md-list-item class="md-inset" @click="click_href('/echarts.heatmap')">熱點圖
-                                    </md-list-item>
-
-                                    
+                                    <md-list-item class="md-inset" @click="click_href('/echarts.heatmap')">熱點圖</md-list-item>
+                                    <md-list-item class="md-inset" @click="click_href('/account')">帳號列表</md-list-item>
                                 </md-list>
                             </md-list-item>
 

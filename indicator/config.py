@@ -43,6 +43,7 @@ class Config(object):
 
     CDP_BACKEND_WEB_URI = 'http://34.84.221.26:8800'
 
+    account_list = {"daniel_0601@reddoor.com.tw"}
 
 class ProdConfig(Config):
     ENV_NAME = "Production"

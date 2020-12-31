@@ -60,16 +60,27 @@ class RFM_DataService():
         print(df)
         return data
 
-    def get_rfm(self, dt_list,js):
+    def get_rfm(self):
         #報表 > 回購間隔佔比
         sql = f"""
         #standardSQL
-        CREATE TEMPORARY FUNCTION get_rank(v FLOAT64,rg0 FLOAT64,rg1 FLOAT64,rg2 FLOAT64,rg3 FLOAT64,rg4 FLOAT64,rg5 FLOAT64,rg6 FLOAT64, revert INT64) RETURNS INT64 LANGUAGE js AS '''{js}''';
+        CREATE TEMPORARY FUNCTION get_rank(v FLOAT64,rg0 FLOAT64,rg1 FLOAT64,rg2 FLOAT64,rg3 FLOAT64,rg4 FLOAT64,rg5 FLOAT64,rg6 FLOAT64, revert INT64) RETURNS INT64 LANGUAGE js AS '''
+                        var res = 6
+                        if ( v >= rg0 && v < rg1 ) {{res = 1}}
+                        else if ( v >= rg1 && v < rg2 ) {{res = 2}}
+                        else if ( v >= rg2 && v < rg3 ) {{res = 3}}
+                        else if ( v >= rg3 && v < rg4 ) {{res = 4}}
+                        else if ( v >= rg4 && v < rg5 ) {{res = 5}}
+                        else {{res = 6}}
+                        if (revert > 0){{
+                            res = 7 - res
+                        }}
+                        return res
+                        ''';
 
         WITH a as
         (
             SELECT * FROM level1_table_{self._owner}.order
-            WHERE (DATE(dt) >= '{dt_list[1]}' AND DATE(dt) <= '{dt_list[0]}')
         ),
         b as
         (
@@ -211,7 +222,12 @@ class RFM_DataService():
         )
         ,my_table AS
         (
-            SELECT rfm, rank, cnt, label1, label2
+            SELECT rfm, rank, cnt, label1, label2,
+                CASE 
+                WHEN rfm = 'R' THEN '天'
+                WHEN rfm = 'F' THEN '次'
+                ELSE '元'
+            END AS unit
             FROM USR_CNT
             LEFT JOIN RESULT
             USING (rfm, rank)
@@ -241,23 +257,24 @@ class RFM_DataService():
         )
         ,all_member AS
         (        
-        SELECT *
-        FROM `level1_table_{self._owner}.user_origin_{self._ds_nodash }` 
+            SELECT pid
+            FROM `level1_table_{self._owner}.user_{self._ds_nodash }` 
         )
         ,first_buy AS
         (
-        SELECT *
-        FROM `level1_table_{self._owner}.user_first_order` 
-        WHERE (DATE(first_order_dt) >= '{dt_list[1]}' AND DATE(first_order_dt) <= '{dt_list[0]}')
+            SELECT *
+            FROM `level1_table_{self._owner}.user_first_order` 
         )
         ,no_cost AS
         (
-        SELECT COUNT(DISTINCT  user_id) AS no_cost_member
-        FROM all_member AS a
-        LEFT JOIN first_buy AS b
-        ON a.user_id = b.pid
-        WHERE pid is null
+            SELECT COUNT(DISTINCT a.pid) AS no_cost_member
+            FROM  `level1_table_{self._owner}.user_{self._ds_nodash }`  AS a
+            LEFT JOIN `level1_table_{self._owner}.user_first_order`  AS b
+            ON a.pid = b.pid
+            WHERE b.first_order_price is not null
         )
+
+
         SELECT *
         FROM my_table
         CROSS JOIN calculation,first_order,no_cost;
@@ -265,3 +282,121 @@ class RFM_DataService():
         """
         return self._exec_sql_get_data(sql)
 
+
+    def get_matrix(self):
+        #報表 > 回購間隔佔比
+        sql = f"""
+        #standardSQL
+        CREATE TEMPORARY FUNCTION get_rank(v FLOAT64,rg0 FLOAT64,rg1 FLOAT64,rg2 FLOAT64,rg3 FLOAT64,rg4 FLOAT64,rg5 FLOAT64,rg6 FLOAT64, revert INT64) RETURNS INT64 LANGUAGE js AS '''
+                        var res = 6
+                        if ( v >= rg0 && v < rg1 ) {{res = 1}}
+                        else if ( v >= rg1 && v < rg2 ) {{res = 2}}
+                        else if ( v >= rg2 && v < rg3 ) {{res = 3}}
+                        else if ( v >= rg3 && v < rg4 ) {{res = 4}}
+                        else if ( v >= rg4 && v < rg5 ) {{res = 5}}
+                        else {{res = 6}}
+                        if (revert > 0){{
+                            res = 7 - res
+                        }}
+                        return res
+                        ''';
+
+        WITH a as
+        (
+            SELECT * FROM level1_table_{self._owner}.order
+        ),
+        b as
+        (
+          --每一天有消費的pid see https://i.screenshot.net/6mw86hz?c109acf03e957eedde60a0ab3a634b33
+          SELECT dt, pid ,daily_price  from
+          (
+              SELECT  EXTRACT(date FROM  dt) AS dt, pid, ord_id, 
+              ROW_NUMBER() over (PARTITION BY  pid, EXTRACT(date FROM  dt)) AS row , 
+              SUM(ord_price) over (PARTITION BY  pid, EXTRACT(date FROM  dt)) AS daily_price 
+              FROM a
+          )b1
+          WHERE b1.row = 1
+          )
+        , c as
+        (
+            --每一個會員的每一天，跟上一天資料 see https://i.screenshot.net/pmw82hq?1a818ab12985bbb8feab486b7efcfe99 pw:123
+            SELECT dt, pid,daily_price, ROW_NUMBER() over (PARTITION BY pid) AS row,
+            LEAD(dt) over (PARTITION BY pid ORDER BY dt) AS leaddt,
+            FROM  b
+        )
+        , d as
+        (
+            --算出同一個會員訂單之間的間隔天數
+            SELECT  * ,date_diff(leaddt, dt, DAY) day_diff FROM c
+        )
+        , RFM_table as
+        (
+            SELECT  *  , SUM(day_diff) OVER (PARTITION BY pid) AS day_diff_sum , 
+            COUNT(pid) OVER (PARTITION BY pid) AS buy_count, 
+            SUM(daily_price)  OVER (PARTITION BY pid) AS total_price
+            FROM 
+            (
+                --排除無回購天數會員 及 pid為none的會員
+                SELECT  pid , dt, leaddt, day_diff,daily_price  FROM d
+                WHERE day_diff is not Null and pid is not null
+            )
+        )
+        ,RFM_indicator as
+        (
+            SELECT pid , ROUND(day_diff_sum / buy_count,2) AS rebuy_day , buy_count , total_price ,
+            FROM RFM_table
+            GROUP BY pid ,rebuy_day ,buy_count ,total_price
+        )
+        ,RFM_percent as
+        (
+            SELECT *,
+            PERCENTILE_CONT(rebuy_day, 0) OVER() AS r0,
+            PERCENTILE_CONT(rebuy_day, 0.166666666667) OVER() AS r1,
+            PERCENTILE_CONT(rebuy_day, 0.333333333333) OVER() AS r2,
+            PERCENTILE_CONT(rebuy_day, 0.5) OVER() AS r3,
+            PERCENTILE_CONT(rebuy_day, 0.666666666667) OVER() AS r4,
+            PERCENTILE_CONT(rebuy_day, 0.833333333333) OVER() AS r5,
+            PERCENTILE_CONT(rebuy_day, 1) OVER() AS r6,
+
+            PERCENTILE_CONT(buy_count, 0) OVER() AS f0,
+            PERCENTILE_CONT(buy_count, 0.166666666667) OVER() AS f1,
+            PERCENTILE_CONT(buy_count, 0.333333333333) OVER() AS f2,
+            PERCENTILE_CONT(buy_count, 0.5) OVER() AS f3,
+            PERCENTILE_CONT(buy_count, 0.666666666667) OVER() AS f4,
+            PERCENTILE_CONT(buy_count, 0.833333333333) OVER() AS f5,
+            PERCENTILE_CONT(buy_count, 1) OVER() AS f6,
+
+            PERCENTILE_CONT(total_price, 0) OVER() AS m0,
+            PERCENTILE_CONT(total_price, 0.166666666667) OVER() AS m1,
+            PERCENTILE_CONT(total_price, 0.333333333333) OVER() AS m2,
+            PERCENTILE_CONT(total_price, 0.5) OVER() AS m3,
+            PERCENTILE_CONT(total_price, 0.666666666667) OVER() AS m4,
+            PERCENTILE_CONT(total_price, 0.833333333333) OVER() AS m5,
+            PERCENTILE_CONT(total_price, 1) OVER() AS m6
+            FROM RFM_indicator
+        )
+
+        ,RFM_rank as
+        (
+            SELECT *, 
+            get_rank(rebuy_day, r0,r1,r2,r3,r4,r5,r6, 1) R,
+            get_rank(buy_count, f0,f1,f2,f3,f4,f5,f6, 0) F,
+            get_rank(total_price, m0,m1,m2,m3,m4,m5,m6, 0) M
+            FROM RFM_percent 
+        )
+
+
+        SELECT *, SUM(cnt) OVER (PARTITION BY NULL) AS total FROM (
+            SELECT R, F, COUNT(DISTINCT pid ) AS cnt, M
+            FROM RFM_rank
+            GROUP BY R, F, M
+        )
+
+
+
+        """
+        
+        return self._exec_sql_get_data(sql)
+
+
+        

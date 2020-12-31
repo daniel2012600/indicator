@@ -1,6 +1,6 @@
 /*************************************
 - 元件名:
-       v-echarts-heatmap
+       v-echarts-rfm-indicator
 - 描述:
        熱地圖
 - 維度量值:
@@ -21,12 +21,12 @@
 - 展示:
        https://echarts.apache.org/examples/zh/editor.html?c=heatmap-cartesian
 - 使用範例:
-       <v-echarts-heatmap id="hm1" :data="heatmapdata" :plotheight="650" :fromcolor="'#f8f9fa'" :tocolor="'#009efb'"></v-echarts-heatmap>
+       <v-echarts-rfm-indicator id="hm1" :data="heatmapdata" :plotheight="650" :fromcolor="'#f8f9fa'" :tocolor="'#009efb'"></v-echarts-rfm-indicator>
 - 日期:
        2018-08-05 17:05
 *************************************/
 
-Vue.component("v-echarts-heatmap", {
+Vue.component("v-echarts-rfm-indicator", {
     props: ["data", "plotheight", "xlabeltype","valuelabelunit", "fromcolor", "tocolor", "addlabel", "colors"],
     watch: {
         data: function (newVal, oldVal) {
@@ -95,40 +95,33 @@ Vue.component("v-echarts-heatmap", {
             elobj.innerHTML = "";
             elobj.removeAttribute("_echarts_instance_")
 
-            //動態偵測key ykeys by item[0]
-            var allkeys = Object.keys(this.data[0])
-            var meskeys = allkeys.slice(1, allkeys.length)
-            var dimkey = allkeys[0] //第零個是維度
-
-            var vals = []
-            this.data.forEach(function (d, idx, arr) {
-                meskeys.forEach(function (mes, idxm, arrm) {
-                    vals.push(d[mes])
-                })
-            })
-            var max = Math.max(...vals)
-            var min = Math.min(...vals)
-
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById(this.$attrs['id']));
 
-            var xlabels = this.data.map(function (d) {
-                return thiscomp.get_xlable_by_type(d[dimkey], thiscomp.xlabeltype);
-            });//日期
-            var ylables = meskeys;//量值的總類
+            var xlabels = this.data.map(function (v,k){ return k+1})
+            var ylabels = this.data.map(function (v,k){ return k+1})
 
             //data的結構是[ylabes索引，xlabels索引，數值]
-            var r = 0, c = 0
-            var data = []
-            this.data.forEach(function (d, r, arr) {
-                for (c = 0; c < meskeys.length; c++) {
-                    v = d[meskeys[c]]
-                    data.push([c, r, v])
-                }
-            })
+            // var tt = []
+            // _.map(_.range(6), d1=>{
+            //     _.map(_.range(6), d2=>{
+            //         tt.push({R: d1, F: d2, d: _.map(_.range(6), d3=>{
+            //             return _.get(this.data, `${d1}.${d2}.${d3}`,0)
+            //         })})
+            //     })
+            // })
 
+            var data = []
+            _.map(_.range(6), d1=>{
+                _.map(_.range(6), d2=>{
+                    data.push({R: d1, F: d2, d: _.map(_.range(6), d3=>{
+                        return _.get(this.data, `${d1}.${d2}.${d3}.cnt`,0)
+                    })})
+                })
+            })
             var data = data.map(function (item) {
-                return [item[1], item[0], item[2] || null];
+                total = _.sumBy(item['d'])
+                return [item["R"], item["F"] ,total || 0];
             });
             // if colors is set, ignore fromcolor & tocolor
             var thisColor;
@@ -138,6 +131,7 @@ Vue.component("v-echarts-heatmap", {
                 thisColor = [this.fromcolor, this.tocolor];
             }
 
+            
             var option = {
                 tooltip: {
                     position: 'top',
@@ -146,20 +140,13 @@ Vue.component("v-echarts-heatmap", {
                         var text = p["name"];
                         var value = p["value"][2];
                         var label = addlabel;
-                        return  label + " " + color + text + ": " + value + "%" +"<br>" +  "666666666666"
+                        return  label + " " + color + text + ": " + value + "%"
                     },
                 },
-                animation: true,
-                toolbox: {
-                    show: true,
-                    feature: {
-                        // dataView: {show: true, readOnly: false},
-                        saveAsImage: {show: true, title: '保存為圖片'}
-                    }
-                },
+                animation: false,
                 grid: {
-                    height: '70%',
-                    y: '10%'
+                    height: '50%',
+                    top: '10%'
                 },
                 xAxis: {
                     type: 'category',
@@ -170,39 +157,30 @@ Vue.component("v-echarts-heatmap", {
                 },
                 yAxis: {
                     type: 'category',
-                    data: ylables,
-                    offset: 2,
+                    data: ylabels,
                     splitArea: {
                         show: true
                     }
                 },
                 visualMap: {
-                    min: min,
-                    max: max,
+                    min: 0,
+                    max: 100,
                     calculable: true,
                     orient: 'horizontal',
                     left: 'center',
-                    bottom: '3%',
-                    inRange: {
-                        color: thisColor
-                    },
+                    bottom: '15%'
                 },
                 series: [{
+                    name: 'Punch Card',
                     type: 'heatmap',
                     data: data,
                     label: {
-                        normal: {
-                            show: true,
-                            formatter: function (param) {
-                                return param.value[2] + valuelabelunit
-                            }
-                        }
+                        show: true
                     },
-                    itemStyle: {
-                        emphasis: {
+                    emphasis: {
+                        itemStyle: {
                             shadowBlur: 10,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)',
-
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
                     }
                 }]

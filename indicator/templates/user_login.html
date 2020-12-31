@@ -1,0 +1,85 @@
+{% extends "layout_mini.html" %}
+{% block title %}登入 - EagleEye CDP 顧客數據雲{% endblock %}
+{% block content %}
+<!-- 主內容 Start -->
+<h1 class="Heading1">CDP</h1>
+<div class="FormBox LoginForm">
+    <div class="Title">
+        <i class="icon-user"></i>
+        <h2 class="Heading2">會員登入</h2>
+    </div>
+    <form id="loginForm" method="post" action="login" @submit="goLogin">
+        <!--程式說明
+                            1. input 欄位輸入錯誤/空白時，<div class="PanelBody">加上樣式FiledError
+                        -->
+        <fieldset class="BasicFieldset FieldsetLogin">
+            <legend>使用者登入表單</legend>
+            <div class="PanelBody FieldError">
+                <div class="Field">
+                    <label class="Label Hide">帳號</label>
+                    <div class="InputGroup">
+                        <span class="FieldCol">
+                            <input class="FormControl" type="text" name="acc" placeholder="E-mail Address" required>
+                        </span>
+                    </div>
+                </div>
+                <div class="Field">
+                    <label class="Label Hide">密碼</label>
+                    <div class="InputGroup">
+                        <span class="FieldCol">
+                            <input class="FormControl" type="password" name="pwd" placeholder="Password" required>
+                        </span>
+                    </div>
+                </div>
+                {% if viewbag_msg %}
+                {% if viewbag_msg.status %}
+                <el-alert title="{{ viewbag_msg.msg }}" type="success" :closable="false"></el-alert>
+                {% else %}
+                <div class="ErrorMeg">{{ viewbag_msg.msg }}</div>
+                {% endif %}
+                {% endif %}
+            </div>
+            <div class="BtnBox">
+                <button type="submit" class="Btn BtnDark BtnMd BtnMax BtnBlock BtnLogin" value="登入">登入</button>
+                {#<a href="#" class="Link" title="忘記密碼">忘記密碼?</a>#}
+            </div>
+            <div class="Field">
+                <div class="InputGroup">
+                    <span class="FieldCol">
+                        {#<input class="Remember CheckBoxDefault" type="checkbox" name="Remember" id="Remember" value="" checked>
+                                        <label for="Remember">記住我</label>#}
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div w3-include-html="template/footer.html"></div>
+<!-- Content End -->
+{% endblock %}
+
+{% block js %}
+<script type="application/javascript">
+    var main = new Vue({
+        el: '#app',
+        mixins: [layoutVue],
+        data:{
+            loading: false
+        },
+        methods: {
+            goLogin(){
+                this.$loading({
+                    lock: true,
+                    text: '登入檢查中, 請稍後',
+                    background: 'rgba(255, 255, 255, 0.7)',
+                });
+            }
+        },
+        computed: {
+            getTitle() {
+                return '登入 | Eagleeye-CDP'
+            }
+        }
+    })
+</script>
+{% endblock %}

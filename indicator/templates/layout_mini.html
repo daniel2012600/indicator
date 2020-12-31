@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-tw">
+
+<head>
+    <script>
+        (function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PPMD6JC');
+    </script>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="EagleEye CDP 顧客數據雲。整合線上和線下管道的數據系統，幫您挖掘分析企業數據、快速勾勒顧客輪廓，進而設定精準行銷方案，帶動品牌營收、協助企業成長！">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimal-ui">
+    <meta property="og:locale" data-vmid="title" content="zh_TW">
+    <meta property="og:description" data-vmid="description" content="EagleEye CDP 顧客數據雲。整合線上和線下管道的數據系統，幫您挖掘分析企業數據、快速勾勒顧客輪廓，進而設定精準行銷方案，帶動品牌營收、協助企業成長！">
+    <meta property="og:site_name" data-vmid="site_name" content="Eagleeye-CDP">
+    <meta property="og:type" data-vmid="type" content="website">
+    <meta property="og:image" data-vmid="image" content="https://cdppj.eagleeye.com.tw/static/img/og_img.jpg">
+    <meta property="og:url" data-vmid="url" content="https://cdppj.eagleeye.com.tw">
+    <!-- 網頁顯示的寬度等於裝置寬度 End-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!--Apple icon-->
+    <link href="/static/style/official/images/ios/apple-icon-57x57.png" rel="apple-touch-icon-precomposed"
+        sizes="57x57" />
+    <link href="/static/style/official/images/ios/apple-icon-72x72.png" rel="apple-touch-icon-precomposed"
+        sizes="72x72" />
+    <link href="/static/style/official/images/ios/apple-icon-114x114.png" rel="apple-touch-icon-precomposed"
+        sizes="114x114" />
+    <link href="/static/style/official/images/ios/apple-icon-144x144.png" rel="apple-touch-icon-precomposed"
+        sizes="144x144" />
+    <!-- CSS Link File Start -->
+    <link media="screen" rel="stylesheet" href="/static/style/official/css/reset.css" />
+    <!-- CSS reset  -->
+    <link media="screen" rel="stylesheet" href="/static/style/official/css/global.css" />
+    <!-- CSS 全站共通樣式  -->
+    <link media="screen" rel="stylesheet" href="/static/style/official/css/iconfont.css" />
+    <!-- CSS iconfont  -->
+    <link media="screen" rel="stylesheet" href="/static/style/official/css/mainframe.css" />
+    <!-- CSS 全站共通框架  -->
+    <link media="screen" rel="stylesheet" href="/static/style/official/css/login.css" />
+    <!-- CSS Link File End -->
+    <!-- 引el样式 -->
+    <link rel="stylesheet" href="/static/style/element-ui/2.13.0/theme-chalk/lib/index.css">
+    <!-- 引入el组件库 -->
+    <link rel="stylesheet" href="/static/css/page.css">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div id="app" class="Wrap">
+        <!-- Header Start -->
+        <div class="Header">
+            <div class="Inner">
+                <div class="LogoWrap">
+                    <div class="Logo">
+                        <a href="" title="EagleEye 鷹眼數據">
+                            <img src="/static/style/official/images/logo.svg" alt="EagleEye 鷹眼數據" />EagleEye 鷹眼數據
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+        <!-- Content Start -->
+        <div class="Content">
+            <div class="Inner">
+                {% block content %}{% endblock %}
+                <div w3-include-html="template/footer.html"></div>
+            </div>
+        </div>
+        <!-- Content End -->
+        <!-- Footer Start -->
+        <div class="Footer">
+            <div class="Inner">[[getFooterText]]</div>
+        </div>
+        <!-- Footer End -->
+    </div>
+
+    <!-- lightbox-new end -->
+    <!-- 程式說明 -上線前請移除 start-->
+    <script src="/static/style/vue/2.6.11/vue.min.js"></script>
+    <script src="/static/style/jquery/3.3.1/slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="/static/style/element-ui/2.13.0/index.js"></script>
+    <script src="/static/js/elementui/zh-TW.js"></script>
+    <script src="/static/js/moment-with-locales.js"></script>
+    <script src="/static/style/vue-resource/1.0.3/vue-resource.min.js"></script>
+    <script src="/static/js/vue-material/1.0.0-beta-8/vue-material.min.js"></script>
+
+    <script>
+        Vue.use(VueMaterial.default)
+
+        var layoutVue = {
+            delimiters: ['[[', ']]'],
+            data: {
+                dt: moment().format('YYYY'),
+            },
+            computed: {
+                getFooterText() {
+                    text = "紅門互動股份有限公司 © " + this.dt + " REDDOOR MEDIA"
+                    return text
+                }
+            }
+        }
+    </script>
+    {% block js %}{% endblock %}
+</body>
+</html>

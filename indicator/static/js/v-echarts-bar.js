@@ -56,6 +56,10 @@ Vue.component("v-echarts-bar", {
         y_label_format: {
             type: Function,
             default: (val, key) => val
+        },
+        rotate:{
+            type: Number,
+            default: 45
         }
     },
     watch: {
@@ -164,7 +168,7 @@ Vue.component("v-echarts-bar", {
                     type: 'category',
                     data: this.data.map(d => d[dimkey]),
                     axisLabel: {
-                        rotate:45,
+                        rotate:this.rotate,
                         formatter: params => this.x_label_format(params)
                     }
                 }],

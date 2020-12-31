@@ -33,44 +33,39 @@
     </el-col>
 </el-row>
 <el-row :gutter="25" class="mb-4">
-    <!-- button -->
     
         <el-select id="selowner" v-model="sel_owner" placeholder="" class="float-left">
             <el-option v-for="item in owneropts" :key="item.label" :label="item.label"
                 :value="item.v">
             </el-option>
         </el-select>
-        <!-- button -->
-        <el-select id="seldaterange" v-model="sel_period" placeholder="" class="float-left">
-            <el-option v-for="item in daterangeopts" :key="item.label" :label="item.label"
-                :value="item.v">
-            </el-option>
-        </el-select>
-        <el-link :underline="false" @click="compute_warring()">
+
+        <el-link :underline="false" @click="compute_warring()" class="float-left">
             <el-button type="primary" style="height: 40px;">計算</el-button>
         </el-link>
-        <v-data-info
-        custom_text1 = "至"
-        :dtrange_text1="'本期' + 1" 
-        :dtrange_text2="'前期' + 2"
-        :data_count = "datalist.length">
-        </v-data-info>
+        <div class="float-left"  style="height:50px; border-radius:5px;">
+            <span class="mr-1" style="float: right;">
+                <font font-size="13px">資料區間： </font>
+                <font color="#7C4C9A" font-size="13px"> 本期[[ cmp_date() ]]</font>
+                <font font-size="13px">至</font>
+                <font color="#7C4C9A" font-size="13px"> 前期[[ cmp_date() ]]</font>
+                <font font-size="13px">| 資料筆數： </font>
+                <font color="#7C4C9A" font-size="13px"> [[  ]] </font>
+                <font font-size="13px">筆 </font>
+            </span>
+        </div>
 </el-row>
-<!-- 主標題及下拉選單 end -->
-
-<div>
-    <el-row :gutter="25" class="mb-4">
-        <el-card shadow="never" class="box-card wrap-card">
-                <v-echarts-heatmap
-                id="hm2"
-                :data="map_data" 
-                :plotheight="480" 
-                valuelabelunit="%" 
-                >
-                </v-echarts-heatmap>
-    </el-row>
-</div>
-
+<!-- RFM矩陣 -->
+<el-row :gutter="25" class="mb-4">
+    <v-echarts-rfm-indicator
+        id="hm2"
+        :data="map_data" 
+        :plotheight="480" 
+        valuelabelunit="%" 
+        >
+    </v-echarts-rfm-indicator>
+</el-row>
+<!-- RFM 柱狀圖 -->
 <el-row :gutter="25" class="mb-4">
     <el-card shadow="never" class="box-card wrap-card">
         <h2 class="card__title">回購平均天數</h2><br>
@@ -115,6 +110,7 @@
                 xaxis_location="'start'"
                 :gird_bottom="30"
                 :x_label_format="(val) => {  return val.split(',')[0] +'\n' + val.split(',')[1]  + '~' +val.split(',')[2]  + '天' }  "
+                :rotate="0"
                 >
                 </v-echarts-bar>
             </div>
@@ -168,6 +164,7 @@
                 bar_color="#c35a20"
                 :gird_bottom="30"
                 :x_label_format="(val) => {  return val.split(',')[0] +'\n' + val.split(',')[1]  + '~' +val.split(',')[2]  + '次' }  "
+                :rotate="0"
                 >
                 </v-echarts-bar>
             </div>
@@ -180,9 +177,9 @@
         <h2 class="card__title">會員消費金額</h2><br>
         <el-col :sm="12" :md="6" v-loading="loading" element-loading-text="資料載入中．．．">
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
-                <h2 class="card__title">0次(未購買)</h2><br>
+                <h2 class="card__title">0元(未購買)</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].no_cost_member + ' 次']]
+                    [[ datalist[0].no_cost_member + ' 人']]
                 </div>
             </el-card>
         </el-col>
@@ -190,7 +187,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">標準差</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].M_std + ' 次']]
+                    [[ datalist[0].M_std + ' 元']]
                 </div>
             </el-card>
         </el-col>
@@ -198,7 +195,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">平均數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].M_average + ' 次']]
+                    [[ datalist[0].M_average + ' 元']]
                 </div>
             </el-card>
         </el-col>
@@ -206,7 +203,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">中位數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].M_median + ' 次']]
+                    [[ datalist[0].M_median + ' 元']]
                 </div>
             </el-card>
         </el-col>
@@ -219,9 +216,8 @@
                 xaxis_location="'start'"
                 bar_color="#aad091"
                 :gird_bottom="30"
-                :x_label_format="(val) => {  
-                    var test = val.split(',')[0] +'\n' + val.split(',')[1]  + '~' +val.split(',')[2]  + '元' 
-                    return test }  "
+                :x_label_format="(val) => { return val.split(',')[0] +'\n' + val.split(',')[1]  + '~' +val.split(',')[2]  + '元' }  "
+                :rotate="0"
                 >
                 </v-echarts-bar>
             </div>
@@ -236,12 +232,12 @@
 {% endblock %} 
 
 {% block js %}
+<script src="/static/js/v-echarts.rfm_indicator.js"></script>
 <script src="/static/js/v-data-info.js"></script>
 <script src="/static/js/v-el-card.js"></script>
 <script src="/static/style/echarts/4.8.0/echarts.min.js"></script>
 <script src="/static/style/lodash/4.16.0/lodash.js"></script>
-<script src="/static/js/v-echarts-rfm-bar.js"></script>
-<script src="/static/js/v-echarts.rfm-indicator.js"></script>
+<script src="/static/js/v-echarts-bar.js"></script>
 <script src="/static/js/v-value-card.js"></script>
 <script>
     const is_etl_done = '{{ is_etl_done | safe }}' == 'True'
@@ -249,7 +245,7 @@
         el: '#app',
         mixins: [layoutVue],
         data:  {
-            breadpath: [{key: '首頁', path: '/'},{key: '標題', path: ''}],
+            breadpath: [{key: 'RFM輔助報表', path: '/'}],
             daterangeopts: [
                 {'v': '1w', 'label': '一週內'},
                 {'v': '2w', 'label': '二週內'},
@@ -266,63 +262,29 @@
                 {'v': 'dpr', 'label': '蒂巴蕾'},
                 {'v': 'dub', 'label': '豆油伯'},
             ],
-            sel_period : '1w',
-            sel_owner : 'lkf',
+            sel_period : '3m',
+            sel_owner : 'wt',
             loading: false,
             dialog: false,
             is_etl_done: is_etl_done,
-            filter_data: {
-                dr: [],
-                compare_def: 'YOY'
-            },
-            datalist :[{"rfm":"M","rank":1,"cnt":20,"label1":"10","label2":"40","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":4,"cnt":26,"label1":"65","label2":"90","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":1,"cnt":31,"label1":"5","label2":"7","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":5,"cnt":51,"label1":"1","label2":"2","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":3,"cnt":38,"label1":"2","label2":"3","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":3,"cnt":36,"label1":"50","label2":"65","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"F","rank":5,"cnt":125,"label1":"1","label2":"2","unit":"次","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":6,"cnt":29,"label1":"120","label2":"920","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":5,"cnt":30,"label1":"90","label2":"120","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"R","rank":2,"cnt":44,"label1":"3","label2":"5","unit":"天","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"F","rank":6,"cnt":39,"label1":"2","label2":"6","unit":"次","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056},{"rfm":"M","rank":2,"cnt":23,"label1":"40","label2":"50","unit":"元","R_average":2.85,"F_average":1.36,"M_average":90.47,"R_std":1.78,"F_std":0.78,"M_std":92.19,"R_median":2,"F_median":1,"M_median":65,"first_order":1499,"no_cost_member":22056}],
-            map_data:[
-            {"index":"1","一":0,"二":0,"三":1,"四":1,"五":1,"六":1,"日":0},
-            {"index":"2","一":0,"二":0,"三":0,"四":1,"五":0,"六":1,"日":1},
-            {"index":"3","一":0,"二":0,"三":0,"四":0,"五":0,"六":1,"日":0},
-            {"index":"4","一":0,"二":0,"三":0,"四":0,"五":1,"六":0,"日":0},
-            {"index":"5","一":0,"二":0,"三":0,"四":1,"五":0,"六":0,"日":0},
-            {"index":"6","一":2,"二":1,"三":1,"四":1,"五":1,"六":0,"日":7}],
+            matrix: [],
+            datalist :[{"rfm":"M","rank":1,"cnt":26062,"label1":"0","label2":"120","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":6,"cnt":28899,"label1":"10","label2":"211","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":5,"cnt":26035,"label1":"10","label2":"17","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":3,"cnt":26238,"label1":"234","label2":"413","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":2,"cnt":26750,"label1":"36","label2":"59","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":3,"cnt":26072,"label1":"25","label2":"36","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":6,"cnt":26217,"label1":"1","label2":"10","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":3,"cnt":25448,"label1":"2","label2":"3","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":4,"cnt":26068,"label1":"17","label2":"25","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":2,"cnt":40480,"label1":"1","label2":"2","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":4,"cnt":26262,"label1":"413","label2":"709","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":5,"cnt":32385,"label1":"5","label2":"10","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":4,"cnt":30185,"label1":"3","label2":"5","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":1,"cnt":26255,"label1":"59","label2":"211","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":5,"cnt":26245,"label1":"709","label2":"1327","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":6,"cnt":26233,"label1":"1327","label2":"1225975","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":2,"cnt":26357,"label1":"120","label2":"234","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006}],
+            map_data : [{"1":[{"R":1,"F":1,"cnt":277,"M":1,"total":7696},{"R":1,"F":1,"cnt":27,"M":2,"total":7696},{"R":1,"F":1,"cnt":1,"M":3,"total":7696}],"2":[{"R":1,"F":2,"cnt":184,"M":1,"total":7696},{"R":1,"F":2,"cnt":335,"M":2,"total":7696},{"R":1,"F":2,"cnt":84,"M":3,"total":7696},{"R":1,"F":2,"cnt":6,"M":4,"total":7696}],"3":[{"R":1,"F":3,"cnt":204,"M":3,"total":7696},{"R":1,"F":3,"cnt":67,"M":4,"total":7696},{"R":1,"F":3,"cnt":68,"M":2,"total":7696},{"R":1,"F":3,"cnt":1,"M":6,"total":7696},{"R":1,"F":3,"cnt":5,"M":5,"total":7696}],"4":[{"R":1,"F":4,"cnt":14,"M":3,"total":7696},{"R":1,"F":4,"cnt":15,"M":4,"total":7696},{"R":1,"F":4,"cnt":3,"M":5,"total":7696}]},{"1":[{"R":2,"F":1,"cnt":124,"M":1,"total":7696},{"R":2,"F":1,"cnt":4,"M":2,"total":7696}],"2":[{"R":2,"F":2,"cnt":157,"M":2,"total":7696},{"R":2,"F":2,"cnt":71,"M":1,"total":7696},{"R":2,"F":2,"cnt":3,"M":4,"total":7696},{"R":2,"F":2,"cnt":37,"M":3,"total":7696}],"3":[{"R":2,"F":3,"cnt":70,"M":2,"total":7696},{"R":2,"F":3,"cnt":210,"M":3,"total":7696},{"R":2,"F":3,"cnt":58,"M":4,"total":7696},{"R":2,"F":3,"cnt":3,"M":5,"total":7696}],"4":[{"R":2,"F":4,"cnt":296,"M":4,"total":7696},{"R":2,"F":4,"cnt":78,"M":5,"total":7696},{"R":2,"F":4,"cnt":105,"M":3,"total":7696},{"R":2,"F":4,"cnt":1,"M":2,"total":7696},{"R":2,"F":4,"cnt":1,"M":6,"total":7696}],"5":[{"R":2,"F":5,"cnt":30,"M":5,"total":7696},{"R":2,"F":5,"cnt":24,"M":4,"total":7696},{"R":2,"F":5,"cnt":2,"M":3,"total":7696}]},{"1":[{"R":3,"F":1,"cnt":66,"M":1,"total":7696},{"R":3,"F":1,"cnt":5,"M":2,"total":7696}],"2":[{"R":3,"F":2,"cnt":56,"M":1,"total":7696},{"R":3,"F":2,"cnt":101,"M":2,"total":7696},{"R":3,"F":2,"cnt":5,"M":4,"total":7696},{"R":3,"F":2,"cnt":22,"M":3,"total":7696},{"R":3,"F":2,"cnt":1,"M":5,"total":7696}],"3":[{"R":3,"F":3,"cnt":122,"M":3,"total":7696},{"R":3,"F":3,"cnt":51,"M":2,"total":7696},{"R":3,"F":3,"cnt":34,"M":4,"total":7696}],"4":[{"R":3,"F":4,"cnt":64,"M":5,"total":7696},{"R":3,"F":4,"cnt":220,"M":4,"total":7696},{"R":3,"F":4,"cnt":69,"M":3,"total":7696},{"R":3,"F":4,"cnt":1,"M":2,"total":7696}],"5":[{"R":3,"F":5,"cnt":320,"M":5,"total":7696},{"R":3,"F":5,"cnt":39,"M":6,"total":7696},{"R":3,"F":5,"cnt":107,"M":4,"total":7696}]},{"1":[{"R":4,"F":1,"cnt":80,"M":1,"total":7696},{"R":4,"F":1,"cnt":8,"M":2,"total":7696}],"2":[{"R":4,"F":2,"cnt":114,"M":2,"total":7696},{"R":4,"F":2,"cnt":55,"M":1,"total":7696},{"R":4,"F":2,"cnt":26,"M":3,"total":7696},{"R":4,"F":2,"cnt":3,"M":4,"total":7696}],"3":[{"R":4,"F":3,"cnt":96,"M":3,"total":7696},{"R":4,"F":3,"cnt":43,"M":2,"total":7696},{"R":4,"F":3,"cnt":21,"M":4,"total":7696},{"R":4,"F":3,"cnt":1,"M":5,"total":7696}],"4":[{"R":4,"F":4,"cnt":128,"M":4,"total":7696},{"R":4,"F":4,"cnt":48,"M":3,"total":7696},{"R":4,"F":4,"cnt":29,"M":5,"total":7696},{"R":4,"F":4,"cnt":1,"M":1,"total":7696}],"5":[{"R":4,"F":5,"cnt":71,"M":6,"total":7696},{"R":4,"F":5,"cnt":67,"M":4,"total":7696},{"R":4,"F":5,"cnt":287,"M":5,"total":7696}],"6":[{"R":4,"F":6,"cnt":75,"M":5,"total":7696},{"R":4,"F":6,"cnt":147,"M":6,"total":7696},{"R":4,"F":6,"cnt":1,"M":4,"total":7696}]},{"1":[{"R":5,"F":1,"cnt":111,"M":1,"total":7696},{"R":5,"F":1,"cnt":1,"M":4,"total":7696},{"R":5,"F":1,"cnt":10,"M":2,"total":7696}],"2":[{"R":5,"F":2,"cnt":93,"M":2,"total":7696},{"R":5,"F":2,"cnt":15,"M":3,"total":7696},{"R":5,"F":2,"cnt":29,"M":1,"total":7696}],"3":[{"R":5,"F":3,"cnt":24,"M":4,"total":7696},{"R":5,"F":3,"cnt":37,"M":2,"total":7696},{"R":5,"F":3,"cnt":80,"M":3,"total":7696}],"4":[{"R":5,"F":4,"cnt":63,"M":4,"total":7696},{"R":5,"F":4,"cnt":20,"M":5,"total":7696},{"R":5,"F":4,"cnt":35,"M":3,"total":7696}],"5":[{"R":5,"F":5,"cnt":159,"M":5,"total":7696},{"R":5,"F":5,"cnt":39,"M":6,"total":7696},{"R":5,"F":5,"cnt":32,"M":4,"total":7696},{"R":5,"F":5,"cnt":1,"M":2,"total":7696}],"6":[{"R":5,"F":6,"cnt":445,"M":6,"total":7696},{"R":5,"F":6,"cnt":70,"M":5,"total":7696}]},{"1":[{"R":6,"F":1,"cnt":152,"M":1,"total":7696},{"R":6,"F":1,"cnt":11,"M":2,"total":7696}],"2":[{"R":6,"F":2,"cnt":115,"M":2,"total":7696},{"R":6,"F":2,"cnt":67,"M":1,"total":7696},{"R":6,"F":2,"cnt":20,"M":3,"total":7696}],"3":[{"R":6,"F":3,"cnt":32,"M":2,"total":7696},{"R":6,"F":3,"cnt":54,"M":3,"total":7696},{"R":6,"F":3,"cnt":10,"M":4,"total":7696},{"R":6,"F":3,"cnt":2,"M":5,"total":7696}],"4":[{"R":6,"F":4,"cnt":44,"M":3,"total":7696},{"R":6,"F":4,"cnt":60,"M":4,"total":7696},{"R":6,"F":4,"cnt":10,"M":5,"total":7696},{"R":6,"F":4,"cnt":2,"M":2,"total":7696}],"5":[{"R":6,"F":5,"cnt":93,"M":5,"total":7696},{"R":6,"F":5,"cnt":8,"M":6,"total":7696},{"R":6,"F":5,"cnt":38,"M":4,"total":7696}],"6":[{"R":6,"F":6,"cnt":532,"M":6,"total":7696},{"R":6,"F":6,"cnt":33,"M":5,"total":7696}]}]
+            
         },
         methods: {
-            cmp_date() {
-                var data = {
-                    day: moment().subtract(1, 'day').format("YYYY-MM-DD"),
-                    day_prev_7d: moment().subtract(8, 'day').format("YYYY-MM-DD"),
-                    day_prev_7d_text: moment().subtract(1, 'day').locale('zh-tw').format("dd"),
-                    this_w1: moment().startOf('isoweek').format("YYYY-MM-DD"),
-                    this_w2: moment().endOf('isoweek').format("YYYY-MM-DD"),
-                    prev_w1: moment().startOf('isoweek').subtract(7, 'day').format("YYYY-MM-DD"),
-                    prev_w2: moment().endOf('isoweek').subtract(7, 'day').format("YYYY-MM-DD"),
-                    prev_2w1: moment().startOf('isoweek').subtract(14, 'day').format("YYYY-MM-DD"),
-                    prev_2w2: moment().endOf('isoweek').subtract(14, 'day').format("YYYY-MM-DD"),
-                    this_m1: moment().startOf('month').format("YYYY-MM-DD"),
-                    this_m2: moment().endOf('month').format("YYYY-MM-DD"),
-                    prev_m1: moment().subtract(1, 'month').startOf('month').format("YYYY-MM-DD"),
-                    prev_m2: moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD"),
-                    prev_2m1: moment().subtract(2, 'month').startOf('month').format("YYYY-MM-DD"),
-                    prev_2m2: moment().subtract(2, 'month').endOf('month').format("YYYY-MM-DD"),
-                }
-                return data
-            },
             get_rfm() {
                 this.loading = true;
                 $.post('/report/rfm_api', {
                     owner: JSON.stringify(this.sel_owner),
-                    period: JSON.stringify(this.sel_period),
                 }, result => {
                     this.datalist = result;
                     this.loading = false;
                 }, 'json')
             },
             indicator_data(){
-                var s_data = this.datalist
-                var my_test = _.groupBy(s_data, 'rank',"asc")
-                var index = _.keyBy(my_test, (o) => {
-                                return o;
-                                });
-                
-                return index
+                var get_xy = _.map(_.groupBy(this.matrix, 'R'), d=> _.groupBy(d, 'F'))
+                return get_xy
             },
             rfm_bardata(param){
                 var my_data = this.datalist
@@ -350,9 +312,44 @@
                     });
                 });
             },
+            cmp_date(sel_period) {
+                var data = {
+                    yesterday: moment().subtract(1, 'day').format("YYYY-MM-DD"),  //昨天
+                    day_prev_7d: moment().subtract(8, 'day').format("YYYY-MM-DD"), //  一週內
+                    day_prev_14d: moment().subtract(15, 'day').format("YYYY-MM-DD"), // 兩週內
+                    day_prev_1m: moment().subtract(31, 'day').format("YYYY-MM-DD"), // 一個月內
+                    day_prev_2m: moment().subtract(61, 'day').format("YYYY-MM-DD"), // 二個月內
+                    day_prev_3m: moment().subtract(91, 'day').format("YYYY-MM-DD"), // 三個月內
+                    day_prev_2y: moment().subtract(731, 'day').format("YYYY-MM-DD"), // 2年內
+
+                }
+                switch (sel_period) {
+                    case "1w":
+                        return [`${data.yesterday}`,`${data.day_prev_7d}`]
+                    case "2w":
+                        return [`${data.yesterday}`,`${data.day_prev_14d}`]
+                    case "1m":
+                        return [`${data.yesterday}`,`${data.day_prev_1m}`]
+                    case "2m":
+                        return [`${data.yesterday}`,`${data.day_prev_2m}`]
+                    case "3m":
+                        return [`${data.yesterday}`,`${data.day_prev_3m}`]
+                    case "2y":
+                        return [`${data.yesterday}`,`${data.day_prev_2y}`]
+                    }
+                },
         },
         mounted () {
             // this.get_rfm();
+            // this.loading = true;
+            // $.post('/report/rfm_matrix', {
+            //     owner: JSON.stringify(this.sel_owner),
+            //     period: JSON.stringify(this.sel_period),
+            // }, result => {
+            //     this.matrix = result;
+            //     this.loading = false;
+            //     this.map_data = _.map(_.groupBy(this.matrix, 'R'), d=> _.groupBy(d, 'F'))
+            // }, 'json')
         }
     });
 
@@ -361,4 +358,18 @@
 
 
 {% endblock %}
+
+
+
+
+
+<!-- 		
+var f_range = _.map(v,d=> _.map(d,(value,key) => {  
+    var my_data = {"R": k+1 , "F":value["F"] }
+   return my_data } ))  -->
+
+   <!-- var want_data = want_data[text] = (value['cnt'])  -->
+
+
+   
 
