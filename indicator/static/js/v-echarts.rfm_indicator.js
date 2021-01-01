@@ -60,26 +60,6 @@ Vue.component("v-echarts-rfm-indicator", {
             }
             return a + "" + b + "" + c;
         },
-        get_xlable_by_type(x, type) {
-            switch (type) {
-                case 'y':
-                    return new Date(x).getFullYear().toString();
-                    break;
-                case 'm':
-                    var month = this.months[new Date(x).getMonth()];
-                    return month.toString();
-                    break;
-                case 'ym':
-                    dt = new Date(x)
-                    return dt.getFullYear() + "/" + (dt.getMonth() + 1);
-                    break;
-                case 'd':
-                    return new Date(x).toISOString().slice(0, 10);
-                    break;
-                default:
-                    return x
-            }
-        },
 
         //繪出圖型
         render() {
@@ -101,27 +81,20 @@ Vue.component("v-echarts-rfm-indicator", {
             var xlabels = this.data.map(function (v,k){ return k+1})
             var ylabels = this.data.map(function (v,k){ return k+1})
 
-            //data的結構是[ylabes索引，xlabels索引，數值]
-            // var tt = []
-            // _.map(_.range(6), d1=>{
-            //     _.map(_.range(6), d2=>{
-            //         tt.push({R: d1, F: d2, d: _.map(_.range(6), d3=>{
-            //             return _.get(this.data, `${d1}.${d2}.${d3}`,0)
-            //         })})
-            //     })
-            // })
+
 
             var data = []
             _.map(_.range(6), d1=>{
-                _.map(_.range(6), d2=>{
+                _.map(_.range(1,7), d2=>{
                     data.push({R: d1, F: d2, d: _.map(_.range(6), d3=>{
                         return _.get(this.data, `${d1}.${d2}.${d3}.cnt`,0)
                     })})
                 })
             })
+            var all_people =  _.sum(_.flattenDeep(_.map(data,d=> d["d"])))
             var data = data.map(function (item) {
-                total = _.sumBy(item['d'])
-                return [item["R"], item["F"] ,total || 0];
+                total = Math.floor(_.sumBy(item['d']) / all_people *100,2)
+                return [item["R"], item["F"]-1 , total|| 0];
             });
             // if colors is set, ignore fromcolor & tocolor
             var thisColor;
@@ -145,8 +118,8 @@ Vue.component("v-echarts-rfm-indicator", {
                 },
                 animation: false,
                 grid: {
-                    height: '50%',
-                    top: '10%'
+                    height: '70%',
+                    y: '10%'
                 },
                 xAxis: {
                     type: 'category',
@@ -166,12 +139,14 @@ Vue.component("v-echarts-rfm-indicator", {
                     min: 0,
                     max: 100,
                     calculable: true,
-                    orient: 'horizontal',
-                    left: 'center',
-                    bottom: '15%'
+                    orient: 'vertical',
+                    left: 'right',
+                    bottom: '35%',
+                    inRange: {
+                        color: thisColor
+                    },
                 },
                 series: [{
-                    name: 'Punch Card',
                     type: 'heatmap',
                     data: data,
                     label: {

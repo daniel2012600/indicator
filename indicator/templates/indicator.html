@@ -46,9 +46,9 @@
         <div class="float-left"  style="height:50px; border-radius:5px;">
             <span class="mr-1" style="float: right;">
                 <font font-size="13px">資料區間： </font>
-                <font color="#7C4C9A" font-size="13px"> 本期[[ cmp_date() ]]</font>
+                <font color="#7C4C9A" font-size="13px"> 本期[[ ]]</font>
                 <font font-size="13px">至</font>
-                <font color="#7C4C9A" font-size="13px"> 前期[[ cmp_date() ]]</font>
+                <font color="#7C4C9A" font-size="13px"> 前期[[ ]]</font>
                 <font font-size="13px">| 資料筆數： </font>
                 <font color="#7C4C9A" font-size="13px"> [[  ]] </font>
                 <font font-size="13px">筆 </font>
@@ -73,7 +73,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">0天(首購)</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length" >
-                    [[ datalist[0].first_order + '人']]
+                    [[ datalist[0].first_order  | k ]] 人
                 </div>
             </el-card>
         </el-col>
@@ -81,7 +81,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">標準差</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].R_std + ' 天']]
+                    [[ datalist[0].R_std  | k ]] 天
                 </div>
             </el-card>
         </el-col>
@@ -89,7 +89,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">平均數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].R_average + ' 天']]
+                    [[ datalist[0].R_average  | k ]] 天
                 </div>
             </el-card>
         </el-col>
@@ -97,7 +97,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">中位數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].R_median + ' 天']]
+                    [[ datalist[0].R_median  | k ]] 天
                 </div>
             </el-card>
         </el-col>
@@ -125,7 +125,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">0次(未購買)</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].no_cost_member + ' 人']]
+                    [[ datalist[0].no_cost_member | k]] 人
                 </div>
             </el-card>
         </el-col>
@@ -133,7 +133,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">標準差</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].F_std + ' 次']]
+                    [[ datalist[0].F_std | k]] 次
                 </div>
             </el-card>
         </el-col>
@@ -141,7 +141,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">平均數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].F_average + ' 次']]
+                    [[ datalist[0].F_average | k]] 次
                 </div>
             </el-card>
         </el-col>
@@ -149,7 +149,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">中位數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].F_median + ' 次']]
+                    [[ datalist[0].F_median | k]] 次
                 </div>
             </el-card>
         </el-col>
@@ -179,7 +179,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">0元(未購買)</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].no_cost_member + ' 人']]
+                    [[ datalist[0].no_cost_member | k  ]] 人
                 </div>
             </el-card>
         </el-col>
@@ -187,7 +187,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">標準差</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].M_std + ' 元']]
+                    [[ datalist[0].M_std | k ]] 元
                 </div>
             </el-card>
         </el-col>
@@ -195,7 +195,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">平均數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].M_average + ' 元']]
+                    [[ datalist[0].M_average | k ]] 元
                 </div>
             </el-card>
         </el-col>
@@ -203,7 +203,7 @@
             <el-card shadow="never" class="box-card wrap-card" align ="middle">
                 <h2 class="card__title">中位數</h2><br>
                 <div  :data="datalist" class="text item" :loading="loading" v-if="!loading && datalist.length">
-                    [[ datalist[0].M_median + ' 元']]
+                    [[ datalist[0].M_median | k ]] 元 
                 </div>
             </el-card>
         </el-col>
@@ -232,6 +232,7 @@
 {% endblock %} 
 
 {% block js %}
+<script src="/static/js/dallor-ksep-float2-percent.js"></script>
 <script src="/static/js/v-echarts.rfm_indicator.js"></script>
 <script src="/static/js/v-data-info.js"></script>
 <script src="/static/js/v-el-card.js"></script>
@@ -269,7 +270,9 @@
             is_etl_done: is_etl_done,
             matrix: [],
             datalist :[{"rfm":"M","rank":1,"cnt":26062,"label1":"0","label2":"120","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":6,"cnt":28899,"label1":"10","label2":"211","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":5,"cnt":26035,"label1":"10","label2":"17","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":3,"cnt":26238,"label1":"234","label2":"413","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":2,"cnt":26750,"label1":"36","label2":"59","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":3,"cnt":26072,"label1":"25","label2":"36","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":6,"cnt":26217,"label1":"1","label2":"10","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":3,"cnt":25448,"label1":"2","label2":"3","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":4,"cnt":26068,"label1":"17","label2":"25","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":2,"cnt":40480,"label1":"1","label2":"2","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":4,"cnt":26262,"label1":"413","label2":"709","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":5,"cnt":32385,"label1":"5","label2":"10","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"F","rank":4,"cnt":30185,"label1":"3","label2":"5","unit":"次","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"R","rank":1,"cnt":26255,"label1":"59","label2":"211","unit":"天","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":5,"cnt":26245,"label1":"709","label2":"1327","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":6,"cnt":26233,"label1":"1327","label2":"1225975","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006},{"rfm":"M","rank":2,"cnt":26357,"label1":"120","label2":"234","unit":"元","R_average":35.17,"F_average":6.36,"M_average":824.56,"R_std":33.22,"F_std":9.52,"M_std":5642.78,"R_median":24.5,"F_median":3,"M_median":413,"first_order":236986,"no_cost_member":169006}],
-            map_data : [{"1":[{"R":1,"F":1,"cnt":277,"M":1,"total":7696},{"R":1,"F":1,"cnt":27,"M":2,"total":7696},{"R":1,"F":1,"cnt":1,"M":3,"total":7696}],"2":[{"R":1,"F":2,"cnt":184,"M":1,"total":7696},{"R":1,"F":2,"cnt":335,"M":2,"total":7696},{"R":1,"F":2,"cnt":84,"M":3,"total":7696},{"R":1,"F":2,"cnt":6,"M":4,"total":7696}],"3":[{"R":1,"F":3,"cnt":204,"M":3,"total":7696},{"R":1,"F":3,"cnt":67,"M":4,"total":7696},{"R":1,"F":3,"cnt":68,"M":2,"total":7696},{"R":1,"F":3,"cnt":1,"M":6,"total":7696},{"R":1,"F":3,"cnt":5,"M":5,"total":7696}],"4":[{"R":1,"F":4,"cnt":14,"M":3,"total":7696},{"R":1,"F":4,"cnt":15,"M":4,"total":7696},{"R":1,"F":4,"cnt":3,"M":5,"total":7696}]},{"1":[{"R":2,"F":1,"cnt":124,"M":1,"total":7696},{"R":2,"F":1,"cnt":4,"M":2,"total":7696}],"2":[{"R":2,"F":2,"cnt":157,"M":2,"total":7696},{"R":2,"F":2,"cnt":71,"M":1,"total":7696},{"R":2,"F":2,"cnt":3,"M":4,"total":7696},{"R":2,"F":2,"cnt":37,"M":3,"total":7696}],"3":[{"R":2,"F":3,"cnt":70,"M":2,"total":7696},{"R":2,"F":3,"cnt":210,"M":3,"total":7696},{"R":2,"F":3,"cnt":58,"M":4,"total":7696},{"R":2,"F":3,"cnt":3,"M":5,"total":7696}],"4":[{"R":2,"F":4,"cnt":296,"M":4,"total":7696},{"R":2,"F":4,"cnt":78,"M":5,"total":7696},{"R":2,"F":4,"cnt":105,"M":3,"total":7696},{"R":2,"F":4,"cnt":1,"M":2,"total":7696},{"R":2,"F":4,"cnt":1,"M":6,"total":7696}],"5":[{"R":2,"F":5,"cnt":30,"M":5,"total":7696},{"R":2,"F":5,"cnt":24,"M":4,"total":7696},{"R":2,"F":5,"cnt":2,"M":3,"total":7696}]},{"1":[{"R":3,"F":1,"cnt":66,"M":1,"total":7696},{"R":3,"F":1,"cnt":5,"M":2,"total":7696}],"2":[{"R":3,"F":2,"cnt":56,"M":1,"total":7696},{"R":3,"F":2,"cnt":101,"M":2,"total":7696},{"R":3,"F":2,"cnt":5,"M":4,"total":7696},{"R":3,"F":2,"cnt":22,"M":3,"total":7696},{"R":3,"F":2,"cnt":1,"M":5,"total":7696}],"3":[{"R":3,"F":3,"cnt":122,"M":3,"total":7696},{"R":3,"F":3,"cnt":51,"M":2,"total":7696},{"R":3,"F":3,"cnt":34,"M":4,"total":7696}],"4":[{"R":3,"F":4,"cnt":64,"M":5,"total":7696},{"R":3,"F":4,"cnt":220,"M":4,"total":7696},{"R":3,"F":4,"cnt":69,"M":3,"total":7696},{"R":3,"F":4,"cnt":1,"M":2,"total":7696}],"5":[{"R":3,"F":5,"cnt":320,"M":5,"total":7696},{"R":3,"F":5,"cnt":39,"M":6,"total":7696},{"R":3,"F":5,"cnt":107,"M":4,"total":7696}]},{"1":[{"R":4,"F":1,"cnt":80,"M":1,"total":7696},{"R":4,"F":1,"cnt":8,"M":2,"total":7696}],"2":[{"R":4,"F":2,"cnt":114,"M":2,"total":7696},{"R":4,"F":2,"cnt":55,"M":1,"total":7696},{"R":4,"F":2,"cnt":26,"M":3,"total":7696},{"R":4,"F":2,"cnt":3,"M":4,"total":7696}],"3":[{"R":4,"F":3,"cnt":96,"M":3,"total":7696},{"R":4,"F":3,"cnt":43,"M":2,"total":7696},{"R":4,"F":3,"cnt":21,"M":4,"total":7696},{"R":4,"F":3,"cnt":1,"M":5,"total":7696}],"4":[{"R":4,"F":4,"cnt":128,"M":4,"total":7696},{"R":4,"F":4,"cnt":48,"M":3,"total":7696},{"R":4,"F":4,"cnt":29,"M":5,"total":7696},{"R":4,"F":4,"cnt":1,"M":1,"total":7696}],"5":[{"R":4,"F":5,"cnt":71,"M":6,"total":7696},{"R":4,"F":5,"cnt":67,"M":4,"total":7696},{"R":4,"F":5,"cnt":287,"M":5,"total":7696}],"6":[{"R":4,"F":6,"cnt":75,"M":5,"total":7696},{"R":4,"F":6,"cnt":147,"M":6,"total":7696},{"R":4,"F":6,"cnt":1,"M":4,"total":7696}]},{"1":[{"R":5,"F":1,"cnt":111,"M":1,"total":7696},{"R":5,"F":1,"cnt":1,"M":4,"total":7696},{"R":5,"F":1,"cnt":10,"M":2,"total":7696}],"2":[{"R":5,"F":2,"cnt":93,"M":2,"total":7696},{"R":5,"F":2,"cnt":15,"M":3,"total":7696},{"R":5,"F":2,"cnt":29,"M":1,"total":7696}],"3":[{"R":5,"F":3,"cnt":24,"M":4,"total":7696},{"R":5,"F":3,"cnt":37,"M":2,"total":7696},{"R":5,"F":3,"cnt":80,"M":3,"total":7696}],"4":[{"R":5,"F":4,"cnt":63,"M":4,"total":7696},{"R":5,"F":4,"cnt":20,"M":5,"total":7696},{"R":5,"F":4,"cnt":35,"M":3,"total":7696}],"5":[{"R":5,"F":5,"cnt":159,"M":5,"total":7696},{"R":5,"F":5,"cnt":39,"M":6,"total":7696},{"R":5,"F":5,"cnt":32,"M":4,"total":7696},{"R":5,"F":5,"cnt":1,"M":2,"total":7696}],"6":[{"R":5,"F":6,"cnt":445,"M":6,"total":7696},{"R":5,"F":6,"cnt":70,"M":5,"total":7696}]},{"1":[{"R":6,"F":1,"cnt":152,"M":1,"total":7696},{"R":6,"F":1,"cnt":11,"M":2,"total":7696}],"2":[{"R":6,"F":2,"cnt":115,"M":2,"total":7696},{"R":6,"F":2,"cnt":67,"M":1,"total":7696},{"R":6,"F":2,"cnt":20,"M":3,"total":7696}],"3":[{"R":6,"F":3,"cnt":32,"M":2,"total":7696},{"R":6,"F":3,"cnt":54,"M":3,"total":7696},{"R":6,"F":3,"cnt":10,"M":4,"total":7696},{"R":6,"F":3,"cnt":2,"M":5,"total":7696}],"4":[{"R":6,"F":4,"cnt":44,"M":3,"total":7696},{"R":6,"F":4,"cnt":60,"M":4,"total":7696},{"R":6,"F":4,"cnt":10,"M":5,"total":7696},{"R":6,"F":4,"cnt":2,"M":2,"total":7696}],"5":[{"R":6,"F":5,"cnt":93,"M":5,"total":7696},{"R":6,"F":5,"cnt":8,"M":6,"total":7696},{"R":6,"F":5,"cnt":38,"M":4,"total":7696}],"6":[{"R":6,"F":6,"cnt":532,"M":6,"total":7696},{"R":6,"F":6,"cnt":33,"M":5,"total":7696}]}]
+            map_data : [{"1":[{"R":1,"F":1,"cnt":277,"M":1,"total":7696},{"R":1,"F":1,"cnt":27,"M":2,"total":7696},{"R":1,"F":1,"cnt":1,"M":3,"total":7696}],"2":[{"R":1,"F":2,"cnt":184,"M":1,"total":7696},{"R":1,"F":2,"cnt":335,"M":2,"total":7696},{"R":1,"F":2,"cnt":84,"M":3,"total":7696},{"R":1,"F":2,"cnt":6,"M":4,"total":7696}],"3":[{"R":1,"F":3,"cnt":204,"M":3,"total":7696},{"R":1,"F":3,"cnt":67,"M":4,"total":7696},{"R":1,"F":3,"cnt":68,"M":2,"total":7696},{"R":1,"F":3,"cnt":1,"M":6,"total":7696},{"R":1,"F":3,"cnt":5,"M":5,"total":7696}],"4":[{"R":1,"F":4,"cnt":14,"M":3,"total":7696},{"R":1,"F":4,"cnt":15,"M":4,"total":7696},{"R":1,"F":4,"cnt":3,"M":5,"total":7696}]},{"1":[{"R":2,"F":1,"cnt":124,"M":1,"total":7696},{"R":2,"F":1,"cnt":4,"M":2,"total":7696}],"2":[{"R":2,"F":2,"cnt":157,"M":2,"total":7696},{"R":2,"F":2,"cnt":71,"M":1,"total":7696},{"R":2,"F":2,"cnt":3,"M":4,"total":7696},{"R":2,"F":2,"cnt":37,"M":3,"total":7696}],"3":[{"R":2,"F":3,"cnt":70,"M":2,"total":7696},{"R":2,"F":3,"cnt":210,"M":3,"total":7696},{"R":2,"F":3,"cnt":58,"M":4,"total":7696},{"R":2,"F":3,"cnt":3,"M":5,"total":7696}],"4":[{"R":2,"F":4,"cnt":296,"M":4,"total":7696},{"R":2,"F":4,"cnt":78,"M":5,"total":7696},{"R":2,"F":4,"cnt":105,"M":3,"total":7696},{"R":2,"F":4,"cnt":1,"M":2,"total":7696},{"R":2,"F":4,"cnt":1,"M":6,"total":7696}],"5":[{"R":2,"F":5,"cnt":30,"M":5,"total":7696},{"R":2,"F":5,"cnt":24,"M":4,"total":7696},{"R":2,"F":5,"cnt":2,"M":3,"total":7696}]},{"1":[{"R":3,"F":1,"cnt":66,"M":1,"total":7696},{"R":3,"F":1,"cnt":5,"M":2,"total":7696}],"2":[{"R":3,"F":2,"cnt":56,"M":1,"total":7696},{"R":3,"F":2,"cnt":101,"M":2,"total":7696},{"R":3,"F":2,"cnt":5,"M":4,"total":7696},{"R":3,"F":2,"cnt":22,"M":3,"total":7696},{"R":3,"F":2,"cnt":1,"M":5,"total":7696}],"3":[{"R":3,"F":3,"cnt":122,"M":3,"total":7696},{"R":3,"F":3,"cnt":51,"M":2,"total":7696},{"R":3,"F":3,"cnt":34,"M":4,"total":7696}],"4":[{"R":3,"F":4,"cnt":64,"M":5,"total":7696},{"R":3,"F":4,"cnt":220,"M":4,"total":7696},{"R":3,"F":4,"cnt":69,"M":3,"total":7696},{"R":3,"F":4,"cnt":1,"M":2,"total":7696}],"5":[{"R":3,"F":5,"cnt":320,"M":5,"total":7696},{"R":3,"F":5,"cnt":39,"M":6,"total":7696},{"R":3,"F":5,"cnt":107,"M":4,"total":7696}]},{"1":[{"R":4,"F":1,"cnt":80,"M":1,"total":7696},{"R":4,"F":1,"cnt":8,"M":2,"total":7696}],"2":[{"R":4,"F":2,"cnt":114,"M":2,"total":7696},{"R":4,"F":2,"cnt":55,"M":1,"total":7696},{"R":4,"F":2,"cnt":26,"M":3,"total":7696},{"R":4,"F":2,"cnt":3,"M":4,"total":7696}],"3":[{"R":4,"F":3,"cnt":96,"M":3,"total":7696},{"R":4,"F":3,"cnt":43,"M":2,"total":7696},{"R":4,"F":3,"cnt":21,"M":4,"total":7696},{"R":4,"F":3,"cnt":1,"M":5,"total":7696}],"4":[{"R":4,"F":4,"cnt":128,"M":4,"total":7696},{"R":4,"F":4,"cnt":48,"M":3,"total":7696},{"R":4,"F":4,"cnt":29,"M":5,"total":7696},{"R":4,"F":4,"cnt":1,"M":1,"total":7696}],"5":[{"R":4,"F":5,"cnt":71,"M":6,"total":7696},{"R":4,"F":5,"cnt":67,"M":4,"total":7696},{"R":4,"F":5,"cnt":287,"M":5,"total":7696}],"6":[{"R":4,"F":6,"cnt":75,"M":5,"total":7696},{"R":4,"F":6,"cnt":147,"M":6,"total":7696},{"R":4,"F":6,"cnt":1,"M":4,"total":7696}]},{"1":[{"R":5,"F":1,"cnt":111,"M":1,"total":7696},{"R":5,"F":1,"cnt":1,"M":4,"total":7696},{"R":5,"F":1,"cnt":10,"M":2,"total":7696}],"2":[{"R":5,"F":2,"cnt":93,"M":2,"total":7696},{"R":5,"F":2,"cnt":15,"M":3,"total":7696},{"R":5,"F":2,"cnt":29,"M":1,"total":7696}],"3":[{"R":5,"F":3,"cnt":24,"M":4,"total":7696},{"R":5,"F":3,"cnt":37,"M":2,"total":7696},{"R":5,"F":3,"cnt":80,"M":3,"total":7696}],"4":[{"R":5,"F":4,"cnt":63,"M":4,"total":7696},{"R":5,"F":4,"cnt":20,"M":5,"total":7696},{"R":5,"F":4,"cnt":35,"M":3,"total":7696}],"5":[{"R":5,"F":5,"cnt":159,"M":5,"total":7696},{"R":5,"F":5,"cnt":39,"M":6,"total":7696},{"R":5,"F":5,"cnt":32,"M":4,"total":7696},{"R":5,"F":5,"cnt":1,"M":2,"total":7696}],"6":[{"R":5,"F":6,"cnt":445,"M":6,"total":7696},{"R":5,"F":6,"cnt":70,"M":5,"total":7696}]},{"1":[{"R":6,"F":1,"cnt":152,"M":1,"total":7696},{"R":6,"F":1,"cnt":11,"M":2,"total":7696}],"2":[{"R":6,"F":2,"cnt":115,"M":2,"total":7696},{"R":6,"F":2,"cnt":67,"M":1,"total":7696},{"R":6,"F":2,"cnt":20,"M":3,"total":7696}],"3":[{"R":6,"F":3,"cnt":32,"M":2,"total":7696},{"R":6,"F":3,"cnt":54,"M":3,"total":7696},{"R":6,"F":3,"cnt":10,"M":4,"total":7696},{"R":6,"F":3,"cnt":2,"M":5,"total":7696}],"4":[{"R":6,"F":4,"cnt":44,"M":3,"total":7696},{"R":6,"F":4,"cnt":60,"M":4,"total":7696},{"R":6,"F":4,"cnt":10,"M":5,"total":7696},{"R":6,"F":4,"cnt":2,"M":2,"total":7696}],"5":[{"R":6,"F":5,"cnt":93,"M":5,"total":7696},{"R":6,"F":5,"cnt":8,"M":6,"total":7696},{"R":6,"F":5,"cnt":38,"M":4,"total":7696}],"6":[{"R":6,"F":6,"cnt":532,"M":6,"total":7696},{"R":6,"F":6,"cnt":33,"M":5,"total":7696}]}],
+            a_data : [{"pid":"wt:19044","rebuy_day":15.82,"buy_count":11,"total_price":1715,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:33413","rebuy_day":26.5,"buy_count":4,"total_price":596,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:17809","rebuy_day":7.72,"buy_count":25,"total_price":2700,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:40087","rebuy_day":8.9,"buy_count":10,"total_price":1097,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:16950","rebuy_day":3.96,"buy_count":52,"total_price":7552,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:41685","rebuy_day":2.5,"buy_count":2,"total_price":268,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:1060","rebuy_day":5.01,"buy_count":92,"total_price":6797,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:13446","rebuy_day":15.5,"buy_count":6,"total_price":610,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:40815","rebuy_day":1.97,"buy_count":32,"total_price":2720,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:6133","rebuy_day":54.75,"buy_count":4,"total_price":954,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:9694","rebuy_day":8.67,"buy_count":15,"total_price":1694,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:1524","rebuy_day":5.88,"buy_count":80,"total_price":15994,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:4776","rebuy_day":37.64,"buy_count":11,"total_price":913,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:883","rebuy_day":46.17,"buy_count":6,"total_price":947,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:16391","rebuy_day":17.5,"buy_count":2,"total_price":367,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:11579","rebuy_day":14.53,"buy_count":15,"total_price":2115,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:16041","rebuy_day":9.19,"buy_count":32,"total_price":4129,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:15560","rebuy_day":7,"buy_count":1,"total_price":95,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:4671","rebuy_day":15,"buy_count":10,"total_price":1174,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065},{"pid":"wt:18178","rebuy_day":33.67,"buy_count":6,"total_price":774,"r0":1,"r1":5.86500000002565,"r2":10.5,"r3":16.145,"r4":25.170000000025652,"r5":45,"r6":440,"f0":1,"f1":2,"f2":5,"f3":9,"f4":16,"f5":33,"f6":444,"m0":10,"m1":265,"m2":575,"m3":1060,"m4":1970,"m5":4011.4999999923043,"m6":2155065}]
+
             
         },
         methods: {
@@ -312,32 +315,19 @@
                     });
                 });
             },
-            cmp_date(sel_period) {
-                var data = {
-                    yesterday: moment().subtract(1, 'day').format("YYYY-MM-DD"),  //昨天
-                    day_prev_7d: moment().subtract(8, 'day').format("YYYY-MM-DD"), //  一週內
-                    day_prev_14d: moment().subtract(15, 'day').format("YYYY-MM-DD"), // 兩週內
-                    day_prev_1m: moment().subtract(31, 'day').format("YYYY-MM-DD"), // 一個月內
-                    day_prev_2m: moment().subtract(61, 'day').format("YYYY-MM-DD"), // 二個月內
-                    day_prev_3m: moment().subtract(91, 'day').format("YYYY-MM-DD"), // 三個月內
-                    day_prev_2y: moment().subtract(731, 'day').format("YYYY-MM-DD"), // 2年內
-
-                }
-                switch (sel_period) {
-                    case "1w":
-                        return [`${data.yesterday}`,`${data.day_prev_7d}`]
-                    case "2w":
-                        return [`${data.yesterday}`,`${data.day_prev_14d}`]
-                    case "1m":
-                        return [`${data.yesterday}`,`${data.day_prev_1m}`]
-                    case "2m":
-                        return [`${data.yesterday}`,`${data.day_prev_2m}`]
-                    case "3m":
-                        return [`${data.yesterday}`,`${data.day_prev_3m}`]
-                    case "2y":
-                        return [`${data.yesterday}`,`${data.day_prev_2y}`]
+            get_rank(v ,rg0 ,rg1 ,rg2 ,rg3 ,rg4 ,rg5 ,rg6 , revert) {
+                var res = 6
+                    if ( v >= rg0 && v < rg1 ) {res = 1}
+                    else if ( v >= rg1 && v < rg2 ) {res = 2}
+                    else if ( v >= rg2 && v < rg3 ) {res = 3}
+                    else if ( v >= rg3 && v < rg4 ) {res = 4}
+                    else if ( v >= rg4 && v < rg5 ) {res = 5}
+                    else {res = 6}
+                    if (revert > 0){
+                        res = 7 - res
                     }
-                },
+                return res
+            }
         },
         mounted () {
             // this.get_rfm();
@@ -369,7 +359,4 @@ var f_range = _.map(v,d=> _.map(d,(value,key) => {
    return my_data } ))  -->
 
    <!-- var want_data = want_data[text] = (value['cnt'])  -->
-
-
-   
 

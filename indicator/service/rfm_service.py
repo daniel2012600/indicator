@@ -120,7 +120,7 @@ class RFM_DataService():
         )
         ,RFM_indicator as
         (
-            SELECT pid , ROUND(day_diff_sum / buy_count,2) AS rebuy_day , buy_count , total_price ,
+            SELECT pid , ROUND(day_diff_sum / buy_count,2) AS rebuy_day , buy_count , total_price , 
             FROM RFM_table
             GROUP BY pid ,rebuy_day ,buy_count ,total_price
         )
@@ -307,7 +307,7 @@ class RFM_DataService():
         ),
         b as
         (
-          --每一天有消費的pid see https://i.screenshot.net/6mw86hz?c109acf03e957eedde60a0ab3a634b33
+          --每一天有消費的pid 
           SELECT dt, pid ,daily_price  from
           (
               SELECT  EXTRACT(date FROM  dt) AS dt, pid, ord_id, 
@@ -319,7 +319,7 @@ class RFM_DataService():
           )
         , c as
         (
-            --每一個會員的每一天，跟上一天資料 see https://i.screenshot.net/pmw82hq?1a818ab12985bbb8feab486b7efcfe99 pw:123
+            --每一個會員的每一天，跟上一天資料 
             SELECT dt, pid,daily_price, ROW_NUMBER() over (PARTITION BY pid) AS row,
             LEAD(dt) over (PARTITION BY pid ORDER BY dt) AS leaddt,
             FROM  b
@@ -343,9 +343,9 @@ class RFM_DataService():
         )
         ,RFM_indicator as
         (
-            SELECT pid , ROUND(day_diff_sum / buy_count,2) AS rebuy_day , buy_count , total_price ,
+            SELECT pid , ROUND(day_diff_sum / buy_count,2) AS rebuy_day , buy_count , total_price 
             FROM RFM_table
-            GROUP BY pid ,rebuy_day ,buy_count ,total_price
+            GROUP BY pid ,rebuy_day, buy_count , total_price 
         )
         ,RFM_percent as
         (
@@ -376,23 +376,24 @@ class RFM_DataService():
             FROM RFM_indicator
         )
 
-        ,RFM_rank as
-        (
-            SELECT *, 
-            get_rank(rebuy_day, r0,r1,r2,r3,r4,r5,r6, 1) R,
-            get_rank(buy_count, f0,f1,f2,f3,f4,f5,f6, 0) F,
-            get_rank(total_price, m0,m1,m2,m3,m4,m5,m6, 0) M
-            FROM RFM_percent 
-        )
+        # ,RFM_rank as
+        # (
+        #     SELECT *, 
+        #     get_rank(rebuyday, r0,r1,r2,r3,r4,r5,r6, 1) R,
+        #     get_rank(buy_count, f0,f1,f2,f3,f4,f5,f6, 0) F,
+        #     get_rank(total_price, m0,m1,m2,m3,m4,m5,m6, 0) M
+        #     FROM RFM_percent 
+        # )
 
 
-        SELECT *, SUM(cnt) OVER (PARTITION BY NULL) AS total FROM (
-            SELECT R, F, COUNT(DISTINCT pid ) AS cnt, M
-            FROM RFM_rank
-            GROUP BY R, F, M
-        )
+        # SELECT * FROM (
+        #     SELECT R, F, COUNT(DISTINCT pid ) AS cnt, M
+        #     FROM RFM_rank
+        #     GROUP BY R, F, M
+        # )
 
-
+        SELECT * FROM RFM_rank
+        LIMIT 20
 
         """
         
