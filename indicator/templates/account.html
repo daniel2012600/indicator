@@ -1,0 +1,121 @@
+{% extends "layout_mini_daniel.html" %}
+{% block title %}CDP-RFM 參考指標{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/style/morris/0.5.1/morris.css" />
+
+<style type="text/css">
+  /*修複sparkline tooltips樣式跑版*/
+  .jqstooltip {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  .el-table .cell {
+        white-space: pre-line;
+    }
+
+  .el-range-separator {
+    /* 修正”至”樣式錯誤 */
+    width: 27px !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 頁面標題-右側-無功能 start -->
+<el-row type="flex" justify="space-between" :gutter="25" class="mb-4">
+    <el-col :span="24">
+    <div class="grid-content">
+        <h1>帳號列表</h1>  
+    </div>
+    </el-col>
+</el-row>
+<!-- 頁面標題-右側-無功能 end -->
+<!-- 1欄 start -->
+
+
+
+<template>
+    <el-table
+      :data="account_data"
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="name"
+        label="姓名"
+        >
+      </el-table-column>
+      <el-table-column
+        prop="email"
+        label="Email"
+        >
+      </el-table-column>
+      <el-table-column
+        prop="date_create"
+        label="建立日期"
+        >
+      </el-table-column>
+      <el-table-column
+        prop="date_alert"
+        label="修改日期"
+        >
+        </el-table-column>
+    </el-table>
+  </template>
+
+
+
+<!-- 1欄 end -->
+
+{% endblock %} 
+
+{% block js %}
+<script src="/static/style/echarts/4.8.0/echarts.min.js"></script>
+<script src="/static/style/lodash/4.16.0/lodash.js"></script>
+
+
+<script>
+
+    var obj = new Vue({
+        el: '#app',
+        mixins: [layoutVue],
+        data:  {
+            breadpath: [{key: '首頁', path: '/'},{key: '帳號列表', path: ''}],
+            datalist:[],
+            loading: false,
+            account_data : [],
+        },
+        mounted () {
+            this.loading = true;
+            $.post('/account_info', {
+            }, result => {
+                this.account_data = _.map(result,d=>{  return {'name': d.name , "email" : d.email} })
+                this.loading = false;
+            }, 'json')
+        }
+    });
+
+    
+</script>
+
+
+{% endblock %}
+
+
+<!-- 
+描述：
+    熱地圖
+html:
+    id : 注意，不是屬性，元性的id，同一個頁面要有唯一性，裏面會用到，一定要設
+屬性：
+    data : [{x軸維度:'abc', y軸維度11:44 , y軸維度2:44 , y軸維度3:44},....]
+    ex:[{"時段":"0點","星期日":0.02,"星期一":0.04,"星期二":0.01,"星期三":0.02,"星期四":0.01,"星期五":0.02,"星期六":0.05},{"時段":"1點","星期日":0,"星期一":0.01,"星期二":0,"星期三":0,"星期四":0,"星期五":0,"星期六":0},
+    fromcolor : 最小量值的顏色
+    tocolor : 最大量值的顏色
+    plotheight : 圖型的高度，一定要設，預設值300
+    valuelabelunit : 字串，預設空值。有設定時，會加在值的最後面
+維度量值:
+    維度1個，量值n個；維度是x軸，量值的key是y軸
+參考:
+    https://echarts.apache.org/examples/zh/editor.html?c=heatmap-cartesian -->

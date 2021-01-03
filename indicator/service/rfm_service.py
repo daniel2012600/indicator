@@ -242,9 +242,9 @@ class RFM_DataService():
             ROUND(STDDEV_POP(rebuy_day),2) AS R_std,
             ROUND(STDDEV_POP(buy_count),2) AS F_std,
             ROUND(STDDEV_POP(total_price),2) AS M_std,
-            r3 AS R_median,
-            f3 AS F_median,
-            m3 AS M_median,
+            ROUND(r3,2) AS R_median,
+            ROUND(f3,2) AS F_median,
+            ROUND(m3,2) AS M_median,
             FROM RFM_rank
             GROUP BY r3,f3,m3
         )
@@ -376,24 +376,22 @@ class RFM_DataService():
             FROM RFM_indicator
         )
 
-        # ,RFM_rank as
-        # (
-        #     SELECT *, 
-        #     get_rank(rebuyday, r0,r1,r2,r3,r4,r5,r6, 1) R,
-        #     get_rank(buy_count, f0,f1,f2,f3,f4,f5,f6, 0) F,
-        #     get_rank(total_price, m0,m1,m2,m3,m4,m5,m6, 0) M
-        #     FROM RFM_percent 
-        # )
+        ,RFM_rank as
+        (
+            SELECT *, 
+            get_rank(rebuy_day, r0,r1,r2,r3,r4,r5,r6, 1) R,
+            get_rank(buy_count, f0,f1,f2,f3,f4,f5,f6, 0) F,
+            get_rank(total_price, m0,m1,m2,m3,m4,m5,m6, 0) M
+            FROM RFM_percent 
+        )
 
 
-        # SELECT * FROM (
-        #     SELECT R, F, COUNT(DISTINCT pid ) AS cnt, M
-        #     FROM RFM_rank
-        #     GROUP BY R, F, M
-        # )
+        SELECT * FROM (
+            SELECT R, F, COUNT(DISTINCT pid ) AS cnt, M
+            FROM RFM_rank
+            GROUP BY R, F, M
+        )
 
-        SELECT * FROM RFM_rank
-        LIMIT 20
 
         """
         

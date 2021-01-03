@@ -81,21 +81,34 @@ Vue.component("v-echarts-rfm-indicator", {
             var xlabels = this.data.map(function (v,k){ return k+1})
             var ylabels = this.data.map(function (v,k){ return k+1})
 
-
-
             var data = []
             _.map(_.range(6), d1=>{
                 _.map(_.range(1,7), d2=>{
                     data.push({R: d1, F: d2, d: _.map(_.range(6), d3=>{
-                        return _.get(this.data, `${d1}.${d2}.${d3}.cnt`,0)
+                        return _.get(this.data, `${d1}.${d2}.${d3}`,0)
                     })})
                 })
             })
-            var all_people =  _.sum(_.flattenDeep(_.map(data,d=> d["d"])))
-            var data = data.map(function (item) {
-                total = Math.floor(_.sumBy(item['d']) / all_people *100,2)
-                return [item["R"], item["F"]-1 , total|| 0];
+            var want_data = _.map(data,d=> _.map(d["d"], item => item.cnt))
+            var all_people = _.sum(_.flattenDeep(want_data))
+
+            var format_data = _.map(data,item => { return  _.map(item.d, (v,k)=> {
+                var my_data  = {}
+                my_data[`${v.R}${v.F}${v.M}`] = _.get(v, 'cnt',0)
+                return my_data    })})
+                
+            var my_format = _.map(format_data,d=> _.reject(d, { 'undefinedundefinedundefined': 0 } ))
+        
+            var data = data.map(function (value,key) {
+                // total = Math.floor(_.sumBy(value['d']) / all_people *100,2)
+                rfm_total = _.sum( _.flattenDeep(_.map(my_format[key],d=> _.values(d))))
+                percent = Math.floor(rfm_total  / all_people *100,2)
+                // RFM_rank = _.map(my_format[key],)
+                return [value["R"], value["F"]-1, percent || 0];
             });
+
+            var min = _.min(_.map(data,d=>{ return d[2] } ))
+            var max = _.max(_.map(data,d=>{ return d[2] } ))
             // if colors is set, ignore fromcolor & tocolor
             var thisColor;
             if (this.fromcolor === undefined && this.tocolor === undefined ) {
@@ -108,12 +121,20 @@ Vue.component("v-echarts-rfm-indicator", {
             var option = {
                 tooltip: {
                     position: 'top',
-                    formatter: function(p){
-                        var color=p["marker"];
-                        var text = p["name"];
-                        var value = p["value"][2];
-                        var label = addlabel;
-                        return  label + " " + color + text + ": " + value + "%"
+                    formatter: function(params,index){
+                        var for_me = params["value"][2];
+                        var my_index = _.split(index, '_')
+                        var key = my_index.slice(-1)[0]
+                        var test = _.map(my_format[key],(v,k) => { 
+                            f_key = Object.keys(v)
+                            f_value = Object.values(v)
+                            f_percent = Math.floor(f_value/all_people * 100,2)
+                            f_data = '[' +f_key[0][0]+','+ f_key[0][1] +','+ f_key[0][2] + ']' + " : " + f_value + '(' + f_percent + '%' +')'
+                            return  f_data 
+                        })
+                        var rfm_total = _.sum( _.flattenDeep(_.map(my_format[key],d=> _.values(d))))
+
+                        return    test.join('<br>') + '<br>' + '總人數' + ':' + rfm_total
                     },
                 },
                 animation: false,
@@ -136,8 +157,8 @@ Vue.component("v-echarts-rfm-indicator", {
                     }
                 },
                 visualMap: {
-                    min: 0,
-                    max: 100,
+                    min: min,
+                    max: max,
                     calculable: true,
                     orient: 'vertical',
                     left: 'right',
@@ -150,7 +171,12 @@ Vue.component("v-echarts-rfm-indicator", {
                     type: 'heatmap',
                     data: data,
                     label: {
-                        show: true
+                        normal: {
+                            show: true,
+                            formatter: function (param) {
+                                return param.value[2] + valuelabelunit
+                            }
+                        }
                     },
                     emphasis: {
                         itemStyle: {
