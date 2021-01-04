@@ -83,9 +83,7 @@ def layout():
     return render_template('indicator.html')
 
 @app.route('/account')
-@requires_login()
 def account():
-    print(request.method)
     return render_template('account.html')
     # if request.method == 'GET':
     #     return render_template('account.html')
