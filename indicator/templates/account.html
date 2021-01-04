@@ -90,7 +90,7 @@
             this.loading = true;
             $.post('/account_info', {
             }, result => {
-                this.account_data = _.map(result,d=>{  return {'name': d.name , "email" : d.email} })
+                this.account_data = _.map(result,d=>{  return {'name': d.name , "email" : d.acc} })
                 this.loading = false;
             }, 'json')
         }

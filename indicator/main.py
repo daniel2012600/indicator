@@ -16,8 +16,8 @@ def login():
         # 登出
         if action == 'out':
             if 'user' in session:
-                if sche.has(session['user']['email']):
-                    sche.delete(session['user']['email'])
+                if sche.has(session['user']['acc']):
+                    sche.delete(session['user']['acc'])
                 session.pop('user', None)
         # 已登入
         if 'user' in session:
@@ -25,9 +25,9 @@ def login():
 
     elif request.method == 'POST':
         # 登入/資料存取
-        dict_acc = py_.map_(AC.ACCOUNT_COLLECTION,'email')
-        if request.form['email'] in dict_acc:
-            dict_pwd = py_.filter_(AC.ACCOUNT_COLLECTION, {'email': request.form['email']})[0]['pwd']
+        dict_acc = py_.map_(AC.ACCOUNT_COLLECTION,'acc')
+        if request.form['acc'] in dict_acc:
+            dict_pwd = py_.filter_(AC.ACCOUNT_COLLECTION, {'acc': request.form['acc']})[0]['pwd']
             if  request.form['pwd'] in dict_pwd:
                 return render_template('indicator.html')
             else :
@@ -83,7 +83,9 @@ def layout():
     return render_template('indicator.html')
 
 @app.route('/account')
+@requires_login()
 def account():
+    print(request.method)
     return render_template('account.html')
     # if request.method == 'GET':
     #     return render_template('account.html')

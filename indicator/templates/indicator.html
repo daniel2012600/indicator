@@ -46,11 +46,11 @@
         <div class="float-left"  style="height:50px; border-radius:5px;">
             <span class="mr-1" style="float: right;">
                 <font font-size="13px">資料區間： </font>
-                <font color="#7C4C9A" font-size="13px"> 本期[[ ]]</font>
+                <font color="#7C4C9A" font-size="13px" > 本期 [[ date_current ]]</font>
                 <font font-size="13px">至</font>
-                <font color="#7C4C9A" font-size="13px"> 前期[[ ]]</font>
+                <font color="#7C4C9A" font-size="13px" > 前期 [[ date_ago ]]</font>
                 <font font-size="13px">| 資料筆數： </font>
-                <font color="#7C4C9A" font-size="13px"> [[  ]] </font>
+                <font color="#7C4C9A" font-size="13px"> [[ data_count | k  ]] </font>
                 <font font-size="13px">筆 </font>
             </span>
         </div>
@@ -276,7 +276,9 @@
             is_etl_done: is_etl_done,
             matrix: [],
             datalist :[],
-            map_data : [],
+            data_count : 0,
+            date_current : '',
+            date_ago: '',
         },
         methods: {
             get_matrix() {
@@ -285,6 +287,7 @@
                     owner: JSON.stringify(this.sel_owner),
                 }, result => {
                     this.loading = false;
+                    this.data_count  = _.sumBy(result,'cnt')
                     this.matrix = _.map(_.groupBy(result, 'R'), d=> _.groupBy(d, 'F'))
                 }, 'json')
             },
@@ -294,6 +297,8 @@
                     owner: JSON.stringify(this.sel_owner),
                 }, result => {
                     this.datalist = result;
+                    this.date_current = result[0].date_current
+                    this.date_ago = result[0].date_ago
                     this.loading = false;
                 }, 'json')
             },

@@ -273,11 +273,15 @@ class RFM_DataService():
             ON a.pid = b.pid
             WHERE b.first_order_price is not null
         )
-
+        ,get_date AS
+        (
+            SELECT MAX(DATE(dt)) AS date_current , MIN(DATE(dt)) AS date_ago
+            FROM a
+        )
 
         SELECT *
         FROM my_table
-        CROSS JOIN calculation,first_order,no_cost;
+        CROSS JOIN calculation,first_order,no_cost,get_date;
 
         """
         return self._exec_sql_get_data(sql)
