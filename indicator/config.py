@@ -1,17 +1,7 @@
 # -*- coding: utf-8 -*-
 class Config(object):
 
-    SQL_CONFIG = {
-        'host': '35.200.15.129',
-        'connect_timeout': 60,
-        'read_timeout': 60,
-        'write_timeout': 60,
-        'max_allowed_packet': 102400,
-        'user': 'cdpdev',
-        'password': 'cdp!@#',
-        'db': 'cdpplatformdb',
-        'charset': 'utf8mb4'
-    }
+    SQL_CONFIG = 
 
     GCS_JSONKEY = 'static/json/KeywordTag-3c600346e709.json'
     DOWNLOAD_PATH = 'static/filedownload/'
